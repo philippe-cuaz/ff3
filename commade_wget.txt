@@ -1,0 +1,8 @@
+superuser privilege:
+
+[Net.ServicePointManager]::SecurityProtocol=[Net.SecurityProtocolType]::Tls12
+
+
+wget command:
+
+Invoke-WebRequest "htps://www.barchart.com/futures/quotes/SBV20/cheat-sheet" -OutFile "C:\Users\phcuaz\Desktop\mytest1.txt"

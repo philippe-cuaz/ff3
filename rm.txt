@@ -1,0 +1,40 @@
+package readmail;
+import java.util.*;
+
+import javax.mail.*;
+public class readmail {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 Properties props = new Properties();
+	        props.setProperty("mail.store.protocol", "imaps");
+	        try {
+	            Session session = Session.getInstance(props, null);
+	            Store store = session.getStore();
+	            String password2="s8j3v1";
+	            String password="k2z9m4";
+	            String password3=password2+password;
+	            store.connect("imap.orange.fr", "philippe.cuaz@orange.fr", password3);
+	            Folder inbox = store.getFolder("INBOX");
+	            inbox.open(Folder.READ_ONLY);
+	            Message msg = inbox.getMessage(inbox.getMessageCount());
+	            Address[] in = msg.getFrom();
+	            for (Address address : in) {
+	                System.out.println("FROM:" + address.toString());
+	            }
+	            Multipart mp = (Multipart) msg.getContent();
+	            BodyPart bp = mp.getBodyPart(0);
+	            System.out.println("SENT DATE:" + msg.getSentDate());
+	            System.out.println("SUBJECT:" + msg.getSubject());
+	            System.out.println("CONTENT:" + bp.getContent());
+	            String message=(String) bp.getContent();
+	            int line=bp.getLineCount();
+	            if(message.contentEquals("message")){System.out.println("received good message!line="+line);}else{
+	            	System.out.println("received bad message!line="+line);}
+	            
+	        } catch (Exception mex) {
+	            mex.printStackTrace();
+	        }
+	}
+
+}

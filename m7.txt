@@ -1,0 +1,3044 @@
+package menu7;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Calendar;
+import java.util.EventObject;
+
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+
+
+
+
+public class databasemenu extends JFrame{
+
+	  private JMenuBar menuBar = new JMenuBar();
+	  private JMenu menu1 = new JMenu("Database:1-4");
+	  private JMenu menu2 = new JMenu("Database:5-8");
+	  private JMenu menu3 = new JMenu("Database:9-12");
+	  private JMenu menu4 = new JMenu("Database:13-16");
+	  private JMenu menu5 = new JMenu("Database:17-20");
+	  private JMenu menu6 = new JMenu("Database:21-24");
+	  private JMenu sub1menu1 = new JMenu("1-ff2-plustrade sugar#11");
+	  private JMenu sub2menu1 = new JMenu("2-ff2-plustradeb sugar#11");
+	  private JMenu sub3menu1 = new JMenu("3-ff2-boomspread soybean");
+	  private JMenu sub4menu1 = new JMenu("4-ff2-beefsandwich cattle");
+	  private JMenu sub1menu2 = new JMenu("5-ff2-coopercoup");
+	  private JMenu sub2menu2 = new JMenu("6-ff2-cotonconnection");
+	  private JMenu sub3menu2 = new JMenu("7-ff2-insuredgsrtradeg");
+	  private JMenu sub4menu2 = new JMenu("8-ff2-insuredgsrtrades");
+	  private JMenu sub1menu3 = new JMenu("9-ff2-multimarkmaneuver");
+	  private JMenu sub2menu3 = new JMenu("10-ff2-petroparlay");
+	  private JMenu sub3menu3 = new JMenu("11-ff2-quicksilverquest");
+	  private JMenu sub4menu3 = new JMenu("12-ff2-sacerealtradew");
+	  private JMenu sub1menu4 = new JMenu("13-ff2-sacerealtradec");
+	  private JMenu sub2menu4 = new JMenu("14-ff2-silverbutterfly");
+	  private JMenu sub3menu4 = new JMenu("15-ff2-superbeantrade");
+	  private JMenu sub4menu4 = new JMenu("16-ff2-sweetseasonal");
+	  private JMenu sub1menu5 = new JMenu("17-ff2-tedspreaded");
+	  private JMenu sub2menu5 = new JMenu("18-ff2-tedspreadtn");
+	  private JMenu sub3menu5 = new JMenu("19-ff2-timetactica");
+	  private JMenu sub4menu5 = new JMenu("20-ff2-timetacticb");
+	  private JMenu sub1menu6 = new JMenu("21-ff2-totalmarkettactic");
+	  private JMenu sub2menu6 = new JMenu("22-ff2-triplebondtrade");
+	  private JMenu sub3menu6 = new JMenu("23-ff2-wildoatswindfall");
+	  private JMenu sub4menu6 = new JMenu("24-ff2-hamsandwich");	  
+	  private JMenu submenu1item1_1 = new JMenu("SBY00 (cash) sugar future"); 
+	  private JMenu submenu1item1_2 = new JMenu("SBN16 (jul16)");
+	  private JMenu submenu1item1_3 = new JMenu("SBV16 (oct16)");
+	  private JMenuItem submenu1item1_4 = new JMenuItem("SBH17 (mar17)");
+	  private JMenuItem submenu1item1_5 = new JMenuItem("SBK17 (may17)");
+	  private JMenuItem submenu1item1_6 = new JMenuItem("SBN17 (jul17)");
+	  private JMenuItem submenu1item1_7 = new JMenuItem("SBV17 (oct17)");
+	  private JMenuItem submenu1item1_8 = new JMenuItem("SBH18 (mar18)");
+	  private JMenuItem submenu1item1_9 = new JMenuItem("SBK18 (may18)");
+	  private JMenuItem submenu1item1_10 = new JMenuItem("SBN18 (jul18)");
+	  private JMenuItem submenu1item1_11 = new JMenuItem("SBV18 (oct18)");
+	  private JMenuItem submenu1item1_12 = new JMenuItem("SBH19 (mar19)");
+	  private JMenuItem submenu1item1_13 = new JMenuItem("SBK19 (may19)");
+	  private JMenuItem submenu1item2_1 = new JMenuItem("option sugar#11 (jul16)");
+	  private JMenuItem submenu1item3_1 = new JMenuItem("ZSY00 (cash) soybean future");
+	  private JMenuItem submenu1item3_2 = new JMenuItem("ZSN16 (jul16)");
+	  private JMenuItem submenu1item3_3 = new JMenuItem("ZSQ16 (aug16)");
+	  private JMenuItem submenu1item3_4 = new JMenuItem("ZSU16 (sep16)");
+	  private JMenuItem submenu1item3_5 = new JMenuItem("ZSX16 (nov16)");
+	  private JMenuItem submenu1item3_6 = new JMenuItem("ZSF17 (jan17)");
+	  private JMenuItem submenu1item3_7 = new JMenuItem("ZSH17 (mar17)");
+	  private JMenuItem submenu1item3_8 = new JMenuItem("ZSK17 (may17)");
+	  private JMenuItem submenu1item3_9 = new JMenuItem("ZSN17 (jul17)");
+	  private JMenuItem submenu1item3_10 = new JMenuItem("ZSQ17 (aug17)");
+	  private JMenuItem submenu1item3_11 = new JMenuItem("ZSU17 (sep17)");
+	  private JMenuItem submenu1item3_12 = new JMenuItem("ZSX17 (nov17)");
+	  private JMenuItem submenu1item3_13 = new JMenuItem("ZSF18 (jan18)");
+	  private JMenuItem submenu1item3_14 = new JMenuItem("ZSH18 (mar18)");
+	  private JMenuItem submenu1item3_15 = new JMenuItem("ZSK18 (may18)");
+	  private JMenuItem submenu1item3_16 = new JMenuItem("ZSN18 (jul18)");
+	  private JMenuItem submenu1item3_17 = new JMenuItem("ZSQ18 (aug18)");
+	  private JMenuItem submenu1item3_18 = new JMenuItem("ZSU18 (sep18)");
+	  private JMenuItem submenu1item3_19 = new JMenuItem("ZSX18 (nov18)");
+	  private JMenuItem submenu1item3_20 = new JMenuItem("ZSN19 (jul19)");
+	  private JMenuItem submenu1item3_21 = new JMenuItem("ZSX19 (nov19)");
+	  private JMenuItem submenu1item4_1 = new JMenuItem("LEM16 (june16) live cattle");
+	  private JMenuItem submenu1item4_2 = new JMenuItem("LEQ16 (aug16)");
+	  private JMenuItem submenu1item4_3 = new JMenuItem("LEV16 (oct16)");
+	  private JMenuItem submenu1item4_4 = new JMenuItem("LEZ16 (dec16)");
+	  private JMenuItem submenu1item4_5 = new JMenuItem("GFQ16 (aug16) feeder cattle");
+	  private JMenuItem submenu1item4_6 = new JMenuItem("GFU16 (sep16)");
+	  private JMenuItem submenu1item4_7 = new JMenuItem("GFV16 (oct16)");
+	  private JMenuItem submenu1item4_8 = new JMenuItem("GFX16 (nov16)");
+	  private JMenuItem submenu1item4_9 = new JMenuItem("HEM16 (june16) lean hogs");
+	  private JMenuItem submenu1item4_10 = new JMenuItem("HEN16 (jul16)");
+	  private JMenuItem submenu1item4_11 = new JMenuItem("HEQ16 (aug16)");
+	  private JMenuItem submenu1item4_12 = new JMenuItem("HEV16 (oct16)");
+	  private JMenuItem submenu1item4_13 = new JMenuItem("DLM16 (jun16) class3 milk");
+	  private JMenuItem submenu1item4_14 = new JMenuItem("DLN16 (jul16)");
+	  private JMenuItem submenu1item4_15 = new JMenuItem("DLQ16 (aug16)");
+	  private JMenu submenu2item1_1 = new JMenu("HGY00 (cash) cooper future");
+	  private JMenu submenu2item2_1 = new JMenu("CTY00 (cash) cotton future");
+	  private JMenu submenu2item3_1 = new JMenu("GCY00 (cash) gold future");
+	  private JMenu submenu2item4_1 = new JMenu("SIY00 (cash) silver future");
+	  private JMenu submenu3item1_1 = new JMenu("DXM16 (cash) us dollar index");
+	  private JMenu submenu3item2_1 = new JMenu("CLY00 (cash) brent future");
+	  private JMenu submenu3item3_1 = new JMenu("silver");
+	  private JMenu submenu3item4_1 = new JMenu("ZWY00 (cash) weat future");
+	  private JMenu submenu4item1_1 = new JMenu("ZCY00 (cash) corn future");
+	  private JMenu submenu4item2_1 = new JMenu("ICE Silver");
+	  private JMenu submenu4item3_1 = new JMenu("bean");
+	  private JMenu submenu4item4_1 = new JMenu("sugar");
+	  private JMenu submenu5item1_1 = new JMenu("GEM16");
+	  private JMenu submenu5item2_1 = new JMenu("ZNM16");
+	  private JMenu submenu5item3_1 = new JMenu("timetactica bad table");
+	  private JMenu submenu5item4_1 = new JMenu("timetacticb bad table");
+	  private JMenu submenu6item1_1 = new JMenu("totalmarkettactic bad table");
+	  //private JMenuItem submenu6item1 = new JMenuItem("submenu6Action21");
+	  private JMenu submenu6item2_1 = new JMenu("ZBM16");
+	  private JMenu submenu6item3_1 = new JMenu("ZOY00 (Cash)");
+	  private JMenu submenu6item4_1 = new JMenu("HEY00 (Cash)");
+	  private JMenuItem submenu1item1_1_1 = new JMenuItem("SBY00_last");
+	  private JMenuItem submenu1item1_1_2 = new JMenuItem("SBY00_high");
+	  private JMenuItem submenu1item1_1_3 = new JMenuItem("SBY00_low");
+	  private JMenuItem submenu1item1_2_1 = new JMenuItem("SBN16_last");
+	  private JMenuItem submenu1item1_2_2 = new JMenuItem("SBN16_high");
+	  private JMenuItem submenu1item1_2_3 = new JMenuItem("SBN16_low");
+	  private JMenuItem submenu1item1_3_1 = new JMenuItem("SBV16_last");
+	  private JMenuItem submenu1item1_3_2 = new JMenuItem("SBV16_high");
+	  private JMenuItem submenu1item1_3_3 = new JMenuItem("SBV16_low");
+	  private JMenuItem submenu2item1_1_1 = new JMenuItem("HGY00_last");
+	  private JMenuItem submenu2item2_1_1 = new JMenuItem("CTY00_last");
+	  private JMenuItem submenu2item3_1_1 = new JMenuItem("GCY00_last");
+	  private JMenuItem submenu2item4_1_1 = new JMenuItem("SIY00_last");
+	  private JMenuItem submenu3item1_1_1 = new JMenuItem("DXM16_last");
+	  private JMenuItem submenu3item2_1_1 = new JMenuItem("CLY00_last");
+	  private JMenuItem submenu3item3_1_1 = new JMenuItem("silver 19");
+	  private JMenuItem submenu3item4_1_1 = new JMenuItem("ZWY00_last");
+	  private JMenuItem submenu4item1_1_1 = new JMenuItem("ZCY00_last");
+	  private JMenuItem submenu4item2_1_1 = new JMenuItem("5000-oz December 2017");
+	  private JMenuItem submenu4item3_1_1 = new JMenuItem("3-ff2-boomspreadsoybean ZSY00");
+	  private JMenuItem submenu4item4_1_1 = new JMenuItem("1-ff2-plustrade sugar11 ZBY00");
+	  private JMenuItem submenu5item1_1_1 = new JMenuItem("GEM16 (july16)");
+	  private JMenuItem submenu5item2_1_1 = new JMenuItem("ZNM16 (july16)");
+	  private JMenuItem submenu5item3_1_1 = new JMenuItem("bad table");
+	  private JMenuItem submenu5item4_1_1 = new JMenuItem("bad table");
+	  private JMenuItem submenu6item1_1_1 = new JMenuItem("bad table");
+	  private JMenuItem submenu6item2_1_1 = new JMenuItem("ZBM16 (june16)");
+	  private JMenuItem submenu6item3_1_1 = new JMenuItem("ZOY00");
+	  private JMenuItem submenu6item4_1_1 = new JMenuItem("HEY00_last");
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		try{
+			databasemenu dbmen = new databasemenu();
+			dbmen.createmenu();
+			}
+	    catch(Exception e2){e2.getMessage();e2.printStackTrace();}
+	}//main
+	
+	public databasemenu(){ }//databasemenu()
+	
+	myVariables thevar;
+	myComponent mycomp;
+	
+	void createmenu()
+	{
+		try{
+			this.setTitle("Finance Databases");
+		    this.setSize(1200, 650);		    
+		    
+		    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		    this.setLocationRelativeTo(null);
+		    submenu1item1_1_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item1");fct1_1_1();}});
+		    submenu1item1_2.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item1");fct1_2();}});  
+		    submenu1item1_3.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item1");fct1_3();}});  
+		    submenu1item1_4.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item1");fct1_4();}});  
+		    submenu1item1_5.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item1");fct1_5();}});  
+		    submenu1item1_6.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item1");fct1_6();}});  
+		    submenu1item1_7.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item1");fct1_7();}});  
+		    submenu1item1_8.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item1");fct1_8();}});  
+		    submenu1item1_9.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item1");fct1_9();}});  
+		    submenu1item1_10.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item1");fct1_10();}});  
+		    submenu1item1_11.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item1");fct1_11();}});  
+		    submenu1item1_12.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item1");fct1_12();}});  
+		    submenu1item1_13.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item1");fct1_13();}});  
+		    submenu1item2_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item2");fct2_1();}}); 
+		    submenu1item3_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item3");fct3_1();}});
+		    submenu1item3_2.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item3");fct3_2();}});
+		    submenu1item3_3.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item3");fct3_3();}});
+		    submenu1item3_4.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item3");fct3_4();}});
+		    submenu1item3_5.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item3");fct3_5();}});
+		    submenu1item3_6.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item3");fct3_6();}});
+		    submenu1item3_7.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item3");fct3_7();}});
+		    submenu1item3_8.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item3");fct3_8();}});
+		    submenu1item3_9.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item3");fct3_9();}});
+		    submenu1item3_10.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item3");fct3_10();}});
+		    submenu1item3_11.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item3");fct3_11();}});
+		    submenu1item3_12.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item3");fct3_12();}});
+		    submenu1item3_13.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item3");fct3_13();}});
+		    submenu1item3_14.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item3");fct3_14();}});
+		    submenu1item3_15.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item3");fct3_15();}});
+		    submenu1item3_16.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item3");fct3_16();}});
+		    submenu1item3_17.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item3");fct3_17();}});
+		    submenu1item3_18.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item3");fct3_18();}});
+		    submenu1item3_19.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item3");fct3_19();}});
+		    submenu1item3_20.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item3");fct3_20();}});
+		    submenu1item3_21.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item3");fct3_21();}});
+		    submenu1item4_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item4");fct4_1();}});
+		    submenu1item4_2.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item4");fct4_2();}});
+		    submenu1item4_3.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item4");fct4_3();}});
+		    submenu1item4_4.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item4");fct4_4();}});
+		    submenu1item4_5.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item4");fct4_5();}});
+		    submenu1item4_6.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item4");fct4_6();}});
+		    submenu1item4_7.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item4");fct4_7();}});
+		    submenu1item4_8.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item4");fct4_8();}});
+		    submenu1item4_9.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item4");fct4_9();}});
+		    submenu1item4_10.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item4");fct4_10();}});
+		    submenu1item4_11.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item4");fct4_11();}});
+		    submenu1item4_12.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item4");fct4_12();}});
+		    submenu1item4_13.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item4");fct4_13();}});
+		    submenu1item4_14.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item4");fct4_14();}});
+		    submenu1item4_15.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("1item4");fct4_15();}});
+		    submenu2item1_1_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("2item5");fct5_1_1();}});  
+		    submenu2item2_1_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("2item6");fct6_1();}});
+		    submenu2item3_1_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("2item6");fct7_1();}});
+		   // submenu2item3_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("2item7");fct7_1();}});
+		    submenu2item4_1_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("2item8");fct8_1();}});
+		    submenu3item1_1_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("3item9");fct9_1();}});
+		    submenu3item2_1_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("3item10");fct10_1();}});
+		    submenu3item3_1_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("3item11");fct11_1();}});
+		    submenu3item4_1_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("3item12");fct12_1();}});  
+		    submenu4item1_1_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("4item13");fct13_1();}}); 
+		    submenu4item2_1_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("4item14");fct14_1();}});
+		    submenu4item3_1_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("4item15");fct15_1();}});
+		    submenu4item4_1_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("4item16");fct16_1();}});  
+		    submenu5item1_1_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("5item17");fct17_1();}}); 
+		    submenu5item2_1_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("5item18");fct18_1();}});
+		    submenu5item3_1_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("5item19");fct19_1();}});
+		    submenu5item4_1_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("5item20");fct20_1();}});
+		    submenu6item1_1_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("6item21");fct21_1();}});
+		    submenu6item2_1_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("6item22");fct22_1();}});
+		    submenu6item3_1_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("6item23");fct23_1();}});
+		    submenu6item4_1_1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {System.out.println("6item24");fct24_1();}});
+		    this.menu1.add(sub1menu1);
+		    this.menu1.add(sub2menu1);
+		    this.menu1.add(sub3menu1);
+		    this.menu1.add(sub4menu1);
+		    this.menu2.add(sub1menu2);
+		    this.menu2.add(sub2menu2);
+		    this.menu2.add(sub3menu2);
+		    this.menu2.add(sub4menu2);
+		    this.menu3.add(sub1menu3);
+		    this.menu3.add(sub2menu3);
+		    this.menu3.add(sub3menu3);
+		    this.menu3.add(sub4menu3);
+		    this.menu4.add(sub1menu4);
+		    this.menu4.add(sub2menu4);
+		    this.menu4.add(sub3menu4);
+		    this.menu4.add(sub4menu4);
+		    this.menu5.add(sub1menu5);
+		    this.menu5.add(sub2menu5);
+		    this.menu5.add(sub3menu5);
+		    this.menu5.add(sub4menu5);
+		    this.menu6.add(sub1menu6);
+		    this.menu6.add(sub2menu6);
+		    this.menu6.add(sub3menu6);
+		    this.menu6.add(sub4menu6);
+		    this.sub1menu1.add(submenu1item1_1);
+		    this.sub1menu1.add(submenu1item1_2);
+		    this.sub1menu1.add(submenu1item1_3);
+		    this.sub1menu1.add(submenu1item1_4);
+		    this.sub1menu1.add(submenu1item1_5);
+		    this.sub1menu1.add(submenu1item1_6);
+		    this.sub1menu1.add(submenu1item1_7);
+		    this.sub1menu1.add(submenu1item1_8);
+		    this.sub1menu1.add(submenu1item1_9);
+		    this.sub1menu1.add(submenu1item1_10);
+		    this.sub1menu1.add(submenu1item1_11);
+		    this.sub1menu1.add(submenu1item1_12);
+		    this.sub1menu1.add(submenu1item1_13);
+		    this.sub2menu1.add(submenu1item2_1);
+		    this.sub3menu1.add(submenu1item3_1);
+		    this.sub3menu1.add(submenu1item3_2);
+		    this.sub3menu1.add(submenu1item3_3);
+		    this.sub3menu1.add(submenu1item3_4);
+		    this.sub3menu1.add(submenu1item3_5);
+		    this.sub3menu1.add(submenu1item3_6);
+		    this.sub3menu1.add(submenu1item3_7);
+		    this.sub3menu1.add(submenu1item3_8);
+		    this.sub3menu1.add(submenu1item3_9);
+		    this.sub3menu1.add(submenu1item3_10);
+		    this.sub3menu1.add(submenu1item3_11);
+		    this.sub3menu1.add(submenu1item3_12);
+		    this.sub3menu1.add(submenu1item3_13);
+		    this.sub3menu1.add(submenu1item3_14);
+		    this.sub3menu1.add(submenu1item3_15);
+		    this.sub3menu1.add(submenu1item3_16);
+		    this.sub3menu1.add(submenu1item3_17);
+		    this.sub3menu1.add(submenu1item3_18);
+		    this.sub3menu1.add(submenu1item3_19);
+		    this.sub3menu1.add(submenu1item3_20);
+		    this.sub3menu1.add(submenu1item3_21);
+		    this.sub4menu1.add(submenu1item4_1);
+		    this.sub4menu1.add(submenu1item4_2);
+		    this.sub4menu1.add(submenu1item4_3);
+		    this.sub4menu1.add(submenu1item4_4);
+		    this.sub4menu1.add(submenu1item4_5);
+		    this.sub4menu1.add(submenu1item4_6);
+		    this.sub4menu1.add(submenu1item4_7);
+		    this.sub4menu1.add(submenu1item4_8);
+		    this.sub4menu1.add(submenu1item4_9);
+		    this.sub4menu1.add(submenu1item4_10);
+		    this.sub4menu1.add(submenu1item4_11);
+		    this.sub4menu1.add(submenu1item4_12);
+		    this.sub4menu1.add(submenu1item4_13);
+		    this.sub4menu1.add(submenu1item4_14);
+		    this.sub4menu1.add(submenu1item4_15);
+		    this.sub1menu2.add(submenu2item1_1);
+		    this.sub2menu2.add(submenu2item2_1);
+		    this.sub3menu2.add(submenu2item3_1);
+		    this.sub4menu2.add(submenu2item4_1);
+		    this.sub1menu3.add(submenu3item1_1);
+		    this.sub2menu3.add(submenu3item2_1);
+		    this.sub3menu3.add(submenu3item3_1);
+		    this.sub4menu3.add(submenu3item4_1);
+		    this.sub1menu4.add(submenu4item1_1);
+		    this.sub2menu4.add(submenu4item2_1);
+		    this.sub3menu4.add(submenu4item3_1);
+		    this.sub4menu4.add(submenu4item4_1);
+		    this.sub1menu5.add(submenu5item1_1);
+		    this.sub2menu5.add(submenu5item2_1);
+		    this.sub3menu5.add(submenu5item3_1);
+		    this.sub4menu5.add(submenu5item4_1);
+		    this.sub1menu6.add(submenu6item1_1);
+		    this.sub2menu6.add(submenu6item2_1);
+		    this.sub3menu6.add(submenu6item3_1);
+		    this.sub4menu6.add(submenu6item4_1);
+		    this.submenu1item1_1.add(submenu1item1_1_1);
+		    this.submenu1item1_1.add(submenu1item1_1_2);
+		    this.submenu1item1_1.add(submenu1item1_1_3);
+		    this.submenu1item1_2.add(submenu1item1_2_1);
+		    this.submenu1item1_2.add(submenu1item1_2_2);
+		    this.submenu1item1_2.add(submenu1item1_2_3);
+		    this.submenu1item1_3.add(submenu1item1_3_1);
+		    this.submenu1item1_3.add(submenu1item1_3_2);
+		    this.submenu1item1_3.add(submenu1item1_3_3);
+		    this.submenu2item1_1.add(submenu2item1_1_1);
+		    this.submenu2item2_1.add(submenu2item2_1_1);
+		    this.submenu2item3_1.add(submenu2item3_1_1);
+		    this.submenu2item4_1.add(submenu2item4_1_1);
+		    this.submenu3item1_1.add(submenu3item1_1_1);
+		    this.submenu3item2_1.add(submenu3item2_1_1);
+		    this.submenu3item3_1.add(submenu3item3_1_1);
+		    this.submenu3item4_1.add(submenu3item4_1_1);
+		    this.submenu4item1_1.add(submenu4item1_1_1);
+		    this.submenu4item2_1.add(submenu4item2_1_1);
+		    this.submenu4item3_1.add(submenu4item3_1_1);
+		    this.submenu4item4_1.add(submenu4item4_1_1);
+		    this.submenu5item1_1.add(submenu5item1_1_1);
+		    this.submenu5item2_1.add(submenu5item2_1_1);
+		    this.submenu5item3_1.add(submenu5item3_1_1);
+		    this.submenu5item4_1.add(submenu5item4_1_1);
+		    this.submenu6item1_1.add(submenu6item1_1_1);
+		    this.submenu6item2_1.add(submenu6item2_1_1);
+		    this.submenu6item3_1.add(submenu6item3_1_1);
+		    this.submenu6item4_1.add(submenu6item4_1_1);
+		    this.menuBar.add(menu1);
+		    this.menuBar.add(menu2);
+		    this.menuBar.add(menu3);
+		    this.menuBar.add(menu4);
+		    this.menuBar.add(menu5);
+		    this.menuBar.add(menu6);
+		    this.setJMenuBar(menuBar);
+		    this.setVisible(true);
+			}
+			catch(Exception e2){e2.getMessage();e2.printStackTrace();}	
+	}//createmenu
+	void fct1_1_1()
+	{
+		try{
+		
+		thevar=new myVariables();
+		String databasename="";	
+		thevar.setdbname("ff2plustrade");
+		databasename=thevar.getdbname();
+		System.out.println(databasename);
+		thevar.setfact1(10);
+		thevar.setfact2(600);
+		thevar.setfact3(75);
+		//databasename="ff2petroparlay";
+		String url    = "jdbc:postgresql://localhost:5432/"+databasename;
+		String username = "postgres";
+		String password = "postgres"; 
+		Connection conn=DriverManager.getConnection(url,username,password);
+		Statement stat=conn.createStatement();
+		
+		ResultSet result2;
+		String cmd1="";
+		String thevale3="";
+	    cmd1="SELECT COUNT(*) FROM pg_tables WHERE schemaname ILIKE 'public'";// count number of table in database 
+	    result2=stat.executeQuery(cmd1);
+		while(result2.next())
+		{
+			thevale3=result2.getString(1);
+		}
+		thevar.lim=Integer.valueOf(thevale3);
+		
+		
+		ResultSet result4;
+		String cmd4="";
+		String[] thevale4=new String[100];
+	    cmd4="SELECT tablename FROM pg_tables WHERE schemaname ILIKE 'public'"; //nom de ttes les tables de la base
+	    result4=stat.executeQuery(cmd4);
+	    int k=1;
+		while(result4.next())
+		{
+			thevale4[k]=result4.getString(1);
+			k++;
+		}
+		
+		String[] tabledat=new String[100];
+		Calendar cal = Calendar.getInstance();
+		int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+		int Month = cal.get(Calendar.MONTH)+1;
+		int Year = cal.get(Calendar.YEAR);
+		tabledat[1]=String.valueOf(dayOfMonth)+String.valueOf(Month)+String.valueOf(Year);
+		String[] tablenam=new String[100];
+		String[] cmde=new String[100];
+		ResultSet result;
+		String[] thevale1=new String[100];
+		String[] thevale2=new String[100];
+		String target="";
+		 
+		double total=0;
+		double mean=0;
+		double first=0;
+		double last=0;
+		String trend="";
+		String trend2="";
+      
+		//target="SBH17_last";
+		//target="SBY00_low";
+		//target="SBH19_high";
+		//target="SBV18_last";
+		thevar.settarget("SBY00_last");
+		target=thevar.gettarget();
+		//target="CLU16_high";
+		//target="SBY00_displaytime";
+		//thevar.mytarget=target;
+		
+		for(int w=1;w<=thevar.lim;w++){
+		//tablenam[w]=databasename+tabledat[w];
+		//cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+tablenam[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+		cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+thevale4[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+		result=stat.executeQuery(cmde[w]);
+		while(result.next())
+		{
+			thevale1[w]=result.getString(1);
+			thevale2[w]=result.getString(2);
+		}
+		System.out.println(target+" output "+/*tabledat[w]+*/"="+thevale2[w]);	
+		thevar.var[w]=thevale2[w];
+		String a1=thevar.var[w].replace("s","");
+		String a3=a1.trim();
+		if(a3.isEmpty()){a3="0";}else{a3=a3;}
+		Double a4=Double.valueOf(a3);
+		total+=Double.valueOf(a4);
+		result.close();
+		}//for
+	    mean=total/thevar.lim;
+	    String a5=thevar.var[1].replace("s","");
+		String a6=a5.trim();
+		if(a6.isEmpty()){a6="0";}else{a6=a6;}
+		Double a7=Double.valueOf(a6);
+	    first=Double.valueOf(a7);
+	    String a8=thevar.var[8].replace("s","");
+		String a9=a8.trim();
+		if(a9.isEmpty()){a9="0";}else{a9=a9;}
+		Double a10=Double.valueOf(a9);
+	    last=Double.valueOf(a10);
+	    if((first>mean)&&(last<mean)){trend="move down:";}else{trend="move up:";}
+	    System.out.println("mean="+mean+" trend="+trend);
+	    thevar.mytrend=trend;
+	    if(trend=="down"){trend2="sell short future contracts and buy option(call/put)";}else{trend2="buy future contracts and buy option(call/put)";}
+	    thevar.mytrend2=trend2;
+	    conn.close();
+	    mycomp=new myComponent();
+	    Graphics2D g = (Graphics2D) getGraphics();
+      //  g.dispose();
+	//    g.clearRect(0,0,1200,650);
+		mycomp.paintComponent(g);
+	    //this.add(new myComponent());
+	    
+		System.out.println("bye bye world!");
+		}
+		catch(Exception e2){e2.getMessage();e2.printStackTrace();}	
+	}//fct1_1
+	void fct1_2()
+	{
+		System.out.println("1item1");
+	}//fct1_2
+	void fct1_3()
+	{
+		System.out.println("1item1");
+	}//fct1_2
+	void fct1_4()
+	{
+		System.out.println("1item1");
+	}//fct1_2
+	void fct1_5()
+	{
+		System.out.println("1item1");
+	}//fct1_2
+	void fct1_6()
+	{
+		System.out.println("1item1");
+	}//fct1_2
+	void fct1_7()
+	{
+		System.out.println("1item1");
+	}//fct1_2
+	void fct1_8()
+	{
+		System.out.println("1item1");
+	}//fct1_2
+	void fct1_9()
+	{
+		System.out.println("1item1");
+	}//fct1_2
+	void fct1_10()
+	{
+		System.out.println("1item1");
+	}//fct1_2
+	void fct1_11()
+	{
+		System.out.println("1item1");	
+	}//fct1_2
+	void fct1_12()
+	{
+		System.out.println("1item1");
+	}//fct1_2
+	void fct1_13()
+	{
+		System.out.println("1item1");	
+	}//fct1_2
+	void fct2_1()   // option table
+	{
+		try{
+			System.out.println("1item1");
+		
+		thevar=new myVariables();
+		String databasename="";	
+	    thevar.setdbname("ff2plustradeboption");
+		databasename=thevar.getdbname();
+		System.out.println(databasename);
+		thevar.setfact1(35);
+		thevar.setfact2(600);
+		thevar.setfact3(420);
+		//databasename="ff2petroparlay";
+		String url    = "jdbc:postgresql://localhost:5432/"+databasename;
+		String username = "postgres";
+		String password = "postgres"; 
+		Connection conn=DriverManager.getConnection(url,username,password);
+		Statement stat=conn.createStatement();
+		
+		ResultSet result2;
+		String cmd1="";
+		String thevale3="";
+	    cmd1="SELECT COUNT(*) FROM pg_tables WHERE schemaname ILIKE 'public'";// count number of table in database 
+	    result2=stat.executeQuery(cmd1);
+		while(result2.next())
+		{
+			thevale3=result2.getString(1);
+		}
+		thevar.lim=Integer.valueOf(thevale3);
+		
+		
+		ResultSet result4;
+		String cmd4="";
+		String[] thevale4=new String[100];
+	    cmd4="SELECT tablename FROM pg_tables WHERE schemaname ILIKE 'public'"; //nom de ttes les tables de la base
+	    result4=stat.executeQuery(cmd4);
+	    int k=1;
+		while(result4.next())
+		{
+			thevale4[k]=result4.getString(1);
+			k++;
+		}
+		
+		String[] tabledat=new String[100];
+		Calendar cal = Calendar.getInstance();
+		int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+		int Month = cal.get(Calendar.MONTH)+1;
+		int Year = cal.get(Calendar.YEAR);
+		tabledat[1]=String.valueOf(dayOfMonth)+String.valueOf(Month)+String.valueOf(Year);
+		String[] tablenam=new String[100];
+		String[] cmde=new String[100];
+		ResultSet result;
+		String[] thevale1=new String[100];
+		String[] thevale2=new String[100];
+		String target="";
+		 
+		double total=0;
+		double mean=0;
+		double first=0;
+		double last=0;
+		String trend="";
+		String trend2="";
+
+		//target="SBH17_last";
+		//target="SBY00_low";
+		//target="SBH19_high";
+		//target="SBV18_last";
+		thevar.settarget("7.00C");
+		target=thevar.gettarget();
+		//target="CLU16_high";
+		//target="SBY00_displaytime";
+		//thevar.mytarget=target;
+		
+		for(int w=1;w<=thevar.lim;w++){
+		//tablenam[w]=databasename+tabledat[w];
+		//cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+tablenam[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+		cmde[w]="SELECT DISTINCT strike,high FROM "+thevale4[w]+" WHERE strike ILIKE '%"+target+"%'"+";";
+		result=stat.executeQuery(cmde[w]);
+		while(result.next())
+		{
+			thevale1[w]=result.getString(1);
+			thevale2[w]=result.getString(2);
+		}
+		if(thevale2[w]==null){thevale2[w]="0";}
+		System.out.println(target+" output "+/*tabledat[w]*/"="+thevale2[w]);	
+		thevar.var[w]=thevale2[w];
+		String a1=thevar.var[w].replace("s","");
+		String a3=a1.trim();
+		if(a3.isEmpty()){a3="0";}else{a3=a3;}
+		String a10=a3.replace("-0","");
+		String a11=a10.replace("-4","");
+		
+		Double a4=Double.valueOf(a11);
+		total+=Double.valueOf(a4);
+		result.close();
+		}//for
+	    mean=total/thevar.lim;
+	    String a5=thevar.var[1].replace("s","");
+		String a6=a5.trim();
+		if(a6.isEmpty()){a6="0";}else{a6=a6;}
+		String a12=a6.replace("-0","");
+		String a13=a12.replace("-4","");
+		Double a7=Double.valueOf(a13);
+	    first=Double.valueOf(a7);
+	    String a8=thevar.var[8].replace("s","");
+		String a9=a8.trim();
+		if(a9.isEmpty()){a9="0";}else{a9=a9;}
+		String a14=a9.replace("-0","");
+		String a15=a14.replace("-4","");
+		Double da10=Double.valueOf(a15);
+	    last=Double.valueOf(da10);
+	    if((first>mean)&&(last<mean)){trend="move down:";}else{trend="move up:";}
+	    System.out.println("mean="+mean+" trend="+trend);
+	    thevar.mytrend=trend;
+	    if(trend=="down"){trend2="sell short future contracts and buy option(call/put)";}else{trend2="buy future contracts and buy option(call/put)";}
+	    thevar.mytrend2=trend2;
+	    conn.close();
+	    mycomp=new myComponent();
+	    Graphics2D g = (Graphics2D) getGraphics();
+	  //  g.dispose();
+	 //   g.clearRect(0,0,1200,650);
+		mycomp.paintComponent(g);
+	    //this.add(new myComponent());
+	    
+		System.out.println("bye bye world!");
+		}
+		catch(NumberFormatException e2){e2.getMessage();e2.printStackTrace();}	
+		catch(Exception e2){e2.getMessage();e2.printStackTrace();}	
+	}//fct2
+	void fct3_1()
+	{
+		//System.out.println("1item1");
+
+		try{
+			System.out.println("1item1");
+		
+		thevar=new myVariables();
+		String databasename="";	
+	    thevar.setdbname("ff2boomspread");
+		databasename=thevar.getdbname();
+		System.out.println(databasename);
+		thevar.setfact1(1);
+		thevar.setfact2(1300);
+		thevar.setfact3(420);
+		//databasename="ff2petroparlay";
+		String url    = "jdbc:postgresql://localhost:5432/"+databasename;
+		String username = "postgres";
+		String password = "postgres"; 
+		Connection conn=DriverManager.getConnection(url,username,password);
+		Statement stat=conn.createStatement();
+		
+		ResultSet result2;
+		String cmd1="";
+		String thevale3="";
+	    cmd1="SELECT COUNT(*) FROM pg_tables WHERE schemaname ILIKE 'public'";// count number of table in database 
+	    result2=stat.executeQuery(cmd1);
+		while(result2.next())
+		{
+			thevale3=result2.getString(1);
+		}
+		thevar.lim=Integer.valueOf(thevale3);
+		
+		
+		ResultSet result4;
+		String cmd4="";
+		String[] thevale4=new String[100];
+	    cmd4="SELECT tablename FROM pg_tables WHERE schemaname ILIKE 'public'"; //nom de ttes les tables de la base
+	    result4=stat.executeQuery(cmd4);
+	    int k=1;
+		while(result4.next())
+		{
+			thevale4[k]=result4.getString(1);
+			k++;
+		}
+		
+		String[] tabledat=new String[100];
+		Calendar cal = Calendar.getInstance();
+		int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+		int Month = cal.get(Calendar.MONTH)+1;
+		int Year = cal.get(Calendar.YEAR);
+		tabledat[1]=String.valueOf(dayOfMonth)+String.valueOf(Month)+String.valueOf(Year);
+		String[] tablenam=new String[100];
+		String[] cmde=new String[100];
+		ResultSet result;
+		String[] thevale1=new String[100];
+		String[] thevale2=new String[100];
+		String target="";
+		 
+		double total=0;
+		double mean=0;
+		double first=0;
+		double last=0;
+		String trend="";
+		String trend2="";
+
+		//target="SBH17_last";
+		//target="SBY00_low";
+		//target="SBH19_high";
+		//target="SBV18_last";
+		thevar.settarget("ZSY00_last");
+		target=thevar.gettarget();
+		//target="CLU16_high";
+		//target="SBY00_displaytime";
+		//thevar.mytarget=target;
+		
+		for(int w=1;w<=thevar.lim;w++){
+		//tablenam[w]=databasename+tabledat[w];
+		//cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+tablenam[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+		cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+thevale4[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+		result=stat.executeQuery(cmde[w]);
+		while(result.next())
+		{
+			thevale1[w]=result.getString(1);
+			thevale2[w]=result.getString(2);
+		}
+		System.out.println(target+" output "+/*tabledat[w]*/"="+thevale2[w]);	
+		thevar.var[w]=thevale2[w];
+		String a1=thevar.var[w].replace("s","");
+		String a3=a1.trim();
+		if(a3.isEmpty()){a3="0";}else{a3=a3;}
+		String a10=a3.replace("-0","");
+		String a11=a10.replace("-4","");
+		
+		Double a4=Double.valueOf(a11);
+		total+=Double.valueOf(a4);
+		result.close();
+		}//for
+	    mean=total/thevar.lim;
+	    String a5=thevar.var[1].replace("s","");
+		String a6=a5.trim();
+		if(a6.isEmpty()){a6="0";}else{a6=a6;}
+		String a12=a6.replace("-0","");
+		String a13=a12.replace("-4","");
+		Double a7=Double.valueOf(a13);
+	    first=Double.valueOf(a7);
+	    String a8=thevar.var[8].replace("s","");
+		String a9=a8.trim();
+		if(a9.isEmpty()){a9="0";}else{a9=a9;}
+		String a14=a9.replace("-0","");
+		String a15=a14.replace("-4","");
+		Double da10=Double.valueOf(a15);
+	    last=Double.valueOf(da10);
+	    if((first>mean)&&(last<mean)){trend="move down:";}else{trend="move up:";}
+	    System.out.println("mean="+mean+" trend="+trend);
+	    thevar.mytrend=trend;
+	    if(trend=="down"){trend2="sell short future contracts and buy option(call/put)";}else{trend2="buy future contracts and buy option(call/put)";}
+	    thevar.mytrend2=trend2;
+	    conn.close();
+	    mycomp=new myComponent();
+	    Graphics2D g = (Graphics2D) getGraphics();
+	  //  g.dispose();
+	 //   g.clearRect(0,0,1200,650);
+		mycomp.paintComponent(g);
+	    //this.add(new myComponent());
+	    
+		System.out.println("bye bye world!");
+		}
+		catch(NumberFormatException e2){e2.getMessage();e2.printStackTrace();}	
+		catch(Exception e2){e2.getMessage();e2.printStackTrace();}	
+	}//fct3
+	void fct3_2()
+	{
+		System.out.println("1item1");
+	}//fct3
+	void fct3_3()
+	{
+		System.out.println("1item1");
+	}//fct3
+	void fct3_4()
+	{
+		System.out.println("1item1");
+	}//fct3
+	void fct3_5()
+	{
+		System.out.println("1item1");
+	}//fct3
+	void fct3_6()
+	{
+		System.out.println("1item1");
+	}//fct3
+	void fct3_7()
+	{
+		System.out.println("1item1");
+	}//fct3
+	void fct3_8()
+	{
+		System.out.println("1item1");
+	}//fct3
+	void fct3_9()
+	{
+		System.out.println("1item1");
+	}//fct3
+	void fct3_10()
+	{
+		System.out.println("1item1");
+	}//fct3
+	void fct3_11()
+	{
+		System.out.println("1item1");
+	}//fct3
+	void fct3_12()
+	{
+		System.out.println("1item1");
+	}//fct3
+	void fct3_13()
+	{
+		System.out.println("1item1");
+	}//fct3
+	void fct3_14()
+	{
+		System.out.println("1item1");
+	}//fct3
+	void fct3_15()
+	{
+		System.out.println("1item1");
+	}//fct3
+	void fct3_16()
+	{
+		System.out.println("1item1");
+	}//fct3
+	void fct3_17()
+	{
+		System.out.println("1item1");
+	}//fct3
+	void fct3_18()
+	{
+		System.out.println("1item1");
+	}//fct3
+	void fct3_19()
+	{
+		System.out.println("1item1");
+	}//fct3
+	void fct3_20()
+	{
+		System.out.println("1item1");
+	}//fct3
+	void fct3_21()
+	{
+		System.out.println("1item1");
+	}//fct3
+	void fct4_1()
+	{
+		
+		try{
+			System.out.println("1item1");
+			thevar=new myVariables();
+			String databasename="";	
+			thevar.setdbname("ff2beefsandwich");
+			databasename=thevar.getdbname();
+			System.out.println(databasename);
+			thevar.setfact1(6);
+			thevar.setfact2(1000);
+			thevar.setfact3(575);
+			//databasename="ff2petroparlay";
+			String url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			String username = "postgres";
+			String password = "postgres"; 
+			Connection conn=DriverManager.getConnection(url,username,password);
+			Statement stat=conn.createStatement();
+			
+			ResultSet result2;
+			String cmd1="";
+			String thevale3="";
+		    cmd1="SELECT COUNT(*) FROM pg_tables WHERE schemaname ILIKE 'public'";// count number of table in database 
+		    result2=stat.executeQuery(cmd1);
+			while(result2.next())
+			{
+				thevale3=result2.getString(1);
+			}
+			thevar.lim=Integer.valueOf(thevale3);
+			
+			
+			ResultSet result4;
+			String cmd4="";
+			String[] thevale4=new String[100];
+		    cmd4="SELECT tablename FROM pg_tables WHERE schemaname ILIKE 'public'"; //nom de ttes les tables de la base
+		    result4=stat.executeQuery(cmd4);
+		    int k=1;
+			while(result4.next())
+			{
+				thevale4[k]=result4.getString(1);
+				k++;
+			}
+			
+			String[] tabledat=new String[100];
+			Calendar cal = Calendar.getInstance();
+			int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+			int Month = cal.get(Calendar.MONTH)+1;
+			int Year = cal.get(Calendar.YEAR);
+			tabledat[1]=String.valueOf(dayOfMonth)+String.valueOf(Month)+String.valueOf(Year);
+			String[] tablenam=new String[100];
+			String[] cmde=new String[100];
+			ResultSet result;
+			String[] thevale1=new String[100];
+			String[] thevale2=new String[100];
+			String target="";
+			 
+			double total=0;
+			double mean=0;
+			double first=0;
+			double last=0;
+			String trend="";
+			String trend2="";
+	      
+			//target="SBH17_last";
+			//target="SBY00_low";
+			//target="SBH19_high";
+			//target="SBV18_last";
+			//thevar.settarget("LEM16_last");
+			thevar.settarget("LEQ16_last");
+			target=thevar.gettarget();
+			//target="CLU16_high";
+			//target="SBY00_displaytime";
+			//thevar.mytarget=target;
+			
+			for(int w=1;w<=thevar.lim;w++){
+			//tablenam[w]=databasename+tabledat[w];
+			//cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+tablenam[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+thevale4[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			result=stat.executeQuery(cmde[w]);
+			while(result.next())
+			{
+				thevale1[w]=result.getString(1);
+				thevale2[w]=result.getString(2);
+			}
+			System.out.println(target+" output "+/*tabledat[w]+*/"="+thevale2[w]);	
+			thevar.var[w]=thevale2[w];
+			String a1=thevar.var[w].replace("s","");
+			String a3=a1.trim();
+			if(a3.isEmpty()){a3="0";}else{a3=a3;}
+			Double a4=Double.valueOf(a3);
+			total+=Double.valueOf(a4);
+			result.close();
+			}//for
+		    mean=total/thevar.lim;
+		    String a5=thevar.var[1].replace("s","");
+			String a6=a5.trim();
+			if(a6.isEmpty()){a6="0";}else{a6=a6;}
+			Double a7=Double.valueOf(a6);
+		    first=Double.valueOf(a7);
+		    String a8=thevar.var[8].replace("s","");
+			String a9=a8.trim();
+			if(a9.isEmpty()){a9="0";}else{a9=a9;}
+			Double a10=Double.valueOf(a9);
+		    last=Double.valueOf(a10);
+		    if((first>mean)&&(last<mean)){trend="move down:";}else{trend="move up:";}
+		    System.out.println("mean="+mean+" trend="+trend);
+		    thevar.mytrend=trend;
+		    if(trend=="down"){trend2="sell short future contracts and buy option(call/put)";}else{trend2="buy future contracts and buy option(call/put)";}
+		    thevar.mytrend2=trend2;
+		    conn.close();
+		    mycomp=new myComponent();
+		    Graphics2D g = (Graphics2D) getGraphics();
+	      //  g.dispose();
+		//    g.clearRect(0,0,1200,650);
+			mycomp.paintComponent(g);
+		    //this.add(new myComponent());
+		    
+			System.out.println("bye bye world!");
+			}
+			catch(Exception e2){e2.getMessage();e2.printStackTrace();}	
+	}//fct4
+	void fct4_2()
+	{
+		System.out.println("1item1");
+		}//fct5
+	void fct4_3()
+	{
+		System.out.println("1item1");
+		}//fct5
+	void fct4_4()
+	{
+		System.out.println("1item1");
+		}//fct5
+	void fct4_5()
+	{
+		System.out.println("1item1");
+		}//fct5
+	void fct4_6()
+	{
+		System.out.println("1item1");
+		}//fct5
+	void fct4_7()
+	{
+		System.out.println("1item1");
+		}//fct5
+	void fct4_8()
+	{
+		System.out.println("1item1");
+		}//fct5
+	void fct4_9()
+	{
+		System.out.println("1item1");
+		}//fct5
+	void fct4_10()
+	{
+		System.out.println("1item1");
+		}//fct5
+	void fct4_11()
+	{
+		System.out.println("1item1");
+		}//fct5
+	void fct4_12()
+	{
+		System.out.println("1item1");
+		}//fct5
+	void fct4_13()
+	{
+		System.out.println("1item1");
+		}//fct5
+	void fct4_14()
+	{
+		System.out.println("1item1");
+		}//fct5
+	void fct4_15()
+	{
+		System.out.println("1item1");
+		}//fct5
+	void fct5_1_1()
+	{
+
+		try{
+			System.out.println("1item1");
+			thevar=new myVariables();
+			String databasename="";	
+			thevar.setdbname("ff2coopercoup");
+			databasename=thevar.getdbname();
+			System.out.println(databasename);
+			thevar.setfact1(100);
+			thevar.setfact2(400);
+			thevar.setfact3(575);
+			//databasename="ff2petroparlay";
+			String url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			String username = "postgres";
+			String password = "postgres"; 
+			Connection conn=DriverManager.getConnection(url,username,password);
+			Statement stat=conn.createStatement();
+			
+			ResultSet result2;
+			String cmd1="";
+			String thevale3="";
+		    cmd1="SELECT COUNT(*) FROM pg_tables WHERE schemaname ILIKE 'public'";// count number of table in database 
+		    result2=stat.executeQuery(cmd1);
+			while(result2.next())
+			{
+				thevale3=result2.getString(1);
+			}
+			thevar.lim=Integer.valueOf(thevale3);
+			
+			
+			ResultSet result4;
+			String cmd4="";
+			String[] thevale4=new String[100];
+		    cmd4="SELECT tablename FROM pg_tables WHERE schemaname ILIKE 'public'"; //nom de ttes les tables de la base
+		    result4=stat.executeQuery(cmd4);
+		    int k=1;
+			while(result4.next())
+			{
+				thevale4[k]=result4.getString(1);
+				k++;
+			}
+			
+			String[] tabledat=new String[100];
+			Calendar cal = Calendar.getInstance();
+			int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+			int Month = cal.get(Calendar.MONTH)+1;
+			int Year = cal.get(Calendar.YEAR);
+			tabledat[1]=String.valueOf(dayOfMonth)+String.valueOf(Month)+String.valueOf(Year);
+			String[] tablenam=new String[100];
+			String[] cmde=new String[100];
+			ResultSet result;
+			String[] thevale1=new String[100];
+			String[] thevale2=new String[100];
+			String target="";
+			 
+			double total=0;
+			double mean=0;
+			double first=0;
+			double last=0;
+			String trend="";
+			String trend2="";
+	      
+			//target="SBH17_last";
+			//target="SBY00_low";
+			//target="SBH19_high";
+			//target="SBV18_last";
+			thevar.settarget("HGY00_last");
+			target=thevar.gettarget();
+			//target="CLU16_high";
+			//target="SBY00_displaytime";
+			//thevar.mytarget=target;
+			
+			for(int w=1;w<=thevar.lim;w++){
+			//tablenam[w]=databasename+tabledat[w];
+			//cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+tablenam[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+thevale4[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			result=stat.executeQuery(cmde[w]);
+			while(result.next())
+			{
+				thevale1[w]=result.getString(1);
+				thevale2[w]=result.getString(2);
+			}
+			System.out.println(target+" output "+/*tabledat[w]+*/"="+thevale2[w]);	
+			thevar.var[w]=thevale2[w];
+			String a1=thevar.var[w].replace("s","");
+			String a3=a1.trim();
+			if(a3.isEmpty()){a3="0";}else{a3=a3;}
+			Double a4=Double.valueOf(a3);
+			total+=Double.valueOf(a4);
+			result.close();
+			}//for
+		    mean=total/thevar.lim;
+		    String a5=thevar.var[1].replace("s","");
+			String a6=a5.trim();
+			if(a6.isEmpty()){a6="0";}else{a6=a6;}
+			Double a7=Double.valueOf(a6);
+		    first=Double.valueOf(a7);
+		    String a8=thevar.var[8].replace("s","");
+			String a9=a8.trim();
+			if(a9.isEmpty()){a9="0";}else{a9=a9;}
+			Double a10=Double.valueOf(a9);
+		    last=Double.valueOf(a10);
+		    if((first>mean)&&(last<mean)){trend="move down:";}else{trend="move up:";}
+		    System.out.println("mean="+mean+" trend="+trend);
+		    thevar.mytrend=trend;
+		    if(trend=="down"){trend2="sell short future contracts and buy option(call/put)";}else{trend2="buy future contracts and buy option(call/put)";}
+		    thevar.mytrend2=trend2;
+		    conn.close();
+		    mycomp=new myComponent();
+		    Graphics2D g = (Graphics2D) getGraphics();
+	      //  g.dispose();
+		//    g.clearRect(0,0,1200,650);
+			mycomp.paintComponent(g);
+		    //this.add(new myComponent());
+		    
+			System.out.println("bye bye world!");
+			}
+			catch(Exception e2){e2.getMessage();e2.printStackTrace();}	
+		}//fct5
+	
+	void fct6_1()
+	{
+		try{
+			System.out.println("1item1");
+			thevar=new myVariables();
+			String databasename="";	
+			thevar.setdbname("ff2cottonconnection");
+			databasename=thevar.getdbname();
+			System.out.println(databasename);
+			thevar.setfact1(1);
+			thevar.setfact2(600);
+			thevar.setfact3(575);
+			//databasename="ff2petroparlay";
+			String url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			String username = "postgres";
+			String password = "postgres"; 
+			Connection conn=DriverManager.getConnection(url,username,password);
+			Statement stat=conn.createStatement();
+			
+			ResultSet result2;
+			String cmd1="";
+			String thevale3="";
+		    cmd1="SELECT COUNT(*) FROM pg_tables WHERE schemaname ILIKE 'public'";// count number of table in database 
+		    result2=stat.executeQuery(cmd1);
+			while(result2.next())
+			{
+				thevale3=result2.getString(1);
+			}
+			thevar.lim=Integer.valueOf(thevale3);
+			
+			
+			ResultSet result4;
+			String cmd4="";
+			String[] thevale4=new String[100];
+		    cmd4="SELECT tablename FROM pg_tables WHERE schemaname ILIKE 'public'"; //nom de ttes les tables de la base
+		    result4=stat.executeQuery(cmd4);
+		    int k=1;
+			while(result4.next())
+			{
+				thevale4[k]=result4.getString(1);
+				k++;
+			}
+			
+			String[] tabledat=new String[100];
+			Calendar cal = Calendar.getInstance();
+			int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+			int Month = cal.get(Calendar.MONTH)+1;
+			int Year = cal.get(Calendar.YEAR);
+			tabledat[1]=String.valueOf(dayOfMonth)+String.valueOf(Month)+String.valueOf(Year);
+			String[] tablenam=new String[100];
+			String[] cmde=new String[100];
+			ResultSet result;
+			String[] thevale1=new String[100];
+			String[] thevale2=new String[100];
+			String target="";
+			 
+			double total=0;
+			double mean=0;
+			double first=0;
+			double last=0;
+			String trend="";
+			String trend2="";
+	      
+			//target="SBH17_last";
+			//target="SBY00_low";
+			//target="SBH19_high";
+			//target="SBV18_last";
+			thevar.settarget("CTY00_last");
+			target=thevar.gettarget();
+			//target="CLU16_high";
+			//target="SBY00_displaytime";
+			//thevar.mytarget=target;
+			
+			for(int w=1;w<=thevar.lim;w++){
+			//tablenam[w]=databasename+tabledat[w];
+			//cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+tablenam[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+thevale4[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			result=stat.executeQuery(cmde[w]);
+			while(result.next())
+			{
+				thevale1[w]=result.getString(1);
+				thevale2[w]=result.getString(2);
+			}
+			System.out.println(target+" output "+/*tabledat[w]+*/"="+thevale2[w]);	
+			if(thevale2[w]!=null){
+			thevar.var[w]=thevale2[w];
+			String a1=thevar.var[w].replace("s","");
+			String a3=a1.trim();
+			if(a3.isEmpty()){a3="0";}else{a3=a3;}
+			Double a4=Double.valueOf(a3);
+			total+=Double.valueOf(a4);}
+			result.close();
+			}//for
+		    mean=total/thevar.lim;
+		    if(thevar.var[1]!=null){
+		    String a5=thevar.var[1].replace("s","");
+			String a6=a5.trim();
+			if(a6.isEmpty()){a6="0";}else{a6=a6;}
+			Double a7=Double.valueOf(a6);
+		    first=Double.valueOf(a7);}
+		    if(thevar.var[8]!=null){   // must verify if 8 should not be last instead
+		    String a8=thevar.var[8].replace("s","");
+			String a9=a8.trim();
+			if(a9.isEmpty()){a9="0";}else{a9=a9;}
+			Double a10=Double.valueOf(a9);
+		    last=Double.valueOf(a10);}
+		    if((first>mean)&&(last<mean)){trend="move down:";}else{trend="move up:";}
+		    System.out.println("mean="+mean+" trend="+trend);
+		    thevar.mytrend=trend;
+		    if(trend=="down"){trend2="sell short future contracts and buy option(call/put)";}else{trend2="buy future contracts and buy option(call/put)";}
+		    thevar.mytrend2=trend2;
+		    conn.close();
+		    mycomp=new myComponent();
+		    Graphics2D g = (Graphics2D) getGraphics();
+	      //  g.dispose();
+		//    g.clearRect(0,0,1200,650);
+			mycomp.paintComponent(g);
+		    //this.add(new myComponent());
+		    
+			System.out.println("bye bye world!");
+			}
+		catch(NullPointerException e3){e3.getMessage();e3.printStackTrace();}	
+			catch(Exception e2){e2.getMessage();e2.printStackTrace();}	
+	}//fct6
+	void fct7_1()
+	{
+		try{
+			System.out.println("1item1");
+			thevar=new myVariables();
+			String databasename="";	
+			thevar.setdbname("ff2insuredgsrtradeg");
+			databasename=thevar.getdbname();
+			System.out.println(databasename);
+			thevar.setfact1(1);
+			thevar.setfact2(1500);
+			thevar.setfact3(575);
+			//databasename="ff2petroparlay";
+			String url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			String username = "postgres";
+			String password = "postgres"; 
+			Connection conn=DriverManager.getConnection(url,username,password);
+			Statement stat=conn.createStatement();
+			
+			ResultSet result2;
+			String cmd1="";
+			String thevale3="";
+		    cmd1="SELECT COUNT(*) FROM pg_tables WHERE schemaname ILIKE 'public'";// count number of table in database 
+		    result2=stat.executeQuery(cmd1);
+			while(result2.next())
+			{
+				thevale3=result2.getString(1);
+			}
+			thevar.lim=Integer.valueOf(thevale3);
+			
+			
+			ResultSet result4;
+			String cmd4="";
+			String[] thevale4=new String[100];
+		    cmd4="SELECT tablename FROM pg_tables WHERE schemaname ILIKE 'public'"; //nom de ttes les tables de la base
+		    result4=stat.executeQuery(cmd4);
+		    int k=1;
+			while(result4.next())
+			{
+				thevale4[k]=result4.getString(1);
+				k++;
+			}
+			
+			String[] tabledat=new String[100];
+			Calendar cal = Calendar.getInstance();
+			int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+			int Month = cal.get(Calendar.MONTH)+1;
+			int Year = cal.get(Calendar.YEAR);
+			tabledat[1]=String.valueOf(dayOfMonth)+String.valueOf(Month)+String.valueOf(Year);
+			String[] tablenam=new String[100];
+			String[] cmde=new String[100];
+			ResultSet result;
+			String[] thevale1=new String[100];
+			String[] thevale2=new String[100];
+			String target="";
+			 
+			double total=0;
+			double mean=0;
+			double first=0;
+			double last=0;
+			String trend="";
+			String trend2="";
+	      
+			//target="SBH17_last";
+			//target="SBY00_low";
+			//target="SBH19_high";
+			//target="SBV18_last";
+			thevar.settarget("GCY00_last");
+			target=thevar.gettarget();
+			//target="CLU16_high";
+			//target="SBY00_displaytime";
+			//thevar.mytarget=target;
+			
+			for(int w=1;w<=thevar.lim;w++){
+			//tablenam[w]=databasename+tabledat[w];
+			//cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+tablenam[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+thevale4[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			result=stat.executeQuery(cmde[w]);
+			while(result.next())
+			{
+				thevale1[w]=result.getString(1);
+				thevale2[w]=result.getString(2);
+			}
+			System.out.println(target+" output "+/*tabledat[w]+*/"="+thevale2[w]);	
+			if(thevale2[w]!=null){
+			thevar.var[w]=thevale2[w];
+			String a1=thevar.var[w].replace("s","");
+			String a3=a1.trim();
+			if(a3.isEmpty()){a3="0";}else{a3=a3;}
+			String a11=a3.replace(".","");
+			String a12=a11.replace(",","");
+			Double a4=Double.valueOf(a12);
+			a4=a4/100;
+			total+=Double.valueOf(a4);}
+			result.close();
+			}//for
+		    mean=total/thevar.lim;
+		    if(thevar.var[1]!=null){
+		    String a5=thevar.var[1].replace("s","");
+			String a6=a5.trim();
+			if(a6.isEmpty()){a6="0";}else{a6=a6;}
+			String a13=a6.replace(".","");
+			String a14=a13.replace(",","");
+			Double a7=Double.valueOf(a14);
+			a7=a7/100;
+		    first=Double.valueOf(a7);}
+		    if(thevar.var[8]!=null){   // must verify if 8 should  be last instead
+		    String a8=thevar.var[8].replace("s","");
+			String a9=a8.trim();
+			if(a9.isEmpty()){a9="0";}else{a9=a9;}
+			String a15=a9.replace(".","");
+			String a16=a15.replace(",","");
+			Double a10=Double.valueOf(a16);
+			a10=a10/100;
+		    last=Double.valueOf(a10);}
+		    if((first>mean)&&(last<mean)){trend="move down:";}else{trend="move up:";}
+		    System.out.println("mean="+mean+" trend="+trend);
+		    thevar.mytrend=trend;
+		    if(trend=="down"){trend2="sell short future contracts and buy option(call/put)";}else{trend2="buy future contracts and buy option(call/put)";}
+		    thevar.mytrend2=trend2;
+		    conn.close();
+		    mycomp=new myComponent();
+		    Graphics2D g = (Graphics2D) getGraphics();
+	      //  g.dispose();
+		//    g.clearRect(0,0,1200,650);
+			mycomp.paintComponent(g);
+		    //this.add(new myComponent());
+		    
+			System.out.println("bye bye world!");
+			}
+		catch(NumberFormatException e4){e4.getMessage();e4.printStackTrace();}	
+		catch(NullPointerException e3){e3.getMessage();e3.printStackTrace();}	
+			catch(Exception e2){e2.getMessage();e2.printStackTrace();}	
+	}//fct7
+	void fct8_1()
+	{
+		try{
+			System.out.println("1item1");
+			thevar=new myVariables();
+			String databasename="";	
+			thevar.setdbname("ff2insuredgsrtrades");
+			databasename=thevar.getdbname();
+			System.out.println(databasename);
+			thevar.setfact1(1);
+			thevar.setfact2(500);
+			thevar.setfact3(300);
+			//databasename="ff2petroparlay";
+			String url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			String username = "postgres";
+			String password = "postgres"; 
+			Connection conn=DriverManager.getConnection(url,username,password);
+			Statement stat=conn.createStatement();
+			
+			ResultSet result2;
+			String cmd1="";
+			String thevale3="";
+		    cmd1="SELECT COUNT(*) FROM pg_tables WHERE schemaname ILIKE 'public'";// count number of table in database 
+		    result2=stat.executeQuery(cmd1);
+			while(result2.next())
+			{
+				thevale3=result2.getString(1);
+			}
+			thevar.lim=Integer.valueOf(thevale3);
+			
+			
+			ResultSet result4;
+			String cmd4="";
+			String[] thevale4=new String[100];
+		    cmd4="SELECT tablename FROM pg_tables WHERE schemaname ILIKE 'public'"; //nom de ttes les tables de la base
+		    result4=stat.executeQuery(cmd4);
+		    int k=1;
+			while(result4.next())
+			{
+				thevale4[k]=result4.getString(1);
+				k++;
+			}
+			
+			String[] tabledat=new String[100];
+			Calendar cal = Calendar.getInstance();
+			int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+			int Month = cal.get(Calendar.MONTH)+1;
+			int Year = cal.get(Calendar.YEAR);
+			tabledat[1]=String.valueOf(dayOfMonth)+String.valueOf(Month)+String.valueOf(Year);
+			String[] tablenam=new String[100];
+			String[] cmde=new String[100];
+			ResultSet result;
+			String[] thevale1=new String[100];
+			String[] thevale2=new String[100];
+			String target="";
+			 
+			double total=0;
+			double mean=0;
+			double first=0;
+			double last=0;
+			String trend="";
+			String trend2="";
+	      
+			//target="SBH17_last";
+			//target="SBY00_low";
+			//target="SBH19_high";
+			//target="SBV18_last";
+			thevar.settarget("SIY00_last");
+			target=thevar.gettarget();
+			//target="CLU16_high";
+			//target="SBY00_displaytime";
+			//thevar.mytarget=target;
+			
+			for(int w=1;w<=thevar.lim;w++){
+			//tablenam[w]=databasename+tabledat[w];
+			//cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+tablenam[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+thevale4[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			result=stat.executeQuery(cmde[w]);
+			while(result.next())
+			{
+				thevale1[w]=result.getString(1);
+				thevale2[w]=result.getString(2);
+			}
+			System.out.println(target+" output "+/*tabledat[w]+*/"="+thevale2[w]);	
+			if(thevale2[w]!=null){
+			thevar.var[w]=thevale2[w];
+			String a1=thevar.var[w].replace("s","");
+			String a3=a1.trim();
+			if(a3.isEmpty()){a3="0";}else{a3=a3;}
+			//String a11=a3.replace(".","");
+			//String a12=a11.replace(",","");
+			Double a4=Double.valueOf(a3);
+			//a4=a4/100;
+			total+=Double.valueOf(a4);}
+			result.close();
+			}//for
+		    mean=total/thevar.lim;
+		    if(thevar.var[1]!=null){
+		    String a5=thevar.var[1].replace("s","");
+			String a6=a5.trim();
+			if(a6.isEmpty()){a6="0";}else{a6=a6;}
+			//String a13=a6.replace(".","");
+			//String a14=a13.replace(",","");
+			Double a7=Double.valueOf(a6);
+			//a7=a7/100;
+		    first=Double.valueOf(a7);}
+		    if(thevar.var[8]!=null){   // must verify if 8 should  be last instead
+		    String a8=thevar.var[8].replace("s","");
+			String a9=a8.trim();
+			if(a9.isEmpty()){a9="0";}else{a9=a9;}
+			//String a15=a9.replace(".","");
+			//String a16=a15.replace(",","");
+			Double a10=Double.valueOf(a9);
+			//a10=a10/100;
+		    last=Double.valueOf(a10);}
+		    if((first>mean)&&(last<mean)){trend="move down:";}else{trend="move up:";}
+		    System.out.println("mean="+mean+" trend="+trend);
+		    thevar.mytrend=trend;
+		    if(trend=="down"){trend2="sell short future contracts and buy option(call/put)";}else{trend2="buy future contracts and buy option(call/put)";}
+		    thevar.mytrend2=trend2;
+		    conn.close();
+		    mycomp=new myComponent();
+		    Graphics2D g = (Graphics2D) getGraphics();
+	      //  g.dispose();
+		//    g.clearRect(0,0,1200,650);
+			mycomp.paintComponent(g);
+		    //this.add(new myComponent());
+		    
+			System.out.println("bye bye world!");
+			}
+		catch(NumberFormatException e4){e4.getMessage();e4.printStackTrace();}	
+		catch(NullPointerException e3){e3.getMessage();e3.printStackTrace();}	
+			catch(Exception e2){e2.getMessage();e2.printStackTrace();}	
+	
+	}//fct8
+	void fct9_1()
+	{
+		try{
+			System.out.println("1item1_fct9_1");
+			thevar=new myVariables();
+			String databasename="";	
+			thevar.setdbname("ff2multimarkmaneuver");
+			databasename=thevar.getdbname();
+			System.out.println(databasename);
+			thevar.setfact1(7);
+			thevar.setfact2(900);
+			thevar.setfact3(300);
+			//databasename="ff2petroparlay";
+			String url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			String username = "postgres";
+			String password = "postgres"; 
+			Connection conn=DriverManager.getConnection(url,username,password);
+			Statement stat=conn.createStatement();
+			
+			ResultSet result2;
+			String cmd1="";
+			String thevale3="";
+		    cmd1="SELECT COUNT(*) FROM pg_tables WHERE schemaname ILIKE 'public'";// count number of table in database 
+		    result2=stat.executeQuery(cmd1);
+			while(result2.next())
+			{
+				thevale3=result2.getString(1);
+			}
+			thevar.lim=Integer.valueOf(thevale3);
+			
+			
+			ResultSet result4;
+			String cmd4="";
+			String[] thevale4=new String[100];
+		    cmd4="SELECT tablename FROM pg_tables WHERE schemaname ILIKE 'public'"; //nom de ttes les tables de la base
+		    result4=stat.executeQuery(cmd4);
+		    int k=1;
+			while(result4.next())
+			{
+				thevale4[k]=result4.getString(1);
+				k++;
+			}
+			
+			String[] tabledat=new String[100];
+			Calendar cal = Calendar.getInstance();
+			int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+			int Month = cal.get(Calendar.MONTH)+1;
+			int Year = cal.get(Calendar.YEAR);
+			tabledat[1]=String.valueOf(dayOfMonth)+String.valueOf(Month)+String.valueOf(Year);
+			String[] tablenam=new String[100];
+			String[] cmde=new String[100];
+			ResultSet result;
+			String[] thevale1=new String[100];
+			String[] thevale2=new String[100];
+			String target="";
+			 
+			double total=0;
+			double mean=0;
+			double first=0;
+			double last=0;
+			String trend="";
+			String trend2="";
+	      
+			//target="SBH17_last";
+			//target="SBY00_low";
+			//target="SBH19_high";
+			//target="SBV18_last";
+			thevar.settarget("DXM16_last");
+			target=thevar.gettarget();
+			//target="CLU16_high";
+			//target="SBY00_displaytime";
+			//thevar.mytarget=target;
+			
+			for(int w=1;w<=thevar.lim;w++){
+			//tablenam[w]=databasename+tabledat[w];
+			//cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+tablenam[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+thevale4[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			result=stat.executeQuery(cmde[w]);
+			while(result.next())
+			{
+				thevale1[w]=result.getString(1);
+				thevale2[w]=result.getString(2);
+			}
+			System.out.println(target+" output "+/*tabledat[w]+*/"="+thevale2[w]);	
+			if(thevale2[w]!=null){
+			thevar.var[w]=thevale2[w];
+			String a1=thevar.var[w].replace("s","");
+			String a3=a1.trim();
+			if(a3.isEmpty()){a3="0";}else{a3=a3;}
+			//String a11=a3.replace(".","");
+			//String a12=a11.replace(",","");
+			Double a4=Double.valueOf(a3);
+			//a4=a4/100;
+			total+=Double.valueOf(a4);}
+			result.close();
+			}//for
+		    mean=total/thevar.lim;
+		    if(thevar.var[1]!=null){
+		    String a5=thevar.var[1].replace("s","");
+			String a6=a5.trim();
+			if(a6.isEmpty()){a6="0";}else{a6=a6;}
+			//String a13=a6.replace(".","");
+			//String a14=a13.replace(",","");
+			Double a7=Double.valueOf(a6);
+			//a7=a7/100;
+		    first=Double.valueOf(a7);}
+		    if(thevar.var[8]!=null){   // must verify if 8 should  be last instead
+		    String a8=thevar.var[8].replace("s","");
+			String a9=a8.trim();
+			if(a9.isEmpty()){a9="0";}else{a9=a9;}
+			//String a15=a9.replace(".","");
+			//String a16=a15.replace(",","");
+			Double a10=Double.valueOf(a9);
+			//a10=a10/100;
+		    last=Double.valueOf(a10);}
+		    if((first>mean)&&(last<mean)){trend="move down:";}else{trend="move up:";}
+		    System.out.println("mean="+mean+" trend="+trend);
+		    thevar.mytrend=trend;
+		    if(trend=="down"){trend2="sell short future contracts and buy option(call/put)";}else{trend2="buy future contracts and buy option(call/put)";}
+		    thevar.mytrend2=trend2;
+		    conn.close();
+		    mycomp=new myComponent();
+		    Graphics2D g = (Graphics2D) getGraphics();
+	      //  g.dispose();
+		//    g.clearRect(0,0,1200,650);
+			mycomp.paintComponent(g);
+		    //this.add(new myComponent());
+		    
+			System.out.println("bye bye world!");
+			}
+		catch(NumberFormatException e4){e4.getMessage();e4.printStackTrace();}	
+		catch(NullPointerException e3){e3.getMessage();e3.printStackTrace();}	
+	    catch(Exception e2){e2.getMessage();e2.printStackTrace();}	
+	
+	}//fct9
+	void fct10_1()
+	{
+		try{
+			System.out.println("1item1_fct10q_1");
+			thevar=new myVariables();
+			String databasename="";	
+			thevar.setdbname("ff2petroparlay");
+			databasename=thevar.getdbname();
+			System.out.println(databasename);
+			thevar.setfact1(7);
+			thevar.setfact2(900);
+			thevar.setfact3(300);
+			//databasename="ff2petroparlay";
+			String url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			String username = "postgres";
+			String password = "postgres"; 
+			Connection conn=DriverManager.getConnection(url,username,password);
+			Statement stat=conn.createStatement();
+			
+			ResultSet result2;
+			String cmd1="";
+			String thevale3="";
+		    cmd1="SELECT COUNT(*) FROM pg_tables WHERE schemaname ILIKE 'public'";// count number of table in database 
+		    result2=stat.executeQuery(cmd1);
+			while(result2.next())
+			{
+				thevale3=result2.getString(1);
+			}
+			thevar.lim=Integer.valueOf(thevale3);
+			
+			
+			ResultSet result4;
+			String cmd4="";
+			String[] thevale4=new String[100];
+		    cmd4="SELECT tablename FROM pg_tables WHERE schemaname ILIKE 'public'"; //nom de ttes les tables de la base
+		    result4=stat.executeQuery(cmd4);
+		    int k=1;
+			while(result4.next())
+			{
+				thevale4[k]=result4.getString(1);
+				k++;
+			}
+			
+			String[] tabledat=new String[100];
+			Calendar cal = Calendar.getInstance();
+			int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+			int Month = cal.get(Calendar.MONTH)+1;
+			int Year = cal.get(Calendar.YEAR);
+			tabledat[1]=String.valueOf(dayOfMonth)+String.valueOf(Month)+String.valueOf(Year);
+			String[] tablenam=new String[100];
+			String[] cmde=new String[100];
+			ResultSet result;
+			String[] thevale1=new String[100];
+			String[] thevale2=new String[100];
+			String target="";
+			 
+			double total=0;
+			double mean=0;
+			double first=0;
+			double last=0;
+			String trend="";
+			String trend2="";
+	      
+			//target="SBH17_last";
+			//target="SBY00_low";
+			//target="SBH19_high";
+			//target="SBV18_last";
+			thevar.settarget("CLY00_last");
+			target=thevar.gettarget();
+			//target="CLU16_high";
+			//target="SBY00_displaytime";
+			//thevar.mytarget=target;
+			
+			for(int w=1;w<=thevar.lim;w++){
+			//tablenam[w]=databasename+tabledat[w];
+			//cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+tablenam[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+thevale4[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			result=stat.executeQuery(cmde[w]);
+			while(result.next())
+			{
+				thevale1[w]=result.getString(1);
+				thevale2[w]=result.getString(2);
+			}
+			System.out.println(target+" output "+/*tabledat[w]+*/"="+thevale2[w]);	
+			if(thevale2[w]!=null){
+			thevar.var[w]=thevale2[w];
+			String a1=thevar.var[w].replace("s","");
+			String a3=a1.trim();
+			if(a3.isEmpty()){a3="0";}else{a3=a3;}
+			//String a11=a3.replace(".","");
+			//String a12=a11.replace(",","");
+			Double a4=Double.valueOf(a3);
+			//a4=a4/100;
+			total+=Double.valueOf(a4);}
+			result.close();
+			}//for
+		    mean=total/thevar.lim;
+		    if(thevar.var[1]!=null){
+		    String a5=thevar.var[1].replace("s","");
+			String a6=a5.trim();
+			if(a6.isEmpty()){a6="0";}else{a6=a6;}
+			//String a13=a6.replace(".","");
+			//String a14=a13.replace(",","");
+			Double a7=Double.valueOf(a6);
+			//a7=a7/100;
+		    first=Double.valueOf(a7);}
+		    if(thevar.var[8]!=null){   // must verify if 8 should  be last instead
+		    String a8=thevar.var[8].replace("s","");
+			String a9=a8.trim();
+			if(a9.isEmpty()){a9="0";}else{a9=a9;}
+			//String a15=a9.replace(".","");
+			//String a16=a15.replace(",","");
+			Double a10=Double.valueOf(a9);
+			//a10=a10/100;
+		    last=Double.valueOf(a10);}
+		    if((first>mean)&&(last<mean)){trend="move down:";}else{trend="move up:";}
+		    System.out.println("mean="+mean+" trend="+trend);
+		    thevar.mytrend=trend;
+		    if(trend=="down"){trend2="sell short future contracts and buy option(call/put)";}else{trend2="buy future contracts and buy option(call/put)";}
+		    thevar.mytrend2=trend2;
+		    conn.close();
+		    mycomp=new myComponent();
+		    Graphics2D g = (Graphics2D) getGraphics();
+	      //  g.dispose();
+		//    g.clearRect(0,0,1200,650);
+			mycomp.paintComponent(g);
+		    //this.add(new myComponent());
+		    
+			System.out.println("bye bye world!");
+			}
+		catch(NumberFormatException e4){e4.getMessage();e4.printStackTrace();}	
+		catch(NullPointerException e3){e3.getMessage();e3.printStackTrace();}	
+	    catch(Exception e2){e2.getMessage();e2.printStackTrace();}	
+	
+	}//fct10
+	void fct11_1()
+	{
+		System.out.println("bad table ; must use different algo not implemented ");
+	}//fct11
+	void fct12_1()
+	{
+		try{
+			System.out.println("1item1_fct10q_1");
+			thevar=new myVariables();
+			String databasename="";	
+			thevar.setdbname("ff2sacerealtradew");
+			databasename=thevar.getdbname();
+			System.out.println(databasename);
+			thevar.setfact1(1);
+			thevar.setfact2(900);
+			thevar.setfact3(300);
+			//databasename="ff2petroparlay";
+			String url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			String username = "postgres";
+			String password = "postgres"; 
+			Connection conn=DriverManager.getConnection(url,username,password);
+			Statement stat=conn.createStatement();
+			
+			ResultSet result2;
+			String cmd1="";
+			String thevale3="";
+		    cmd1="SELECT COUNT(*) FROM pg_tables WHERE schemaname ILIKE 'public'";// count number of table in database 
+		    result2=stat.executeQuery(cmd1);
+			while(result2.next())
+			{
+				thevale3=result2.getString(1);
+			}
+			thevar.lim=Integer.valueOf(thevale3);
+			
+			
+			ResultSet result4;
+			String cmd4="";
+			String[] thevale4=new String[100];
+		    cmd4="SELECT tablename FROM pg_tables WHERE schemaname ILIKE 'public'"; //nom de ttes les tables de la base
+		    result4=stat.executeQuery(cmd4);
+		    int k=1;
+			while(result4.next())
+			{
+				thevale4[k]=result4.getString(1);
+				k++;
+			}
+			
+			String[] tabledat=new String[100];
+			Calendar cal = Calendar.getInstance();
+			int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+			int Month = cal.get(Calendar.MONTH)+1;
+			int Year = cal.get(Calendar.YEAR);
+			tabledat[1]=String.valueOf(dayOfMonth)+String.valueOf(Month)+String.valueOf(Year);
+			String[] tablenam=new String[100];
+			String[] cmde=new String[100];
+			ResultSet result;
+			String[] thevale1=new String[100];
+			String[] thevale2=new String[100];
+			String target="";
+			 
+			double total=0;
+			double mean=0;
+			double first=0;
+			double last=0;
+			String trend="";
+			String trend2="";
+	      
+			//target="SBH17_last";
+			//target="SBY00_low";
+			//target="SBH19_high";
+			//target="SBV18_last";
+			thevar.settarget("ZWY00_last");
+			target=thevar.gettarget();
+			//target="CLU16_high";
+			//target="SBY00_displaytime";
+			//thevar.mytarget=target;
+			
+			for(int w=1;w<=thevar.lim;w++){
+			//tablenam[w]=databasename+tabledat[w];
+			//cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+tablenam[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+thevale4[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			result=stat.executeQuery(cmde[w]);
+			while(result.next())
+			{
+				thevale1[w]=result.getString(1);
+				thevale2[w]=result.getString(2);
+			}
+			System.out.println(target+" output "+/*tabledat[w]+*/"="+thevale2[w]);	
+			if(thevale2[w]!=null){
+			thevar.var[w]=thevale2[w];
+			String a1=thevar.var[w].replace("s","");
+			String a3=a1.trim();
+			if(a3.isEmpty()){a3="0";}else{a3=a3;}
+			String a11=a3.replace("-0","");
+			String a12=a11.replace("-4","");
+			String a13=a12.replace("-2","");
+			Double a4=Double.valueOf(a13);
+			//a4=a4/100;
+			total+=Double.valueOf(a4);}
+			result.close();
+			}//for
+		    mean=total/thevar.lim;
+		    if(thevar.var[1]!=null){
+		    String a5=thevar.var[1].replace("s","");
+			String a6=a5.trim();
+			if(a6.isEmpty()){a6="0";}else{a6=a6;}
+			String a14=a6.replace("-0","");
+			String a15=a14.replace("-4","");
+			String a16=a15.replace("-2","");
+			Double a7=Double.valueOf(a16);
+			//a7=a7/100;
+		    first=Double.valueOf(a7);}
+		    if(thevar.var[8]!=null){   // must verify if 8 should  be last instead
+		    String a8=thevar.var[8].replace("s","");
+			String a9=a8.trim();
+			if(a9.isEmpty()){a9="0";}else{a9=a9;}
+			String a17=a9.replace("-0","");
+			String a18=a17.replace("-4","");
+			String a19=a18.replace("-2","");
+			Double a10=Double.valueOf(a19);
+			//a10=a10/100;
+		    last=Double.valueOf(a10);}
+		    if((first>mean)&&(last<mean)){trend="move down:";}else{trend="move up:";}
+		    System.out.println("mean="+mean+" trend="+trend);
+		    thevar.mytrend=trend;
+		    if(trend=="down"){trend2="sell short future contracts and buy option(call/put)";}else{trend2="buy future contracts and buy option(call/put)";}
+		    thevar.mytrend2=trend2;
+		    conn.close();
+		    mycomp=new myComponent();
+		    Graphics2D g = (Graphics2D) getGraphics();
+	      //  g.dispose();
+		//    g.clearRect(0,0,1200,650);
+			mycomp.paintComponent(g);
+		    //this.add(new myComponent());
+		    
+			System.out.println("bye bye world!");
+			}
+		catch(NumberFormatException e4){e4.getMessage();e4.printStackTrace();}	
+		catch(NullPointerException e3){e3.getMessage();e3.printStackTrace();}	
+	    catch(Exception e2){e2.getMessage();e2.printStackTrace();}	
+	}//ft12
+	void fct13_1()
+	{
+		try{
+			System.out.println("1item1_fct13_1");
+			thevar=new myVariables();
+			String databasename="";	
+			thevar.setdbname("ff2sacerealtradec");
+			databasename=thevar.getdbname();
+			System.out.println(databasename);
+			thevar.setfact1(1);
+			thevar.setfact2(900);
+			thevar.setfact3(300);
+			//databasename="ff2petroparlay";
+			String url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			String username = "postgres";
+			String password = "postgres"; 
+			Connection conn=DriverManager.getConnection(url,username,password);
+			Statement stat=conn.createStatement();
+			
+			ResultSet result2;
+			String cmd1="";
+			String thevale3="";
+		    cmd1="SELECT COUNT(*) FROM pg_tables WHERE schemaname ILIKE 'public'";// count number of table in database 
+		    result2=stat.executeQuery(cmd1);
+			while(result2.next())
+			{
+				thevale3=result2.getString(1);
+			}
+			thevar.lim=Integer.valueOf(thevale3);
+			
+			
+			ResultSet result4;
+			String cmd4="";
+			String[] thevale4=new String[100];
+		    cmd4="SELECT tablename FROM pg_tables WHERE schemaname ILIKE 'public'"; //nom de ttes les tables de la base
+		    result4=stat.executeQuery(cmd4);
+		    int k=1;
+			while(result4.next())
+			{
+				thevale4[k]=result4.getString(1);
+				k++;
+			}
+			
+			String[] tabledat=new String[100];
+			Calendar cal = Calendar.getInstance();
+			int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+			int Month = cal.get(Calendar.MONTH)+1;
+			int Year = cal.get(Calendar.YEAR);
+			tabledat[1]=String.valueOf(dayOfMonth)+String.valueOf(Month)+String.valueOf(Year);
+			String[] tablenam=new String[100];
+			String[] cmde=new String[100];
+			ResultSet result;
+			String[] thevale1=new String[100];
+			String[] thevale2=new String[100];
+			String target="";
+			 
+			double total=0;
+			double mean=0;
+			double first=0;
+			double last=0;
+			String trend="";
+			String trend2="";
+	      
+			//target="SBH17_last";
+			//target="SBY00_low";
+			//target="SBH19_high";
+			//target="SBV18_last";
+			thevar.settarget("ZCY00_last");
+			target=thevar.gettarget();
+			//target="CLU16_high";
+			//target="SBY00_displaytime";
+			//thevar.mytarget=target;
+			
+			for(int w=1;w<=thevar.lim;w++){
+			//tablenam[w]=databasename+tabledat[w];
+			//cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+tablenam[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+thevale4[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			result=stat.executeQuery(cmde[w]);
+			while(result.next())
+			{
+				thevale1[w]=result.getString(1);
+				thevale2[w]=result.getString(2);
+			}
+			System.out.println(target+" output "+/*tabledat[w]+*/"="+thevale2[w]);	
+			if(thevale2[w]!=null){
+			thevar.var[w]=thevale2[w];
+			String a1=thevar.var[w].replace("s","");
+			String a3=a1.trim();
+			if(a3.isEmpty()){a3="0";}else{a3=a3;}
+			String a11=a3.replace("-0","");
+			String a12=a11.replace("-4","");
+			String a13=a12.replace("-2","");
+			String a20=a13.replace("-6","");
+			Double a4=Double.valueOf(a20);
+			//a4=a4/100;
+			total+=Double.valueOf(a4);}
+			result.close();
+			}//for
+		    mean=total/thevar.lim;
+		    if(thevar.var[1]!=null){
+		    String a5=thevar.var[1].replace("s","");
+			String a6=a5.trim();
+			if(a6.isEmpty()){a6="0";}else{a6=a6;}
+			String a14=a6.replace("-0","");
+			String a15=a14.replace("-4","");
+			String a16=a15.replace("-2","");
+			String a21=a16.replace("-6","");
+			Double a7=Double.valueOf(a21);
+			//a7=a7/100;
+		    first=Double.valueOf(a7);}
+		    if(thevar.var[8]!=null){   // must verify if 8 should  be last instead
+		    String a8=thevar.var[8].replace("s","");
+			String a9=a8.trim();
+			if(a9.isEmpty()){a9="0";}else{a9=a9;}
+			String a17=a9.replace("-0","");
+			String a18=a17.replace("-4","");
+			String a19=a18.replace("-2","");
+			String a22=a19.replace("-6","");
+			Double a10=Double.valueOf(a22);
+			//a10=a10/100;
+		    last=Double.valueOf(a10);}
+		    if((first>mean)&&(last<mean)){trend="move down:";}else{trend="move up:";}
+		    System.out.println("mean="+mean+" trend="+trend);
+		    thevar.mytrend=trend;
+		    if(trend=="down"){trend2="sell short future contracts and buy option(call/put)";}else{trend2="buy future contracts and buy option(call/put)";}
+		    thevar.mytrend2=trend2;
+		    conn.close();
+		    mycomp=new myComponent();
+		    Graphics2D g = (Graphics2D) getGraphics();
+	      //  g.dispose();
+		//    g.clearRect(0,0,1200,650);
+			mycomp.paintComponent(g);
+		    //this.add(new myComponent());
+		    
+			System.out.println("bye bye world!");
+			}
+		catch(NumberFormatException e4){e4.getMessage();e4.printStackTrace();}	
+		catch(NullPointerException e3){e3.getMessage();e3.printStackTrace();}	
+	    catch(Exception e2){e2.getMessage();e2.printStackTrace();}	
+	}//fct13
+	void fct14_1()
+	{
+		System.out.println("1item1 : bad table");
+	}//fct14
+	void fct15_1()
+	{
+		System.out.println("already treated? 3-ff2-1item1");
+	}//fct15
+	void fct16_1()
+	{
+		System.out.println("1item1-fct16_1");
+	}//fct16
+	void fct17_1()
+	{
+		
+		try{
+			System.out.println("1item1_fct17_1");
+			thevar=new myVariables();
+			String databasename="";	
+			thevar.setdbname("ff2tedspreaded");
+			databasename=thevar.getdbname();
+			System.out.println(databasename);
+			thevar.setfact1(130);
+			thevar.setfact2(13300);
+			thevar.setfact3(300);
+			//databasename="ff2petroparlay";
+			String url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			String username = "postgres";
+			String password = "postgres"; 
+			Connection conn=DriverManager.getConnection(url,username,password);
+			Statement stat=conn.createStatement();
+			
+			ResultSet result2;
+			String cmd1="";
+			String thevale3="";
+		    cmd1="SELECT COUNT(*) FROM pg_tables WHERE schemaname ILIKE 'public'";// count number of table in database 
+		    result2=stat.executeQuery(cmd1);
+			while(result2.next())
+			{
+				thevale3=result2.getString(1);
+			}
+			thevar.lim=Integer.valueOf(thevale3);
+			
+			
+			ResultSet result4;
+			String cmd4="";
+			String[] thevale4=new String[100];
+		    cmd4="SELECT tablename FROM pg_tables WHERE schemaname ILIKE 'public'"; //nom de ttes les tables de la base
+		    result4=stat.executeQuery(cmd4);
+		    int k=1;
+			while(result4.next())
+			{
+				thevale4[k]=result4.getString(1);
+				k++;
+			}
+			
+			String[] tabledat=new String[100];
+			Calendar cal = Calendar.getInstance();
+			int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+			int Month = cal.get(Calendar.MONTH)+1;
+			int Year = cal.get(Calendar.YEAR);
+			tabledat[1]=String.valueOf(dayOfMonth)+String.valueOf(Month)+String.valueOf(Year);
+			String[] tablenam=new String[100];
+			String[] cmde=new String[100];
+			ResultSet result;
+			String[] thevale1=new String[100];
+			String[] thevale2=new String[100];
+			String target="";
+			 
+			double total=0;
+			double mean=0;
+			double first=0;
+			double last=0;
+			String trend="";
+			String trend2="";
+	      
+			//target="SBH17_last";
+			//target="SBY00_low";
+			//target="SBH19_high";
+			//target="SBV18_last";
+			thevar.settarget("GEM16_last");
+			target=thevar.gettarget();
+			//target="CLU16_high";
+			//target="SBY00_displaytime";
+			//thevar.mytarget=target;
+			
+			for(int w=1;w<=thevar.lim;w++){
+			//tablenam[w]=databasename+tabledat[w];
+			//cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+tablenam[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+thevale4[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			result=stat.executeQuery(cmde[w]);
+			while(result.next())
+			{
+				thevale1[w]=result.getString(1);
+				thevale2[w]=result.getString(2);
+			}
+			System.out.println(target+" output "+/*tabledat[w]+*/"="+thevale2[w]);	
+			if(thevale2[w]!=null){
+			thevar.var[w]=thevale2[w];
+			String a1=thevar.var[w].replace("s","");
+			String a3=a1.trim();
+			if(a3.isEmpty()){a3="0";}else{a3=a3;}
+			String a11=a3.replace("-0","");
+			String a12=a11.replace("-4","");
+			String a13=a12.replace("-2","");
+			String a20=a13.replace("-6","");
+			Double a4=Double.valueOf(a20);
+			//a4=a4/100;
+			total+=Double.valueOf(a4);}
+			result.close();
+			}//for
+		    mean=total/thevar.lim;
+		    if(thevar.var[1]!=null){
+		    String a5=thevar.var[1].replace("s","");
+			String a6=a5.trim();
+			if(a6.isEmpty()){a6="0";}else{a6=a6;}
+			String a14=a6.replace("-0","");
+			String a15=a14.replace("-4","");
+			String a16=a15.replace("-2","");
+			String a21=a16.replace("-6","");
+			Double a7=Double.valueOf(a21);
+			//a7=a7/100;
+		    first=Double.valueOf(a7);}
+		    if(thevar.var[8]!=null){   // must verify if 8 should  be last instead
+		    String a8=thevar.var[8].replace("s","");
+			String a9=a8.trim();
+			if(a9.isEmpty()){a9="0";}else{a9=a9;}
+			String a17=a9.replace("-0","");
+			String a18=a17.replace("-4","");
+			String a19=a18.replace("-2","");
+			String a22=a19.replace("-6","");
+			Double a10=Double.valueOf(a22);
+			//a10=a10/100;
+		    last=Double.valueOf(a10);}
+		    if((first>mean)&&(last<mean)){trend="move down:";}else{trend="move up:";}
+		    System.out.println("mean="+mean+" trend="+trend);
+		    thevar.mytrend=trend;
+		    if(trend=="down"){trend2="sell short future contracts and buy option(call/put)";}else{trend2="buy future contracts and buy option(call/put)";}
+		    thevar.mytrend2=trend2;
+		    conn.close();
+		    mycomp=new myComponent();
+		    Graphics2D g = (Graphics2D) getGraphics();
+	      //  g.dispose();
+		//    g.clearRect(0,0,1200,650);
+			mycomp.paintComponent(g);
+		    //this.add(new myComponent());
+		    
+			System.out.println("bye bye world!");
+			}
+		catch(NumberFormatException e4){e4.getMessage();e4.printStackTrace();}	
+		catch(NullPointerException e3){e3.getMessage();e3.printStackTrace();}	
+	    catch(Exception e2){e2.getMessage();e2.printStackTrace();}	
+	}//fct17
+	void fct18_1()
+	{
+		try{
+			System.out.println("1item1_fct18_1");
+			thevar=new myVariables();
+			String databasename="";	
+			thevar.setdbname("ff2tedspreadtn");
+			databasename=thevar.getdbname();
+			System.out.println(databasename);
+			thevar.setfact1(10);
+			thevar.setfact2(1600);
+			thevar.setfact3(300);
+			//databasename="ff2petroparlay";
+			String url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			String username = "postgres";
+			String password = "postgres"; 
+			Connection conn=DriverManager.getConnection(url,username,password);
+			Statement stat=conn.createStatement();
+			
+			ResultSet result2;
+			String cmd1="";
+			String thevale3="";
+		    cmd1="SELECT COUNT(*) FROM pg_tables WHERE schemaname ILIKE 'public'";// count number of table in database 
+		    result2=stat.executeQuery(cmd1);
+			while(result2.next())
+			{
+				thevale3=result2.getString(1);
+			}
+			thevar.lim=Integer.valueOf(thevale3);
+			
+			
+			ResultSet result4;
+			String cmd4="";
+			String[] thevale4=new String[100];
+		    cmd4="SELECT tablename FROM pg_tables WHERE schemaname ILIKE 'public'"; //nom de ttes les tables de la base
+		    result4=stat.executeQuery(cmd4);
+		    int k=1;
+			while(result4.next())
+			{
+				thevale4[k]=result4.getString(1);
+				k++;
+			}
+			
+			String[] tabledat=new String[100];
+			Calendar cal = Calendar.getInstance();
+			int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+			int Month = cal.get(Calendar.MONTH)+1;
+			int Year = cal.get(Calendar.YEAR);
+			tabledat[1]=String.valueOf(dayOfMonth)+String.valueOf(Month)+String.valueOf(Year);
+			String[] tablenam=new String[100];
+			String[] cmde=new String[100];
+			ResultSet result;
+			String[] thevale1=new String[100];
+			String[] thevale2=new String[100];
+			String target="";
+			 
+			double total=0;
+			double mean=0;
+			double first=0;
+			double last=0;
+			String trend="";
+			String trend2="";
+	      
+			//target="SBH17_last";
+			//target="SBY00_low";
+			//target="SBH19_high";
+			//target="SBV18_last";
+			thevar.settarget("ZNM16_last");
+			target=thevar.gettarget();
+			//target="CLU16_high";
+			//target="SBY00_displaytime";
+			//thevar.mytarget=target;
+			
+			for(int w=1;w<=thevar.lim;w++){
+			//tablenam[w]=databasename+tabledat[w];
+			//cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+tablenam[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+thevale4[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			result=stat.executeQuery(cmde[w]);
+			while(result.next())
+			{
+				thevale1[w]=result.getString(1);
+				thevale2[w]=result.getString(2);
+			}
+			System.out.println(target+" output "+/*tabledat[w]+*/"="+thevale2[w]);	
+			if(thevale2[w]!=null){
+			thevar.var[w]=thevale2[w];
+			String a1=thevar.var[w].replace("s","");
+			String a3=a1.trim();
+			if(a3.isEmpty()){a3="0";}else{a3=a3;}
+			String a11=a3.replace("-0","");
+			String a12=a11.replace("-4","");
+			String a13=a12.replace("-2","");
+			String a20=a13.replace("-6","");
+			String a21=a20.replace("-305","");
+			String a22=a21.replace("-105","");
+			String a23=a22.replace("-125","");
+			String a24=a23.replace("-175","");
+			String a25=a24.replace("-170","");
+			String a26=a25.replace("-310","");
+			String a27=a26.replace("-155","");
+			String a28=a27.replace("-120","");
+			String a29=a28.replace("-135","");
+			String a30=a29.replace("-130","");
+			String a31=a30.replace("-145","");
+			String a32=a31.replace("-300","");
+			String a33=a32.replace("-305","");
+			Double a4=Double.valueOf(a33);
+			//a4=a4/100;
+			total+=Double.valueOf(a4);}
+			result.close();
+			}//for
+		    mean=total/thevar.lim;
+		    if(thevar.var[1]!=null){
+		    String a5=thevar.var[1].replace("s","");
+			String a6=a5.trim();
+			if(a6.isEmpty()){a6="0";}else{a6=a6;}
+			String a14=a6.replace("-0","");
+			String a15=a14.replace("-4","");
+			String a16=a15.replace("-2","");
+			String a21=a16.replace("-6","");
+			Double a7=Double.valueOf(a21);
+			//a7=a7/100;
+		    first=Double.valueOf(a7);}
+		    if(thevar.var[8]!=null){   // must verify if 8 should  be last instead
+		    String a8=thevar.var[8].replace("s","");
+			String a9=a8.trim();
+			if(a9.isEmpty()){a9="0";}else{a9=a9;}
+			String a17=a9.replace("-0","");
+			String a18=a17.replace("-4","");
+			String a19=a18.replace("-2","");
+			String a22=a19.replace("-6","");
+			Double a10=Double.valueOf(a22);
+			//a10=a10/100;
+		    last=Double.valueOf(a10);}
+		    if((first>mean)&&(last<mean)){trend="move down:";}else{trend="move up:";}
+		    System.out.println("mean="+mean+" trend="+trend);
+		    thevar.mytrend=trend;
+		    if(trend=="down"){trend2="sell short future contracts and buy option(call/put)";}else{trend2="buy future contracts and buy option(call/put)";}
+		    thevar.mytrend2=trend2;
+		    conn.close();
+		    mycomp=new myComponent();
+		    Graphics2D g = (Graphics2D) getGraphics();
+	      //  g.dispose();
+		//    g.clearRect(0,0,1200,650);
+			mycomp.paintComponent(g);
+		    //this.add(new myComponent());
+		    
+			System.out.println("bye bye world!");
+			}
+		catch(NumberFormatException e4){e4.getMessage();e4.printStackTrace();}	
+		catch(NullPointerException e3){e3.getMessage();e3.printStackTrace();}	
+	    catch(Exception e2){e2.getMessage();e2.printStackTrace();}	
+	}//fct18
+	void fct19_1()
+	{
+		System.out.println("1item1 timetactica bad table");
+	}//fct19
+	void fct20_1()
+	{
+		System.out.println("1item1 timetacticb bad table");
+	}//fct20
+	void fct21_1()
+	{
+		System.out.println("1item1 totalmarkettactic bad table");
+	}//fct21
+	void fct22_1()
+	{
+		try{
+			System.out.println("1item1_fct22_1");
+			thevar=new myVariables();
+			String databasename="";	
+			thevar.setdbname("ff2tripletbondtrade");
+			databasename=thevar.getdbname();
+			System.out.println(databasename);
+			thevar.setfact1(5);
+			thevar.setfact2(1100);
+			thevar.setfact3(300);
+			//databasename="ff2petroparlay";
+			String url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			String username = "postgres";
+			String password = "postgres"; 
+			Connection conn=DriverManager.getConnection(url,username,password);
+			Statement stat=conn.createStatement();
+			
+			ResultSet result2;
+			String cmd1="";
+			String thevale3="";
+		    cmd1="SELECT COUNT(*) FROM pg_tables WHERE schemaname ILIKE 'public'";// count number of table in database 
+		    result2=stat.executeQuery(cmd1);
+			while(result2.next())
+			{
+				thevale3=result2.getString(1);
+			}
+			thevar.lim=Integer.valueOf(thevale3);
+			
+			
+			ResultSet result4;
+			String cmd4="";
+			String[] thevale4=new String[100];
+		    cmd4="SELECT tablename FROM pg_tables WHERE schemaname ILIKE 'public'"; //nom de ttes les tables de la base
+		    result4=stat.executeQuery(cmd4);
+		    int k=1;
+			while(result4.next())
+			{
+				thevale4[k]=result4.getString(1);
+				k++;
+			}
+			
+			String[] tabledat=new String[100];
+			Calendar cal = Calendar.getInstance();
+			int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+			int Month = cal.get(Calendar.MONTH)+1;
+			int Year = cal.get(Calendar.YEAR);
+			tabledat[1]=String.valueOf(dayOfMonth)+String.valueOf(Month)+String.valueOf(Year);
+			String[] tablenam=new String[100];
+			String[] cmde=new String[100];
+			ResultSet result;
+			String[] thevale1=new String[100];
+			String[] thevale2=new String[100];
+			String target="";
+			 
+			double total=0;
+			double mean=0;
+			double first=0;
+			double last=0;
+			String trend="";
+			String trend2="";
+	      
+			//target="SBH17_last";
+			//target="SBY00_low";
+			//target="SBH19_high";
+			//target="SBV18_last";
+			thevar.settarget("ZBM16_last");
+			target=thevar.gettarget();
+			//target="CLU16_high";
+			//target="SBY00_displaytime";
+			//thevar.mytarget=target;
+			
+			for(int w=1;w<=thevar.lim;w++){
+			//tablenam[w]=databasename+tabledat[w];
+			//cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+tablenam[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+thevale4[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			result=stat.executeQuery(cmde[w]);
+			while(result.next())
+			{
+				thevale1[w]=result.getString(1);
+				thevale2[w]=result.getString(2);
+			}
+			System.out.println(target+" output "+/*tabledat[w]+*/"="+thevale2[w]);	
+			if(thevale2[w]!=null){
+			thevar.var[w]=thevale2[w];
+			String a1=thevar.var[w].replace("s","");
+			String a3=a1.trim();
+			if(a3.isEmpty()){a3="0";}else{a3=a3;}
+			String a11=a3.replace("-0","");
+			String a12=a11.replace("-4","");
+			String a13=a12.replace("-2","");
+			String a20=a13.replace("-6","");
+			String a21=a20.replace("-305","");
+			String a22=a21.replace("-105","");
+			String a23=a22.replace("-125","");
+			String a24=a23.replace("-175","");
+			String a25=a24.replace("-170","");
+			String a26=a25.replace("-310","");
+			String a27=a26.replace("-155","");
+			String a28=a27.replace("-120","");
+			String a29=a28.replace("-135","");
+			String a30=a29.replace("-130","");
+			String a31=a30.replace("-145","");
+			String a32=a31.replace("-300","");
+			String a33=a32.replace("-305","");
+			String a34=a33.replace("-16","");
+			String a35=a34.replace("-10","");
+			String a36=a35.replace("-15","");
+			String a37=a36.replace("-18","");
+			String a38=a37.replace("-17","");
+			String a39=a38.replace("-14","");
+			String a40=a39.replace("-31","");
+			Double a4=Double.valueOf(a40);
+			//a4=a4/100;
+			total+=Double.valueOf(a4);}
+			result.close();
+			}//for
+		    mean=total/thevar.lim;
+		    if(thevar.var[1]!=null){
+		    String a5=thevar.var[1].replace("s","");
+			String a6=a5.trim();
+			if(a6.isEmpty()){a6="0";}else{a6=a6;}
+			String a14=a6.replace("-0","");
+			String a15=a14.replace("-4","");
+			String a16=a15.replace("-2","");
+			String a21=a16.replace("-6","");
+			Double a7=Double.valueOf(a21);
+			//a7=a7/100;
+		    first=Double.valueOf(a7);}
+		    if(thevar.var[8]!=null){   // must verify if 8 should  be last instead
+		    String a8=thevar.var[8].replace("s","");
+			String a9=a8.trim();
+			if(a9.isEmpty()){a9="0";}else{a9=a9;}
+			String a17=a9.replace("-0","");
+			String a18=a17.replace("-4","");
+			String a19=a18.replace("-2","");
+			String a22=a19.replace("-6","");
+			String a23=a22.replace("-10","");
+			String a24=a23.replace("-16","");
+			String a25=a24.replace("-15","");
+			String a26=a25.replace("-18","");
+			String a27=a26.replace("-17","");
+			String a28=a27.replace("-14","");
+			String a29=a28.replace("-31","");
+			Double a10=Double.valueOf(a29);
+			//a10=a10/100;
+		    last=Double.valueOf(a10);}
+		    if((first>mean)&&(last<mean)){trend="move down:";}else{trend="move up:";}
+		    System.out.println("mean="+mean+" trend="+trend);
+		    thevar.mytrend=trend;
+		    if(trend=="down"){trend2="sell short future contracts and buy option(call/put)";}else{trend2="buy future contracts and buy option(call/put)";}
+		    thevar.mytrend2=trend2;
+		    conn.close();
+		    mycomp=new myComponent();
+		    Graphics2D g = (Graphics2D) getGraphics();
+	      //  g.dispose();
+		//    g.clearRect(0,0,1200,650);
+			mycomp.paintComponent(g);
+		    //this.add(new myComponent());
+		    
+			System.out.println("bye bye world!");
+			}
+		catch(NumberFormatException e4){e4.getMessage();e4.printStackTrace();}	
+		catch(NullPointerException e3){e3.getMessage();e3.printStackTrace();}	
+	    catch(Exception e2){e2.getMessage();e2.printStackTrace();}	
+	}//fct22
+	void fct23_1()
+	{
+		try{
+			System.out.println("1item1_fct23_1");
+			thevar=new myVariables();
+			String databasename="";	
+			thevar.setdbname("ff2wildoatswindfall");
+			databasename=thevar.getdbname();
+			System.out.println(databasename);
+			thevar.setfact1(1);
+			thevar.setfact2(600);
+			thevar.setfact3(300);
+			//databasename="ff2petroparlay";
+			String url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			String username = "postgres";
+			String password = "postgres"; 
+			Connection conn=DriverManager.getConnection(url,username,password);
+			Statement stat=conn.createStatement();
+			
+			ResultSet result2;
+			String cmd1="";
+			String thevale3="";
+		    cmd1="SELECT COUNT(*) FROM pg_tables WHERE schemaname ILIKE 'public'";// count number of table in database 
+		    result2=stat.executeQuery(cmd1);
+			while(result2.next())
+			{
+				thevale3=result2.getString(1);
+			}
+			thevar.lim=Integer.valueOf(thevale3);
+			
+			
+			ResultSet result4;
+			String cmd4="";
+			String[] thevale4=new String[100];
+		    cmd4="SELECT tablename FROM pg_tables WHERE schemaname ILIKE 'public'"; //nom de ttes les tables de la base
+		    result4=stat.executeQuery(cmd4);
+		    int k=1;
+			while(result4.next())
+			{
+				thevale4[k]=result4.getString(1);
+				k++;
+			}
+			
+			String[] tabledat=new String[100];
+			Calendar cal = Calendar.getInstance();
+			int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+			int Month = cal.get(Calendar.MONTH)+1;
+			int Year = cal.get(Calendar.YEAR);
+			tabledat[1]=String.valueOf(dayOfMonth)+String.valueOf(Month)+String.valueOf(Year);
+			String[] tablenam=new String[100];
+			String[] cmde=new String[100];
+			ResultSet result;
+			String[] thevale1=new String[100];
+			String[] thevale2=new String[100];
+			String target="";
+			 
+			double total=0;
+			double mean=0;
+			double first=0;
+			double last=0;
+			String trend="";
+			String trend2="";
+	      
+			//target="SBH17_last";
+			//target="SBY00_low";
+			//target="SBH19_high";
+			//target="SBV18_last";
+			thevar.settarget("ZOY00_last");
+			target=thevar.gettarget();
+			//target="CLU16_high";
+			//target="SBY00_displaytime";
+			//thevar.mytarget=target;
+			
+			for(int w=1;w<=thevar.lim;w++){
+			//tablenam[w]=databasename+tabledat[w];
+			//cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+tablenam[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+thevale4[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			result=stat.executeQuery(cmde[w]);
+			while(result.next())
+			{
+				thevale1[w]=result.getString(1);
+				thevale2[w]=result.getString(2);
+			}
+			System.out.println(target+" output "+/*tabledat[w]+*/"="+thevale2[w]);	
+			if(thevale2[w]!=null){
+			thevar.var[w]=thevale2[w];
+			String a1=thevar.var[w].replace("s","");
+			String a3=a1.trim();
+			if(a3.isEmpty()){a3="0";}else{a3=a3;}
+			String a11=a3.replace("-0","");
+			String a12=a11.replace("-4","");
+			String a13=a12.replace("-2","");
+			String a20=a13.replace("-6","");
+			String a21=a20.replace("-305","");
+			String a22=a21.replace("-105","");
+			String a23=a22.replace("-125","");
+			String a24=a23.replace("-175","");
+			String a25=a24.replace("-170","");
+			String a26=a25.replace("-310","");
+			String a27=a26.replace("-155","");
+			String a28=a27.replace("-120","");
+			String a29=a28.replace("-135","");
+			String a30=a29.replace("-130","");
+			String a31=a30.replace("-145","");
+			String a32=a31.replace("-300","");
+			String a33=a32.replace("-305","");
+			String a34=a33.replace("-16","");
+			String a35=a34.replace("-10","");
+			String a36=a35.replace("-15","");
+			String a37=a36.replace("-18","");
+			String a38=a37.replace("-17","");
+			String a39=a38.replace("-14","");
+			String a40=a39.replace("-31","");
+			Double a4=Double.valueOf(a40);
+			//a4=a4/100;
+			total+=Double.valueOf(a4);}
+			result.close();
+			}//for
+		    mean=total/thevar.lim;
+		    if(thevar.var[1]!=null){
+		    String a5=thevar.var[1].replace("s","");
+			String a6=a5.trim();
+			if(a6.isEmpty()){a6="0";}else{a6=a6;}
+			String a14=a6.replace("-0","");
+			String a15=a14.replace("-4","");
+			String a16=a15.replace("-2","");
+			String a21=a16.replace("-6","");
+			Double a7=Double.valueOf(a21);
+			//a7=a7/100;
+		    first=Double.valueOf(a7);}
+		    if(thevar.var[8]!=null){   // must verify if 8 should  be last instead
+		    String a8=thevar.var[8].replace("s","");
+			String a9=a8.trim();
+			if(a9.isEmpty()){a9="0";}else{a9=a9;}
+			String a17=a9.replace("-0","");
+			String a18=a17.replace("-4","");
+			String a19=a18.replace("-2","");
+			String a22=a19.replace("-6","");
+			String a23=a22.replace("-10","");
+			String a24=a23.replace("-16","");
+			String a25=a24.replace("-15","");
+			String a26=a25.replace("-18","");
+			String a27=a26.replace("-17","");
+			String a28=a27.replace("-14","");
+			String a29=a28.replace("-31","");
+			Double a10=Double.valueOf(a29);
+			//a10=a10/100;
+		    last=Double.valueOf(a10);}
+		    if((first>mean)&&(last<mean)){trend="move down:";}else{trend="move up:";}
+		    System.out.println("mean="+mean+" trend="+trend);
+		    thevar.mytrend=trend;
+		    if(trend=="down"){trend2="sell short future contracts and buy option(call/put)";}else{trend2="buy future contracts and buy option(call/put)";}
+		    thevar.mytrend2=trend2;
+		    conn.close();
+		    mycomp=new myComponent();
+		    Graphics2D g = (Graphics2D) getGraphics();
+	      //  g.dispose();
+		//    g.clearRect(0,0,1200,650);
+			mycomp.paintComponent(g);
+		    //this.add(new myComponent());
+		    
+			System.out.println("bye bye world!");
+			}
+		catch(NumberFormatException e4){e4.getMessage();e4.printStackTrace();}	
+		catch(NullPointerException e3){e3.getMessage();e3.printStackTrace();}	
+	    catch(Exception e2){e2.getMessage();e2.printStackTrace();}	
+	}//fct23
+	void fct24_1()
+	{
+		try{
+			System.out.println("1item1_fct24_1");
+			thevar=new myVariables();
+			String databasename="";	
+			thevar.setdbname("ff2hamsandwich");
+			databasename=thevar.getdbname();
+			System.out.println(databasename);
+			thevar.setfact1(4);
+			thevar.setfact2(700);
+			thevar.setfact3(300);
+			//databasename="ff2petroparlay";
+			String url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			String username = "postgres";
+			String password = "postgres"; 
+			Connection conn=DriverManager.getConnection(url,username,password);
+			Statement stat=conn.createStatement();
+			
+			ResultSet result2;
+			String cmd1="";
+			String thevale3="";
+		    cmd1="SELECT COUNT(*) FROM pg_tables WHERE schemaname ILIKE 'public'";// count number of table in database 
+		    result2=stat.executeQuery(cmd1);
+			while(result2.next())
+			{
+				thevale3=result2.getString(1);
+			}
+			thevar.lim=Integer.valueOf(thevale3);
+			
+			
+			ResultSet result4;
+			String cmd4="";
+			String[] thevale4=new String[100];
+		    cmd4="SELECT tablename FROM pg_tables WHERE schemaname ILIKE 'public'"; //nom de ttes les tables de la base
+		    result4=stat.executeQuery(cmd4);
+		    int k=1;
+			while(result4.next())
+			{
+				thevale4[k]=result4.getString(1);
+				k++;
+			}
+			
+			String[] tabledat=new String[100];
+			Calendar cal = Calendar.getInstance();
+			int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+			int Month = cal.get(Calendar.MONTH)+1;
+			int Year = cal.get(Calendar.YEAR);
+			tabledat[1]=String.valueOf(dayOfMonth)+String.valueOf(Month)+String.valueOf(Year);
+			String[] tablenam=new String[100];
+			String[] cmde=new String[100];
+			ResultSet result;
+			String[] thevale1=new String[100];
+			String[] thevale2=new String[100];
+			String target="";
+			 
+			double total=0;
+			double mean=0;
+			double first=0;
+			double last=0;
+			String trend="";
+			String trend2="";
+	      
+			//target="SBH17_last";
+			//target="SBY00_low";
+			//target="SBH19_high";
+			//target="SBV18_last";
+			thevar.settarget("HEY00_last");
+			target=thevar.gettarget();
+			//target="CLU16_high";
+			//target="SBY00_displaytime";
+			//thevar.mytarget=target;
+			
+			for(int w=1;w<=thevar.lim;w++){
+			//tablenam[w]=databasename+tabledat[w];
+			//cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+tablenam[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			cmde[w]="SELECT DISTINCT attributeid,valuetext FROM "+thevale4[w]+" WHERE attributeid ILIKE '%"+target+"%'"+";";
+			result=stat.executeQuery(cmde[w]);
+			while(result.next())
+			{
+				thevale1[w]=result.getString(1);
+				thevale2[w]=result.getString(2);
+			}
+			System.out.println(target+" output "+/*tabledat[w]+*/"="+thevale2[w]);	
+			if(thevale2[w]!=null){
+			thevar.var[w]=thevale2[w];
+			String a1=thevar.var[w].replace("s","");
+			String a3=a1.trim();
+			if(a3.isEmpty()){a3="0";}else{a3=a3;}
+			String a11=a3.replace("-0","");
+			String a12=a11.replace("-4","");
+			String a13=a12.replace("-2","");
+			String a20=a13.replace("-6","");
+			String a21=a20.replace("-305","");
+			String a22=a21.replace("-105","");
+			String a23=a22.replace("-125","");
+			String a24=a23.replace("-175","");
+			String a25=a24.replace("-170","");
+			String a26=a25.replace("-310","");
+			String a27=a26.replace("-155","");
+			String a28=a27.replace("-120","");
+			String a29=a28.replace("-135","");
+			String a30=a29.replace("-130","");
+			String a31=a30.replace("-145","");
+			String a32=a31.replace("-300","");
+			String a33=a32.replace("-305","");
+			String a34=a33.replace("-16","");
+			String a35=a34.replace("-10","");
+			String a36=a35.replace("-15","");
+			String a37=a36.replace("-18","");
+			String a38=a37.replace("-17","");
+			String a39=a38.replace("-14","");
+			String a40=a39.replace("-31","");
+			Double a4=Double.valueOf(a40);
+			//a4=a4/100;
+			total+=Double.valueOf(a4);}
+			result.close();
+			}//for
+		    mean=total/thevar.lim;
+		    if(thevar.var[1]!=null){
+		    String a5=thevar.var[1].replace("s","");
+			String a6=a5.trim();
+			if(a6.isEmpty()){a6="0";}else{a6=a6;}
+			String a14=a6.replace("-0","");
+			String a15=a14.replace("-4","");
+			String a16=a15.replace("-2","");
+			String a21=a16.replace("-6","");
+			Double a7=Double.valueOf(a21);
+			//a7=a7/100;
+		    first=Double.valueOf(a7);}
+		    if(thevar.var[8]!=null){   // must verify if 8 should  be last instead
+		    String a8=thevar.var[8].replace("s","");
+			String a9=a8.trim();
+			if(a9.isEmpty()){a9="0";}else{a9=a9;}
+			String a17=a9.replace("-0","");
+			String a18=a17.replace("-4","");
+			String a19=a18.replace("-2","");
+			String a22=a19.replace("-6","");
+			String a23=a22.replace("-10","");
+			String a24=a23.replace("-16","");
+			String a25=a24.replace("-15","");
+			String a26=a25.replace("-18","");
+			String a27=a26.replace("-17","");
+			String a28=a27.replace("-14","");
+			String a29=a28.replace("-31","");
+			Double a10=Double.valueOf(a29);
+			//a10=a10/100;
+		    last=Double.valueOf(a10);}
+		    if((first>mean)&&(last<mean)){trend="move down:";}else{trend="move up:";}
+		    System.out.println("mean="+mean+" trend="+trend);
+		    thevar.mytrend=trend;
+		    if(trend=="down"){trend2="sell short future contracts and buy option(call/put)";}else{trend2="buy future contracts and buy option(call/put)";}
+		    thevar.mytrend2=trend2;
+		    conn.close();
+		    mycomp=new myComponent();
+		    Graphics2D g = (Graphics2D) getGraphics();
+	      //  g.dispose();
+		//    g.clearRect(0,0,1200,650);
+			mycomp.paintComponent(g);
+		    //this.add(new myComponent());
+		    
+			System.out.println("bye bye world!");
+			}
+		catch(NumberFormatException e4){e4.getMessage();e4.printStackTrace();}	
+		catch(NullPointerException e3){e3.getMessage();e3.printStackTrace();}	
+	    catch(Exception e2){e2.getMessage();e2.printStackTrace();}	
+	}//fct24
+	public class myVariables
+    {
+    	public String[] var=new String[100];
+    	public String mytarget;
+    	public String mytrend;
+    	public String mytrend2;
+    	public int lim;
+    	public int dbnumber;
+    	public int fact1;
+    	public int fact2;
+    	public int fact3;
+    	public String[] dbname=new String[100];
+    	public String mydbname="";
+    	public void setfact3(int fact3){this.fact3=fact3;}
+    	public int getfact3(){return this.fact3;}
+    	public void setfact1(int fact1){this.fact1=fact1;}
+    	public int getfact1(){return this.fact1;}
+    	public void setfact2(int fact2){this.fact2=fact2;}
+    	public int getfact2(){return this.fact2;}
+    	public void settarget(String target){this.mytarget=target;}
+    	public String gettarget(){return this.mytarget;}
+    	public void setdbname(String mydbname){this.mydbname=mydbname;}
+    	public String getdbname(){return this.mydbname;}
+    	
+    }//myVariables
+	 class myComponent extends JComponent
+	    {
+	    	public void paintComponent(Graphics g)
+	    	{
+	    	try{
+	    		super.paintComponent(g);
+	    	    g.clearRect(10, 60, 1180, 580);
+	    	//	g.setColor(Color.BLACK);
+	    	//	g.fillRect(10, 60, 1180, 580);
+	    		int[] POSITION_X=new int[100];
+	    		int[] POSITION_Y=new int[100];
+	    		
+	    		for(int m=1;m<=thevar.lim;m++){
+	    			if(thevar.var[m]!=null){
+	    		String a1=thevar.var[m].replace("s","");
+	    		String a3=a1.trim();
+	        	if(a3.isEmpty()){a3="0";}else{a3=a3;}
+	        	String a16=a3.replace("-0","");
+	    		String a17=a16.replace("-4","");
+	    		String a18=a17.replace("-2","");
+				String a19=a18.replace("-6","");
+				String a20=a19.replace(",","");
+				String a21=a20.replace("-305","");
+				String a22=a21.replace("-105","");
+				String a23=a22.replace("-125","");
+				String a24=a23.replace("-175","");
+				String a25=a24.replace("-170","");
+				String a26=a25.replace("-310","");
+				String a27=a26.replace("-155","");
+				String a28=a27.replace("-120","");
+				String a29=a28.replace("-135","");
+				String a30=a29.replace("-130","");
+				String a31=a30.replace("-145","");
+				String a32=a31.replace("-300","");
+				String a33=a32.replace("-305","");
+				String a34=a33.replace("-16","");
+				String a35=a34.replace("-10","");
+				String a36=a35.replace("-15","");
+				String a37=a36.replace("-18","");
+				String a38=a37.replace("-17","");
+				String a39=a38.replace("-14","");
+				String a40=a39.replace("-31","");
+	        	Double a4=Double.valueOf(a40);
+	        //	a4=a4/100;
+	        	a4=thevar.getfact1()*a4;
+	            int a5=a4.intValue();
+	        	POSITION_Y[m]=thevar.getfact2()-(1*a5);
+	        	POSITION_X[m]=thevar.getfact3()+(10*(m-1));}}
+	               	
+	    		String item=new String();
+	    		item="x";
+	    		for(int n=1;n<=thevar.lim;n++){
+	    		g.drawString(item, POSITION_X[n], POSITION_Y[n]);
+	    		}//for
+	    		//super.paintComponent(g);
+	    		g.drawString(thevar.mytarget+" "+thevar.mytrend+" "+thevar.mytrend2,500,105);
+	    	   }
+	    	catch(NullPointerException e2){e2.getMessage();e2.printStackTrace();}
+	    	catch(ArrayIndexOutOfBoundsException e1){e1.getMessage();e1.printStackTrace();}
+	    	catch(Exception e){e.getMessage();e.printStackTrace();}
+	    	}// paintcomponent  	
+	    }// class myComponent
+}// class databasemenu

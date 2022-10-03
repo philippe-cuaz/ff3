@@ -1,0 +1,523 @@
+package transformoptiontable3;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Calendar;
+import java.util.Timer;
+import java.util.TimerTask;
+
+
+
+public class transformoptiontable3 {
+	static transformoptiontable3 x=new transformoptiontable3();
+	static MyData md=x.new MyData();	
+	static Timer timer;
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		timer = new Timer();
+	    int delay = 10;
+	    int onesecond=1000;
+	    int onehour=3600*onesecond;
+	    int period = onehour*24;
+	    TimerTask task = new TimerTask()
+	    {
+	     public void run()
+	     {
+	    	 mytimedata td=x.new mytimedata();
+	    	
+	 		 td.actionPerformed();
+	         System.out.println("bye bye everybody");
+	     }
+	    };
+	    timer.scheduleAtFixedRate(task, delay, period);
+	}
+	public class mytimedata  {
+		public void actionPerformed(){
+			    System.out.println("start mytimedata actionPerformed");
+				//  datawebimporttodatabase dat=new datawebimporttodatabase();
+			  //    dat.getdata();
+			      
+			      //transformoptiontable2 y=new transformoptiontable2();
+			      createtable ct=x.new createtable();
+			    //  public static MyData md=x.new MyData();	      
+			      md.setdayback(0);
+			      md.setdayforward(0);
+			      md.setmonthback(0);
+			      md.setyearback(0);
+			      md.setdatabase("ff2plustradeboption");
+			      ct.create();
+			      ct.getdata();
+			      ct.insert();
+			      System.out.println("stop mytimedata actionPerformed");
+			}
+			
+		}
+	 public class createtable{
+		   public void create()
+		   {
+			   try{
+				System.out.println("start createtable create");
+			    String databasename,driver,url,username,password,tablename,tabledate,option;
+			    Connection conn;
+			    Statement stat;
+			    Calendar cal = Calendar.getInstance();
+				int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH)-md.getdayback()+md.getdayforward();
+				int Month = cal.get(Calendar.MONTH)+1-md.getmonthback();
+				int Year = cal.get(Calendar.YEAR)-md.getyearback();
+				
+				String zero="0";	
+				String stringdayofmonth="";
+				String stringmonth="";
+				if (dayOfMonth<10){stringdayofmonth=zero+String.valueOf(dayOfMonth);}
+				if(dayOfMonth>9){stringdayofmonth=String.valueOf(dayOfMonth);}
+				if(Month<10){stringmonth=zero+String.valueOf(Month);}
+				if(Month>9){stringmonth=String.valueOf(Month);}
+				tabledate=stringdayofmonth+stringmonth+String.valueOf(Year);
+				
+				//tabledate=String.valueOf(dayOfMonth)+String.valueOf(Month)+String.valueOf(Year);
+				System.out.println("tabledate1 ="+tabledate);
+			    databasename="";
+				databasename=md.getdatabase();//"ff2plustradeb";
+				driver = "org.postgresql.Driver";
+				System.out.println("driver1 ="+driver);		
+				//String property = System.getProperty("java.library.path");
+				//System.out.println(property);
+				//String lib="postgresql-9.4.1208.jre7.jar";
+				//System.loadLibrary(lib);
+				//URL url1 = getClass().getResource(lib);
+				//System.out.println(url1);
+				Class.forName(driver);
+				System.out.println("databasename1 ="+databasename);
+				url    = "jdbc:postgresql://localhost:5432/"+databasename;
+				username = "postgres";
+				password = "postgres";            // Change it to your Password	
+				//System.out.println(url+" "+username+" "+password);
+				conn=DriverManager.getConnection(url,username,password);
+				stat=conn.createStatement();		
+				tablename="";
+				option="option";
+				tablename=databasename+tabledate;
+				System.out.println("tablename1 ="+tablename);
+				String cmd="CREATE TABLE IF NOT EXISTS "+tablename+" (Strike CHAR(50),High CHAR(50),Low CHAR(50),Current CHAR(50),Change CHAR(50),Volume CHAR(50),Time CHAR(50),Premium CHAR(50))";
+				System.out.println("cmd1 ="+cmd);
+			    stat.executeUpdate(cmd);		    
+			    stat.close();
+			    conn.close();
+			    ///System.out.println("done create !");
+			    System.out.println("stop createtable create");
+			   }
+			   catch(UnsatisfiedLinkError ex1){ex1.getMessage();ex1.getStackTrace();}
+			   catch(Exception ex1){ex1.getMessage();ex1.getStackTrace();}
+		   }//create
+		   int getstartff2plustradeb(String table,String database)
+		   {
+			   System.out.println("start createtable getstartff2plustradeb");
+			   Integer myres=0;
+			   try{
+			   String tablename=table;
+			   String databasename=database;
+			   String driver = "org.postgresql.Driver";
+			   Class.forName(driver);
+			   String url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			   String username = "postgres";
+			   String password = "postgres";            	
+			   Connection conn=DriverManager.getConnection(url,username,password);
+			   Statement stat=conn.createStatement();	
+			   
+			   // count number of lines in table
+			   System.out.println("createtable getstartff2plustradeb start count number of lines in table");
+			   String cmd="select count(valuetext) from "+tablename+" ;";
+			   System.out.println("cmd2 ="+cmd);
+			   ResultSet result;
+			   result=stat.executeQuery(cmd);		   
+			   String res0=new String();
+			   while(result.next())
+				{
+					res0=result.getString(1);		
+				}
+			   System.out.println("number of lines ="+res0);
+			   result.close();
+			   stat.close();
+			   conn.close();
+			   int mylines=Integer.parseInt(res0);
+			   
+			   // fetch data from table
+			   System.out.println("createtable getstartff2plustradeb start fetch data from table");
+			   tablename=table;
+			   databasename=database;
+			   driver = "org.postgresql.Driver";
+			   Class.forName(driver);
+			   url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			   username = "postgres";
+			   password = "postgres";            	
+			   conn=DriverManager.getConnection(url,username,password);
+			   stat=conn.createStatement();	
+			   cmd="select attributeid,valuetext from "+tablename+";";
+			   System.out.println("cmd3 ="+cmd);
+			   result=stat.executeQuery(cmd);	
+			   int k=1;
+			   String[][] res1=new String[mylines+1][2];
+			   while(result.next())
+				{
+					res1[k][0]=result.getString(1);
+					res1[k][1]=result.getString(2);
+				//	System.out.println(res1[k][0]+" "+res1[k][1]);
+					//System.out.println(res1[k][1]);
+					k++;
+				}
+				result.close();
+				stat.close();
+			    conn.close();
+			   // create a new table with line number from tablename 
+			    System.out.println("createtable getstartff2plustradeb start create a new table with line number from tablename ");
+			    tablename="extended"+table;
+				databasename=database;
+				driver = "org.postgresql.Driver";
+				Class.forName(driver);
+				url    = "jdbc:postgresql://localhost:5432/"+databasename;
+				username = "postgres";
+				password = "postgres";            	
+				conn=DriverManager.getConnection(url,username,password);
+				stat=conn.createStatement();
+				String cmd6="CREATE TABLE IF NOT EXISTS "+tablename+" (line CHAR(50),attributeid CHAR(50),valuetext CHAR(50))";
+				System.out.println("cmd4 ="+cmd6);
+				stat.executeUpdate(cmd6);		    
+				stat.close();
+				conn.close();
+				// populate a new table with line number from table
+				 System.out.println("createtable getstartff2plustradeb start populate a new table with line number from table ");
+				 tablename="extended"+table;
+					databasename=database;
+					driver = "org.postgresql.Driver";
+					Class.forName(driver);
+					url    = "jdbc:postgresql://localhost:5432/"+databasename;
+					username = "postgres";
+					password = "postgres";            	
+					conn=DriverManager.getConnection(url,username,password);
+					stat=conn.createStatement();
+					System.out.println("lim mylines ="+mylines+" table ="+tablename);
+					//Integer m=1;
+					//String cmd2="INSERT INTO "+tablename+" (line, attributeid, valuetext) VALUES ('"+m.toString()+"','"+res1[m][0].trim()+"','"+res1[m][1].trim()+"');";
+					//System.out.println("cmd40 ="+cmd2);
+					Integer n=1;
+					String cmd2="";
+					while(n<(mylines+1)){
+					String cmd1="INSERT INTO "+tablename+" (line, attributeid, valuetext) VALUES ('"+n.toString()+"','"+res1[n][0].trim()+"','"+res1[n][1].trim()+"');";
+					//System.out.println("cmd4 ="+cmd1);
+					cmd2=cmd1;
+					stat.executeUpdate(cmd1);
+					n++;
+					}
+					System.out.println("stop populate insert done cmd41 ="+cmd2);
+					stat.close();
+					conn.close();
+			 
+			   // select line from ff2plustradeb15102016 where valuetext ilike '7.00C%';
+					 System.out.println("createtable getstartff2plustradeb start select line from ff2plustradeb15102016 where valuetext ilike '7.00C%'; ");
+					    tablename="extended"+table;
+						databasename=database;
+						driver = "org.postgresql.Driver";
+						Class.forName(driver);
+						url    = "jdbc:postgresql://localhost:5432/"+databasename;
+						username = "postgres";
+						password = "postgres";            	
+						conn=DriverManager.getConnection(url,username,password);
+						stat=conn.createStatement();
+						cmd="select distinct line from "+tablename+" where valuetext ilike '7.00C%';";
+						System.out.println("cmd5 ="+cmd);
+						result=stat.executeQuery(cmd);
+						   String res2="";
+						   while(result.next())
+							{
+								res2=result.getString(1);
+							}
+						   System.out.println("line number of the occurence(7.00C)string ="+res2);
+						   myres=Integer.parseInt(res2.trim());
+						   System.out.println("1line number of the occurence(7.00C)int ="+myres.toString());
+							result.close();
+							stat.close();
+						    conn.close();
+							
+						
+			   }
+			   catch(Exception ex1){ex1.getMessage();ex1.getStackTrace();}
+			   System.out.println("2line number of the occurence(7.00C)int ="+myres.toString());
+			   System.out.println("stop createtable getstartff2plustradeb");
+			   return myres;
+		   }//getstartff2plustradeb
+		   public void getdata()
+		   {
+			   try{
+					System.out.println("start createtable getdata");
+					System.out.println("1");
+				    String databasename,databasenameoption,driver,url,username,password,tablename,tabledate;
+				    String[] strike = new String[1000],high = new String[1000],low = new String[1000],current=new String[1000],change= new String[1000],volume= new String[1000],time= new String[1000],premium=new String[1000];
+				    Connection conn;
+				    Statement stat;
+				    Calendar cal = Calendar.getInstance();
+					int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH)-md.getdayback()+md.getdayforward();
+					int Month = cal.get(Calendar.MONTH)+1-md.getmonthback();
+					int Year = cal.get(Calendar.YEAR)-md.getyearback();
+					
+					String zero="0";	
+					String stringdayofmonth="";
+					String stringmonth="";
+					if (dayOfMonth<10){stringdayofmonth=zero+String.valueOf(dayOfMonth);}
+					if(dayOfMonth>9){stringdayofmonth=String.valueOf(dayOfMonth);}
+					if(Month<10){stringmonth=zero+String.valueOf(Month);}
+					if(Month>9){stringmonth=String.valueOf(Month);}
+					tabledate=stringdayofmonth+stringmonth+String.valueOf(Year);
+					
+					//tabledate=String.valueOf(dayOfMonth)+String.valueOf(Month)+String.valueOf(Year);
+					System.out.println(tabledate);
+				    databasenameoption="";
+					databasenameoption=md.getdatabase();//"ff2plustradeboption";
+					databasename=databasenameoption.replace("option","");
+					md.setdatabase(databasename);
+					databasename=md.getdatabase();//"ff2plustradeb";
+					driver = "org.postgresql.Driver";
+					System.out.println("driver2 ="+driver);		
+					//String property = System.getProperty("java.library.path");
+					//System.out.println(property);
+					//String lib="postgresql-9.4.1208.jre7.jar";
+					//System.loadLibrary(lib);
+					//URL url1 = getClass().getResource(lib);
+					System.out.println("databasename2 ="+databasename);
+					Class.forName(driver);
+					url    = "jdbc:postgresql://localhost:5432/"+databasename;
+					username = "postgres";
+					password = "postgres";            // Change it to your Password	
+					//System.out.println(url+" "+username+" "+password);
+					conn=DriverManager.getConnection(url,username,password);
+					stat=conn.createStatement();		
+					tablename="";
+					System.out.println("2");
+					tablename=databasename+tabledate;
+					System.out.println("tablename2 ="+tablename);
+					//String cmd="select * from"+ tablename;
+					//String cmd="INSERT INTO "+tablename+" (Strike,High,Low,Current,Change,Volume,Time,Premium) VALUES ('"+strike+"','"+high+"','"+low+"','"+current+"','"+change+"','"+volume+"','"+time+"','"+premium+"');";
+					String cmd="SELECT valuetext FROM "+tablename;
+					System.out.println("cmd6 ="+cmd);
+					System.out.println("3");
+					ResultSet result;
+				    result=stat.executeQuery(cmd);
+				    System.out.println("4");
+					int k=1;
+					String[] valuetext=new String[5000];
+					while(result.next())
+					{
+						valuetext[k]=result.getString(1);
+						//System.out.println(result.getString(1));
+						k++;
+					}
+					System.out.println("5");
+					result.close();
+					stat.close();
+				    conn.close();
+				    System.out.println(k);
+					md.setlim(k);
+					
+					Integer mystart=getstartff2plustradeb(tablename,databasename);
+					 System.out.println("mystart ="+mystart.toString());
+					int start=(int)mystart;//29;
+					int m=1;
+					int n=start;
+					int mylim2=md.getlim();
+					System.out.println("6");
+					System.out.println("lim="+mylim2);
+					while(m<=mylim2)
+					{
+						md.setstrike(valuetext[n],m);
+						md.sethigh(valuetext[n+2],m);
+						md.setlow(valuetext[n+3],m);
+						md.setcurrent(valuetext[n+4],m);
+						md.setchange(valuetext[n+5],m);
+						md.setvolume(valuetext[n+6],m);
+						md.settime(valuetext[n+7],m);
+						md.setpremium(valuetext[n+8],m);
+						m++;
+						n=n+9;
+					}
+					System.out.println("7");
+				   // System.out.println("done getdata !");
+				    System.out.println("stop createtable getdata");
+				   }
+				   catch(UnsatisfiedLinkError ex1){ex1.getMessage();ex1.getStackTrace();}
+				   catch(Exception ex1){ex1.getMessage();ex1.getStackTrace();}
+		     
+		   }//getdata
+		   public void insert()
+		   {
+			   try{
+					System.out.println("start createtable insert");
+				    String databasename,databasenameoption,driver,url,username,password,tablename,tabledate,option;
+				   // String strike = "0",high = "0",low = "0",current= "0",change= "0",volume= "0",time= "0",premium= "0";
+				    Connection conn;
+				    Statement stat;
+				    Calendar cal = Calendar.getInstance();
+					int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH)-md.getdayback()+md.getdayforward();
+					int Month = cal.get(Calendar.MONTH)+1-md.getmonthback();
+					int Year = cal.get(Calendar.YEAR)-md.getyearback();
+					
+					String zero="0";	
+					String stringdayofmonth="";
+					String stringmonth="";
+					if (dayOfMonth<10){stringdayofmonth=zero+String.valueOf(dayOfMonth);}
+					if(dayOfMonth>9){stringdayofmonth=String.valueOf(dayOfMonth);}
+					if(Month<10){stringmonth=zero+String.valueOf(Month);}
+					if(Month>9){stringmonth=String.valueOf(Month);}
+					tabledate=stringdayofmonth+stringmonth+String.valueOf(Year);
+					
+					//
+					// must create databasenameoption if not exist !!!!
+					//
+					driver = "org.postgresql.Driver";
+					System.out.println("driver3 ="+driver);
+					Class.forName(driver);
+					String databasename1="postgres";
+					url    = "jdbc:postgresql://localhost:5432/"+databasename1;
+					username = "postgres";
+					password = "postgres";            // Change it to your Password	
+					//System.out.println(url+" "+username+" "+password);
+					conn=DriverManager.getConnection(url,username,password);
+					stat=conn.createStatement();
+					String cmd70="select datname from pg_database where datname ilike 'ff2plustradeboption';";
+					System.out.println("cmd70 ="+cmd70);
+					ResultSet result;
+					result=stat.executeQuery(cmd70);
+					String res2="";
+					while(result.next())
+						{
+							res2=result.getString(1);
+						}
+					result.close();
+					stat.close();
+					conn.close();
+					System.out.println("res2 ="+res2);
+					boolean databaseexistflag=false;
+					if(res2.trim().equals("ff2plustradeboption")){databaseexistflag=true;}
+				    if(res2.trim().isEmpty()){databaseexistflag=false;}
+					if(databaseexistflag==false)
+					{
+					    // create database	
+						String cmd71="";
+						databasenameoption="postgres";
+						cmd71="create database ff2plustradeboption";
+						System.out.println("cmd71 ="+cmd71);
+						driver = "org.postgresql.Driver";
+						System.out.println("driver71 ="+driver);	
+						Class.forName(driver);
+						url    = "jdbc:postgresql://localhost:5432/"+databasenameoption;
+						username = "postgres";
+						password = "postgres";            // Change it to your Password	
+						//System.out.println(url+" "+username+" "+password);
+						conn=DriverManager.getConnection(url,username,password);
+						stat=conn.createStatement();
+						stat.executeUpdate(cmd71);
+						System.out.println("database ff2plustradeboption created");
+					}
+					
+					//tabledate=String.valueOf(dayOfMonth)+String.valueOf(Month)+String.valueOf(Year);
+					System.out.println(tabledate);
+				    databasename="";
+				    databasename=md.getdatabase();
+				    databasenameoption="";
+				    databasenameoption=databasename+"option";
+				    System.out.println("databasenameoption3 ="+databasenameoption);	
+				    md.setdatabase(databasenameoption);
+				    databasenameoption=md.getdatabase();
+					driver = "org.postgresql.Driver";
+					System.out.println("driver3 ="+driver);		
+					//String property = System.getProperty("java.library.path");
+					//System.out.println(property);
+					//String lib="postgresql-9.4.1208.jre7.jar";
+					//System.loadLibrary(lib);
+					//URL url1 = getClass().getResource(lib);
+					//System.out.println(url1);
+					Class.forName(driver);		
+					//
+					url    = "jdbc:postgresql://localhost:5432/"+databasenameoption;
+					username = "postgres";
+					password = "postgres";            // Change it to your Password	
+					//System.out.println(url+" "+username+" "+password);
+					conn=DriverManager.getConnection(url,username,password);
+					stat=conn.createStatement();		
+					tablename="";
+					//option="option";
+					tablename=databasenameoption+tabledate;
+					System.out.println("tablename3 ="+tablename);
+					System.out.println("lim3 ="+md.getlim());
+					int p=0;
+					int q=0;
+					String cmd="";
+					for(int n=1;n<=md.getlim();n++)
+					{
+				    if((md.getstrike(n)!=null)&&(md.gethigh(n)!=null)&&(md.getlow(n)!=null)&&(md.getcurrent(n)!=null)&&(md.getchange(n)!=null)&&(md.getvolume(n)!=null)&&(md.gettime(n)!=null)&&(md.getpremium(n)!=null))
+				   {
+					//System.out.println(md.getstrike(n)+" "+md.gethigh(n)+" "+md.getlow(n)+" "+md.getcurrent(n)+" "+md.getchange(n)+" "+md.getvolume(n)+" "+md.gettime(n)+" "+md.getpremium(n));
+					 cmd="INSERT INTO "+tablename+" (Strike,High,Low,Current,Change,Volume,Time,Premium) VALUES ('"+md.getstrike(n).trim()+"','"+md.gethigh(n).trim()+"','"+md.getlow(n).trim()+"','"+md.getcurrent(n).trim()+"','"+md.getchange(n).trim()+"','"+md.getvolume(n).trim()+"','"+md.gettime(n).trim()+"','"+md.getpremium(n).trim()+"');";
+					//System.out.println(cmd);
+					stat.executeUpdate(cmd);
+					p++;
+				   }
+					q++;
+					}
+					System.out.println("cmd7 ="+cmd);
+				    //System.out.println(cmd);
+				    System.out.println("line treated="+p);
+				    System.out.println("line total="+q);
+				    stat.close();
+				    conn.close();
+				   // System.out.println("done insert !");
+				    System.out.println("stop createtable insert");
+				   }
+				   catch(UnsatisfiedLinkError ex1){ex1.getMessage();ex1.getStackTrace();}
+				   catch(Exception ex1){ex1.getMessage();ex1.getStackTrace();}
+		   }
+	   }
+	   public class MyData
+	   {
+		   private String database;
+		   public void setdatabase(String database){this.database=database;}
+		   String getdatabase(){return this.database;}
+		   private int dayback;
+		   public void setdayback(int dayback){this.dayback=dayback;}
+		   int getdayback(){return this.dayback;}
+		   private int dayforward;
+		   public void setdayforward(int dayforward){this.dayforward=dayforward;}
+		   int getdayforward(){return this.dayforward;}
+		   private int monthback;
+		   public void setmonthback(int monthback){this.monthback=monthback;}
+		   int getmonthback(){return this.monthback;}
+		   private int yearback;
+		   public void setyearback(int yearback){this.yearback=yearback;}
+		   int getyearback(){return this.yearback;}
+		   int lim;
+	   	   //private String strike = "0",high = "0",low = "0",current= "0",change= "0",volume= "0",time= "0",premium= "0";
+	   	   private MyDataType mdt=new MyDataType(); 
+	   	   void setlim(int lim){this.lim=lim;}
+	   	   int getlim(){return this.lim;}
+	   	   void setstrike(String strike,int n){this.mdt.strike[n]=strike;}
+	       String getstrike(int n){return this.mdt.strike[n];}
+	   	   void sethigh(String high,int n){this.mdt.high[n]=high;}
+	   	   String gethigh(int n){return this.mdt.high[n];}
+	   	   void setlow(String low,int n){this.mdt.low[n]=low;}
+	   	   String getlow(int n){return this.mdt.low[n];}
+	   	   void setcurrent(String current,int n){this.mdt.current[n]=current;}
+	   	   String getcurrent(int n){return this.mdt.current[n];}
+	   	   void setchange(String change,int n){this.mdt.change[n]=change;}
+	   	   String getchange(int n){return this.mdt.change[n];}
+	   	   void setvolume(String volume,int n){this.mdt.volume[n]=volume;}
+	   	   String getvolume(int n){return this.mdt.volume[n];}
+	   	   void settime(String time,int n){this.mdt.time[n]=time;}
+	   	   String gettime(int n){return this.mdt.time[n];}
+	   	   void setpremium(String premium,int n){this.mdt.premium[n]=premium;}
+	   	   String getpremium(int n){return this.mdt.premium[n];}
+	   } 
+	   public class MyDataType
+	   {
+		    String[] strike =new String[5000] ,high = new String[5000],low = new String[5000],current=new String[5000],change= new String[5000],volume= new String[5000],time= new String[5000],premium= new String[5000];   
+	   }
+}

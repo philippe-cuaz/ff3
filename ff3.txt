@@ -1,0 +1,2136 @@
+package financefuture3; 
+
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.IOException;
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
+import java.nio.file.NoSuchFileException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.SQLNonTransientConnectionException;
+import java.sql.Statement;
+import java.util.Calendar;
+import java.util.TimerTask;
+
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+
+import org.jsoup.Jsoup;
+import org.jsoup.select.Elements;
+import org.postgresql.util.PSQLException;
+
+import transformoptiontable.transformoptiontable;
+import transformoptiontable.transformoptiontable.MyData;
+import transformoptiontable.transformoptiontable.createtable;
+
+import java.util.Timer;
+
+public class financefuture3 {
+	static financefuture3 x=new financefuture3();
+	static Timer timer;	
+	public static void main(String[] args) 
+	{
+		// TODO Auto-generated method stub  
+		timer = new Timer();
+	    int delay = 10;
+	    int onesecond=1000;
+	    int onehour=3600*onesecond;
+	    int period = onehour*24;
+	    TimerTask task = new TimerTask()
+	    {
+	     public void run()
+	     {
+	    	 mytimedata td=x.new mytimedata();
+	    	
+	 		 td.actionPerformed();
+	         System.out.println("bye bye everybody");
+	     }
+	    };
+	    timer.scheduleAtFixedRate(task, delay, period);
+	}// main
+	
+	public class mytimedata  {
+	public void actionPerformed(){
+			  datawebimporttodatabase dat=new datawebimporttodatabase();
+		      dat.getdata();
+		     /* 
+		      transformoptiontable y=new transformoptiontable();
+		      createtable ct=y.new createtable();
+		      MyData md=y.new MyData();	      
+		      md.setdayback(0);
+		      md.setdayforward(0);
+		      md.setmonthback(0);
+		      md.setyearback(0);
+		      md.setdatabase("ff2plustradeboption");
+		      ct.create();
+		      ct.getdata();
+		      ct.insert();
+		      */
+		}
+		
+	}
+static public class datawebimporttodatabase{
+	public void getdata(){
+		  try{
+			   
+			     thevar=x.new myVariables();
+			    // MyData md=x.new MyData();
+			     
+	        	 java.io.PrintWriter out1=new java.io.PrintWriter("the-11-plus-trade-DATA.txt");
+	        	 String url1 = "http://www.barchart.com/commodityfutures/Sugar_%2311_Futures/SB?search=SB*";	        	 
+	        	 org.jsoup.nodes.Document doc1 = Jsoup.connect(url1).get();
+	             Elements td1 =doc1.select("td");
+	             int s1=td1.size();
+	             tm.s1=s1;
+	             out1.println("\ntd: "+ s1);
+	             String[] idattr1=new String[s1+1];
+	             String[] valuetext1=new String[s1+1];
+	             int i1=1;  
+	             for (org.jsoup.nodes.Element tada : td1) {
+	                 out1.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	                 idattr1[i1]=tada.attr("id");
+	                 valuetext1[i1]=trim(tada.text(),35);
+	                 i1++;
+	             }
+	            // thevar.var1="hello3";
+	        	out1.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING DATA FLUSH   !!!!!
+	        	
+	        	 java.io.PrintWriter out1b=new java.io.PrintWriter("the-11-plus-trade-b-DATA.txt");
+	    		 String url1b = "http://www.barchart.com/commodityfutures/Sugar_%2311_Futures/options/SB";		 
+	    		 org.jsoup.nodes.Document doc1b = Jsoup.connect(url1b).get();
+	    	     Elements td1b =doc1b.select("td");// should try "img"???!!!
+	    	     int s1b=td1b.size();
+	    	     tm.s1b=s1b;
+	    	     out1b.println("\ntd: "+ s1b);
+	    	     String[] idattr1b=new String[s1b+1];
+	    	     String[] valuetext1b=new String[s1b+1];
+	    	     int i1b=1;     
+	    	     for (org.jsoup.nodes.Element tada : td1b) {
+	    	        out1b.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	    	        idattr1b[i1b]=tada.attr("id");
+	    	        valuetext1b[i1b]=trim(tada.text(),35);
+	    	        i1b++;
+	    	     }
+	    		 out1b.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING FLUSH   !!!!!
+	        	
+	        	java.io.PrintWriter out2=new java.io.PrintWriter("the-b-o-m-spread-DATA.txt");
+	       	    String url2 = "http://www.barchart.com/commodityfutures/Soybeans_Futures/ZS";	       	   
+	       	    org.jsoup.nodes.Document doc2 = Jsoup.connect(url2).get();
+	            Elements td2 =doc2.select("td");
+	            int s2=td2.size();
+	            tm.s2=s2;
+	            out2.println("\ntd: "+ s2);
+	            String[] idattr2=new String[s2+1];
+	            String[] valuetext2=new String[s2+1];
+	            int i2=1;
+	            for (org.jsoup.nodes.Element tada : td2) {
+	                out2.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	                idattr2[i2]=tada.attr("id");
+	                valuetext2[i2]=trim(tada.text(),35);
+	                i2++;
+	            }
+	       	    out2.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING FLUSH   !!!!!
+	       	
+	       	   java.io.PrintWriter out3=new java.io.PrintWriter("the-beef-sandwich-DATA.txt");
+	   	       String url3 = "http://www.barchart.com/commodityfutures/Meats";	   	       
+	   	       org.jsoup.nodes.Document doc3 = Jsoup.connect(url3).get();
+	           Elements td3 =doc3.select("td");
+	           int s3=td3.size();
+	           tm.s3=s3;
+	           out3.println("\ntd: "+ td3.size());
+	           String[] idattr3=new String[td3.size()+1];
+	           String[] valuetext3=new String[td3.size()+1];
+	           int i3=1;
+	           for (org.jsoup.nodes.Element tada : td3) {
+	            out3.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	            idattr3[i3]=tada.attr("id");
+	            valuetext3[i3]=trim(tada.text(),35);
+	            i3++;
+	           }
+	   	       out3.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING FLUSH   !!!!!
+	   	       
+	   	java.io.PrintWriter out4=new java.io.PrintWriter("the-copper-coup-DATA.txt");
+		 String url4 = "http://www.barchart.com/commodityfutures/High_Grade_Copper_Futures/HG?search=HG*";		 
+		 org.jsoup.nodes.Document doc4 = Jsoup.connect(url4).get();
+	    Elements td4 =doc4.select("td");
+	    int s4=td4.size();
+	    tm.s4=s4;
+	    out4.println("\ntd: "+ s4);
+	    String[] idattr4=new String[s4+1];
+	    String[] valuetext4=new String[s4+1];
+	    int i4=1;
+	    for (org.jsoup.nodes.Element tada : td4) {
+	        out4.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	        idattr4[i4]=tada.attr("id");
+	        valuetext4[i4]=trim(tada.text(),35);
+	        i4++;
+	    }
+		out4.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING FLUSH   !!!!!
+		
+		java.io.PrintWriter out5=new java.io.PrintWriter("the-cotton-connection-DATA.txt");
+	//	 String url5 = "http://data.tradingcharts.com/futures/quotes/ct.html";
+		 String url5 = "http://www.barchart.com/commodityfutures/Cotton_%232_Futures/CT?search=CT*";
+		 org.jsoup.nodes.Document doc5 = Jsoup.connect(url5).get();
+	    Elements td5 =doc5.select("td");
+	    int s5=td5.size();
+	    tm.s5=s5;
+	    out5.println("\ntd: "+ s5);
+	    String[] idattr5=new String[s5+1];
+	    String[] valuetext5=new String[s5+1];
+	    int i5=1;
+	    for (org.jsoup.nodes.Element tada : td5) {
+	        out5.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	        idattr5[i5]=tada.attr("id");
+	        valuetext5[i5]=trim(tada.text(),35);
+	        i5++;
+	    }
+		out5.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING FLUSH   !!!!!
+		
+		java.io.PrintWriter out6=new java.io.PrintWriter("the-ham-sandwich-DATA.txt");
+		 String url6 = "http://www.barchart.com/commodityfutures/Lean_Hogs_Futures/HE?search=HE*";		 
+		 org.jsoup.nodes.Document doc6 = Jsoup.connect(url6).get();
+	    Elements td6 =doc6.select("td");
+	    int s6=td6.size();
+	    tm.s6=s6;
+	    out6.println("\ntd: "+ s6);
+	    String[] idattr6=new String[s6+1];
+	    String[] valuetext6=new String[s6+1];
+	    int i6=1;
+	    for (org.jsoup.nodes.Element tada : td6) {
+	        out6.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	        idattr6[i6]=tada.attr("id");
+	        valuetext6[i6]=trim(tada.text(),35);
+	        i6++;
+	    }
+		out6.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING FLUSH   !!!!!
+		
+		 java.io.PrintWriter out7=new java.io.PrintWriter("the-insured-gsr-trade-g-DATA.txt");
+		 String url7 = "http://www.barchart.com/commodityfutures/Gold_Futures/GCM18";		 
+		 org.jsoup.nodes.Document doc7 = Jsoup.connect(url7).get();
+	     Elements td7 =doc7.select("td");
+	     int s7=td7.size();
+	     tm.s7=s7;
+	     out7.println("\ntd: "+ s7);
+	     String[] idattr7=new String[s7+1];
+	     String[] valuetext7=new String[s7+1];
+	     int i7=1;
+	     for (org.jsoup.nodes.Element tada : td7) {
+	        out7.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	        idattr7[i7]=tada.attr("id");
+	        valuetext7[i7]=trim(tada.text(),35);
+	        i7++;
+	     }
+		 out7.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING FLUSH   !!!!!
+		 java.io.PrintWriter out7b=new java.io.PrintWriter("the-insured-gsr-trade-s-DATA.txt");
+		// String url7b = "http://www.barchart.com/commodityfutures/Silver_Futures/options/SI";
+		 String url7b = "http://www.barchart.com/commodityfutures/Silver_Futures/SI?search=SI*";
+		 org.jsoup.nodes.Document doc7b = Jsoup.connect(url7b).get();
+	     Elements td7b =doc7b.select("td");
+	     int s7b=td7b.size();
+	     tm.s7b=s7b;
+	     out7b.println("\ntd: "+ s7b);
+	     String[] idattr7b=new String[s7b+1];
+	     String[] valuetext7b=new String[s7b+1];
+	     int i7b=1;
+	     for (org.jsoup.nodes.Element tada : td7b) {
+	        out7b.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	        idattr7b[i7b]=tada.attr("id");
+	        valuetext7b[i7b]=trim(tada.text(),35);
+	        i7b++;
+	     }
+		 out7b.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING FLUSH   !!!!!
+		
+		java.io.PrintWriter out8=new java.io.PrintWriter("the-multi-mark-maneuver-DATA.txt");
+		 String url8 = "http://www.barchart.com/commodityfutures/Currencies";	
+		 org.jsoup.nodes.Document doc8 = Jsoup.connect(url8).get();
+	    Elements td8 =doc8.select("td");
+	    int s8=td8.size();
+	    tm.s8=s8;
+	    out8.println("\ntd: "+ s8);
+	    String[] idattr8=new String[s8+1];
+	    String[] valuetext8=new String[s8+1];
+	    int i8=1;
+	    for (org.jsoup.nodes.Element tada : td8) {
+	        out8.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	        idattr8[i8]=tada.attr("id");
+	        valuetext8[i8]=trim(tada.text(),35);
+	        i8++;
+	    }
+		out8.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING FLUSH   !!!!!
+		
+		java.io.PrintWriter out9=new java.io.PrintWriter("the-petro-parlay-DATA.txt");
+		 String url9 = "http://www.barchart.com/commodityfutures/Crude_Oil_WTI_Futures/CL";		 
+		 org.jsoup.nodes.Document doc9 = Jsoup.connect(url9).get();
+	    Elements td9 =doc9.select("td");
+	    int s9=td9.size();
+	    tm.s9=s9;
+	    out9.println("\ntd: "+ s9);
+	    String[] idattr9=new String[s9+1];
+	    String[] valuetext9=new String[s9+1];
+	    int i9=1;
+	    for (org.jsoup.nodes.Element tada : td9) {
+	        out9.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	        idattr9[i9]=tada.attr("id");
+	        valuetext9[i9]=trim(tada.text(),35);
+	        i9++;
+	    }
+		out9.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING FLUSH   !!!!!
+		
+		java.io.PrintWriter out10=new java.io.PrintWriter("the-quick-silver-quest-DATA.txt");
+		 String url10 = "http://www.barchart.com/quotes/futures/SIN19";		 
+		 org.jsoup.nodes.Document doc10 = Jsoup.connect(url10).get();
+	    Elements td10 =doc10.select("td");
+	    int s10=td10.size();
+	    tm.s10=s10;
+	    out10.println("\ntd: "+ s10);
+	    String[] idattr10=new String[s10+1];
+	    String[] valuetext10=new String[s10+1];
+	    int i10=1;
+	    for (org.jsoup.nodes.Element tada : td10) {
+	        out10.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	        idattr10[i10]=tada.attr("id");
+	        valuetext10[i10]=trim(tada.text(),35);
+	        i10++;
+	    }
+		out10.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING FLUSH   !!!!!
+		
+		 java.io.PrintWriter out11=new java.io.PrintWriter("the-s-a-cereal-trade-w-DATA.txt");
+		 String url11 = "http://www.barchart.com/commodityfutures/Wheat_Futures/ZW?search=ZW*";		
+		 org.jsoup.nodes.Document doc11 = Jsoup.connect(url11).get();
+	     Elements td11 =doc11.select("td");
+	     int s11=td11.size();
+	     tm.s11=s11;
+	     out11.println("\ntd: "+ s11);
+	     String[] idattr11=new String[s11+1];
+	     String[] valuetext11=new String[s11+1];
+	     int i11=1;
+	     for (org.jsoup.nodes.Element tada : td11) {
+	        out11.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	        idattr11[i11]=tada.attr("id");
+	        valuetext11[i11]=trim(tada.text(),35);
+	        i11++;
+	     }
+		 out11.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING FLUSH   !!!!!
+		 java.io.PrintWriter out11b=new java.io.PrintWriter("the-s-a-cereal-trade-c-DATA.txt");
+		 String url11b = "http://www.barchart.com/commodityfutures/Corn_Futures/ZCN0";		
+		 org.jsoup.nodes.Document doc11b = Jsoup.connect(url11b).get();
+	     Elements td11b =doc11b.select("td");
+	     int s11b=td11b.size();
+	     tm.s11b=s11b;
+	     out11b.println("\ntd: "+ s11b);
+	     String[] idattr11b=new String[s11b+1];
+	     String[] valuetext11b=new String[s11b+1];
+	     int i11b=1;
+	     for (org.jsoup.nodes.Element tada : td11b) {
+	        out11b.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	        idattr11b[i11b]=tada.attr("id");
+	        valuetext11b[i11b]=trim(tada.text(),35);
+	        i11b++;
+	     }
+		 out11b.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING FLUSH   !!!!!
+		
+		 java.io.PrintWriter out12=new java.io.PrintWriter("the-silver-butterfly-DATA.txt");
+		 String url12 = "http://www.barchart.com/commodityfutures/ICE_Silver_5000-oz_Futures/options/ZIZ17";		 
+		 org.jsoup.nodes.Document doc12 = Jsoup.connect(url12).get();
+	     Elements td12 =doc12.select("td");
+	     int s12=td12.size();
+	     tm.s12=s12;
+	     out12.println("\ntd: "+ s12);
+	     String[] idattr12=new String[s12+1];
+	     String[] valuetext12=new String[s12+1];
+	     int i12=1;
+	     for (org.jsoup.nodes.Element tada : td12) {
+	        out12.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	        idattr12[i12]=tada.attr("id");
+	        valuetext12[i12]=trim(tada.text(),35);
+	        i12++;
+	     }
+		 out12.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING FLUSH   !!!!!
+		 
+		 java.io.PrintWriter out13=new java.io.PrintWriter("the-superbean-trade-DATA.txt");
+		 String url13 = "http://www.barchart.com/commodityfutures/Soybeans_Futures/ZS";		 
+		 org.jsoup.nodes.Document doc13 = Jsoup.connect(url13).get();
+	     Elements td13 =doc13.select("td");
+	     int s13=td13.size();
+	     tm.s13=s13;
+	     out13.println("\ntd: "+ s13);
+	     String[] idattr13=new String[s13+1];
+	     String[] valuetext13=new String[s13+1];
+	     int i13=1;
+	     for (org.jsoup.nodes.Element tada : td13) {
+	        out13.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	        idattr13[i13]=tada.attr("id");
+	        valuetext13[i13]=trim(tada.text(),35);
+	        i13++;
+	     }
+		 out13.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING FLUSH   !!!!!
+		 
+		java.io.PrintWriter out14=new java.io.PrintWriter("the-sweet-seasonal-DATA.txt");
+		 String url14 = "http://www.barchart.com/commodityfutures/Sugar_%2311_Futures/SB?search=SB*";		 
+		 org.jsoup.nodes.Document doc14 = Jsoup.connect(url14).get();
+	    Elements td14 =doc14.select("td");
+	    int s14=td14.size();
+	    tm.s14=s14;
+	    out14.println("\ntd: "+ s14);
+	    String[] idattr14=new String[s14+1];
+	    String[] valuetext14=new String[s14+1];
+	    int i14=1;
+	    for (org.jsoup.nodes.Element tada : td14) {
+	        out14.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	        idattr14[i14]=tada.attr("id");
+	        valuetext14[i14]=trim(tada.text(),35);
+	        i14++;
+	    }
+		out14.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING FLUSH   !!!!!
+		
+		 java.io.PrintWriter out15=new java.io.PrintWriter("the-ted-spread-ed-DATA.txt");
+		 String url15 = "http://www.barchart.com/commodityfutures/Eurodollar_Futures/GE?search=GE*";		 
+		 org.jsoup.nodes.Document doc15 = Jsoup.connect(url15).get();
+	     Elements td15 =doc15.select("td");
+	     int s15=td15.size();
+	     tm.s15=s15;
+	     out15.println("\ntd: "+ s15);
+	     String[] idattr15=new String[s15+1];
+	     String[] valuetext15=new String[s15+1];
+	     int i15=1;
+	     for (org.jsoup.nodes.Element tada : td15) {
+	        out15.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	        idattr15[i15]=tada.attr("id");
+	        valuetext15[i15]=trim(tada.text(),35);
+	        i15++;
+	     }
+		 out15.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING FLUSH   !!!!!
+		 java.io.PrintWriter out15b=new java.io.PrintWriter("the-ted-spread-tn-DATA.txt");
+		 String url15b = "http://www.barchart.com/commodityfutures/10-Year_T-Note_Futures/ZN?search=ZN*";		 
+		 org.jsoup.nodes.Document doc15b = Jsoup.connect(url15b).get();
+	     Elements td15b =doc15b.select("td");
+	     int s15b=td15b.size();
+	     tm.s15b=s15b;
+	     out15b.println("\ntd: "+ s15b);
+	     String[] idattr15b=new String[s15b+1];
+	     String[] valuetext15b=new String[s15b+1];
+	     int i15b=1;
+	     for (org.jsoup.nodes.Element tada : td15b) {
+	        out15b.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	        idattr15b[i15b]=tada.attr("id");
+	        valuetext15b[i15b]=trim(tada.text(),35);
+	        i15b++;
+	     }
+		 out15b.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING FLUSH   !!!!!
+		
+		 java.io.PrintWriter out16=new java.io.PrintWriter("the-time-tactic-a-DATA.txt");
+		 String url16 = "http://www.barchart.com/quotes/stocks/$OEX";		 
+		 org.jsoup.nodes.Document doc16 = Jsoup.connect(url16).get();
+	     Elements td16 =doc16.select("td");
+	     int s16=td16.size();
+	     tm.s16=s16;
+	     out16.println("\ntd: "+ s16);
+	     String[] idattr16=new String[s16+1];
+	     String[] valuetext16=new String[s16+1];
+	     int i16=1;
+	     for (org.jsoup.nodes.Element tada : td16) {
+	        out16.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	        idattr16[i16]=tada.attr("id");
+	        valuetext16[i16]=trim(tada.text(),35);
+	        i16++;
+	     }
+		 out16.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING FLUSH   !!!!!
+		 
+		 java.io.PrintWriter out16b=new java.io.PrintWriter("the-time-tactic-b-DATA.txt");
+		 String url16b = "http://www.barchart.com/stocks/sp100.php";		 
+		 org.jsoup.nodes.Document doc16b = Jsoup.connect(url16b).get();
+	     Elements td16b =doc16b.select("td");
+	     int s16b=td16b.size();
+	     tm.s16b=s16b;
+	     out16b.println("\ntd: "+ s16b);
+	     String[] idattr16b=new String[s16b+1];
+	     String[] valuetext16b=new String[s16b+1];
+	     int i16b=1;
+	     for (org.jsoup.nodes.Element tada : td16b) {
+	        out16b.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	        idattr16b[i16b]=tada.attr("id");
+	        valuetext16b[i16b]=trim(tada.text(),35);
+	        i16b++;
+	     }
+		 out16b.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING FLUSH   !!!!!
+		
+		java.io.PrintWriter out17=new java.io.PrintWriter("the-total-market-tactic-DATA.txt");
+		 String url17 = "http://www.barchart.com/quotes/stocks/$OEX";		 
+		 org.jsoup.nodes.Document doc17 = Jsoup.connect(url17).get();
+	    Elements td17 =doc17.select("td");
+	    int s17=td17.size();
+	    tm.s17=s17;
+	    out17.println("\ntd: "+ s17);
+	    String[] idattr17=new String[s17+1];
+	    String[] valuetext17=new String[s17+1];
+	    int i17=1;
+	    for (org.jsoup.nodes.Element tada : td17) {
+	        out17.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	        idattr17[i17]=tada.attr("id");
+	        valuetext17[i17]=trim(tada.text(),35);
+	        i17++;
+	    }
+		out17.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING FLUSH   !!!!!
+		
+		 java.io.PrintWriter out18=new java.io.PrintWriter("the-triple-t-bond-trade-DATA.txt");
+		 String url18 = "http://www.barchart.com/commodityfutures/30-Year_T-Bond_Futures/ZB?search=ZB*";		 
+		 org.jsoup.nodes.Document doc18 = Jsoup.connect(url18).get();
+	     Elements td18 =doc18.select("td");
+	     int s18=td18.size();
+	     tm.s18=s18;
+	     out18.println("\ntd: "+ s18);
+	     String[] idattr18=new String[s18+1];
+	     String[] valuetext18=new String[s18+1];
+	     int i18=1;
+	     for (org.jsoup.nodes.Element tada : td18) {
+	        out18.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	        idattr18[i18]=tada.attr("id");
+	        valuetext18[i18]=trim(tada.text(),35);
+	        i18++;
+	     }
+		 out18.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING FLUSH   !!!!!
+		
+		java.io.PrintWriter out19=new java.io.PrintWriter("the-wild-oats-windfall-DATA.txt");
+		 String url19 = "http://www.barchart.com/commodityfutures/Oats_Futures/ZO?search=ZO*";		 
+		 org.jsoup.nodes.Document doc19 = Jsoup.connect(url19).get();
+	    Elements td19 =doc19.select("td");
+	    int s19=td19.size();
+	    tm.s19=s19;
+	    out19.println("\ntd: "+ s19);
+	    String[] idattr19=new String[s19+1];
+	    String[] valuetext19=new String[s19+1];
+	    int i19=1;
+	    for (org.jsoup.nodes.Element tada : td19) {
+	        out19.format(" *\n id= %s  value=%s", tada.attr("id"), trim(tada.text(), 35));
+	        idattr19[i19]=tada.attr("id");
+	        valuetext19[i19]=trim(tada.text(),35);
+	        i19++;
+	    }
+		out19.close();//  MUST DO IT  !!!!  ELSE INCOMPLETE DATA FILE FROM MISSING DATA FLUSH   !!!!!
+		
+		
+		String tabledate="";
+		Calendar cal = Calendar.getInstance();
+		int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+		int Month = cal.get(Calendar.MONTH)+1;
+		int Year = cal.get(Calendar.YEAR);
+		
+		String zero="0";	
+		String stringdayofmonth="";
+		String stringmonth="";
+		if (dayOfMonth<10){stringdayofmonth=zero+String.valueOf(dayOfMonth);}
+		if(dayOfMonth>9){stringdayofmonth=String.valueOf(dayOfMonth);}
+		if(Month<10){stringmonth=zero+String.valueOf(Month);}
+		if(Month>9){stringmonth=String.valueOf(Month);}
+		tabledate=stringdayofmonth+stringmonth+String.valueOf(Year);
+		
+		//tabledate=String.valueOf(dayOfMonth)+String.valueOf(Month)+String.valueOf(Year);
+		
+		
+		         //DriverManager.registerDriver(new org.postgresql.Driver());
+				//Properties prop = new Properties();
+				//prop.put("jdbc.drivers",driver);
+				//System.setProperties(prop);
+		
+		// IF NO DATABASE EXIST , CREATES THEM(23) FROM DEFAULT DATABASE , 
+		// TO ENABLE CONNECTION TO THEM IN THE FOLLOWING PART (ELSE CAN NOT CONNECT)
+		String databasename="";
+		databasename="postgres";
+		String url    = "jdbc:postgresql://localhost:5432/"+databasename;
+		String username = "postgres";
+        String password="postgres";
+        Class.forName("org.postgresql.Driver");
+		Connection conn=DriverManager.getConnection(url,username,password);
+		Statement stat=conn.createStatement();
+		boolean databasexistflag;
+		ResultSet result1;
+		//1
+		databasexistflag=false;
+		databasename="ff2plustrade";
+		result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+		while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+		if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		//24
+				databasexistflag=false;
+				databasename="ff2plustradeb";
+				result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+				while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+				if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		//2
+		databasexistflag=false;
+		databasename="ff2boomspread";
+		result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+		while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+		if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		//3
+		databasexistflag=false;
+		databasename="ff2beefsandwich";
+		result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+		while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+		if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		//4
+		databasexistflag=false;
+		databasename="ff2coopercoup";
+		result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+		while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+		if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		//5
+		databasexistflag=false;
+		databasename="ff2cottonconnection";
+		result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+		while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+		if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		//6
+		databasexistflag=false;
+		databasename="ff2hamsandwich";
+		result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+		while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+		if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		//7
+		databasexistflag=false;
+		databasename="ff2insuredgsrtradeg";
+		result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+		while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+		if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		//8
+		databasexistflag=false;
+		databasename="ff2insuredgsrtrades";
+		result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+		while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+		if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		//9
+		databasexistflag=false;
+		databasename="ff2multimarkmaneuver";
+		result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+		while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+		if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		//10
+		databasexistflag=false;
+		databasename="ff2petroparlay";
+		result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+		while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+		if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		//11
+		databasexistflag=false;
+		databasename="ff2quicksilverquest";
+		result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+		while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+		if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		//12
+		databasexistflag=false;
+		databasename="ff2sacerealtradew";
+		result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+		while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+		if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		//13
+		databasexistflag=false;
+		databasename="ff2sacerealtradec";
+		result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+		while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+		if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		//14
+		databasexistflag=false;
+		databasename="ff2silverbutterfly";
+		result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+		while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+		if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		//15
+		databasexistflag=false;
+		databasename="ff2superbeantrade";
+		result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+		while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+		if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		//16
+		databasexistflag=false;
+		databasename="ff2sweetseasonal";
+		result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+		while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+		if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		//17
+		databasexistflag=false;
+		databasename="ff2tedspreaded";
+		result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+		while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+		if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		//18
+		databasexistflag=false;
+		databasename="ff2tedspreadtn";
+		result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+		while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+		if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		//19
+		databasexistflag=false;
+		databasename="ff2timetactica";
+		result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+		while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+		if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		//20
+		databasexistflag=false;
+		databasename="ff2timetacticb";
+		result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+		while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+		if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		//21
+		databasexistflag=false;
+		databasename="ff2totalmarkettactic";
+		result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+		while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+		if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		//22
+		databasexistflag=false;
+		databasename="ff2tripletbondtrade";
+		result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+		while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+		if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		//23
+		databasexistflag=false;
+		databasename="ff2wildoatswindfall";
+		result1=stat.executeQuery("select datname from pg_database where datname like '"+databasename+"'");
+		while(result1.next()){if(databasename.equalsIgnoreCase(result1.getString(1))){databasexistflag=true;};}
+		if(databasexistflag==false){stat.executeUpdate("CREATE DATABASE "+databasename);}
+		
+		//   1
+		
+		databasename="ff2plustrade";
+		String driver = "org.postgresql.Driver";
+		Class.forName(driver);
+		url    = "jdbc:postgresql://localhost:5432/"+databasename;
+		username = "postgres";
+		password = "postgres";            // Change it to your Password	
+		conn=DriverManager.getConnection(url,username,password);
+		stat=conn.createStatement();	
+		String tablename="";	
+		
+		tablename=databasename+tabledate;
+	    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+	    String scmd1="";
+	    String scmd2="";
+	    String rescmd1="";
+	    String rescmd2="";
+	    String res1cmd1="";
+	    String res2cmd2=""; 
+	    for(int i=1;i<=s1;i++)
+	    {
+	    scmd1=idattr1[i];
+	    scmd2=valuetext1[i];
+	    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+	    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+	    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+	    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+	    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+	    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+	    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+	    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+	    //System.out.println(cmd);
+	    stat.executeUpdate(cmd);
+	    }
+		ResultSet result=stat.executeQuery("SELECT * FROM "+tablename);
+		while(result.next())
+		{
+			System.out.println(result.getString(1)+ result.getString(2));
+		}
+		//stat.executeUpdate("Drop Table "+tablename);
+		result.close();
+		result1.close();
+		conn.close();
+		
+	//   24
+		
+			databasename="";
+			databasename="ff2plustradeb";
+			driver = "org.postgresql.Driver";
+			Class.forName(driver);
+			url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			username = "postgres";
+			password = "postgres";            // Change it to your Password	
+			conn=DriverManager.getConnection(url,username,password);
+			stat=conn.createStatement();
+			
+			tablename="";
+			
+			tablename=databasename+tabledate;
+		    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+		    scmd1="";
+		    scmd2="";
+		    rescmd1="";
+		    rescmd2="";
+		    res1cmd1="";
+		    res2cmd2=""; 
+		   // for(int i=1;i<=s2;i++)
+		    for(int i=1;i<=s1b;i++)
+		    {
+		  //  scmd1=idattr2[i];
+		 //   scmd2=valuetext2[i];
+		    	   scmd1=idattr1b[i];
+				   scmd2=valuetext1b[i];
+		    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+		    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+		    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+		    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+		    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+		    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+		    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+		    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+		    //System.out.println(cmd);
+		    stat.executeUpdate(cmd);
+		    }
+			result=stat.executeQuery("SELECT * FROM "+tablename);
+			while(result.next())
+			{
+				System.out.println(result.getString(1)+ result.getString(2));
+			}
+			//stat.executeUpdate("Drop Table "+tablename);
+			result.close();
+			result1.close();
+			conn.close();
+			
+		//  create transformed option table
+		     
+			//create
+			
+			//System.out.println("start create !");
+			/*
+		    String databasename1,driver1,url0,username1,password1,tablename1,tabledate1,option;
+		    Connection conn1;
+		    Statement stat1;
+		    Calendar cal1 = Calendar.getInstance();
+			int dayOfMonth1 = cal1.get(Calendar.DAY_OF_MONTH);
+			int Month1 = cal1.get(Calendar.MONTH)+1;
+			int Year1 = cal1.get(Calendar.YEAR);
+			tabledate1=String.valueOf(dayOfMonth1)+String.valueOf(Month1)+String.valueOf(Year1);
+			*/
+			//System.out.println(tabledate1);
+			/*
+		    databasename1="";
+			databasename1="ff2plustradeb";
+			driver1 = "org.postgresql.Driver";
+			*/
+			//System.out.println(driver1);		
+			//String property = System.getProperty("java.library.path");
+			//System.out.println(property);
+			//String lib="postgresql-9.4.1208.jre7.jar";
+			//System.loadLibrary(lib);
+			//URL url1 = getClass().getResource(lib);
+			//System.out.println(url1);
+			/*
+			Class.forName(driver1);
+			url0    = "jdbc:postgresql://localhost:5432/"+databasename1;
+			username1 = "postgres";
+			password1 = "postgres";            // Change it to your Password	
+			*/
+			//System.out.println(url+" "+username+" "+password);
+			/*
+			conn1=DriverManager.getConnection(url0,username1,password1);
+			stat1=conn1.createStatement();		
+			tablename1="";
+			option="option";
+			tablename1=databasename1+option+tabledate1;
+			*/
+			//System.out.println(tablename1);
+			/*
+		    stat1.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename1+" (Strike CHAR(50),High CHAR(50),Low CHAR(50),Current CHAR(50),Change CHAR(50),Volume CHAR(50),Time CHAR(50),Premium CHAR(50))");		    
+		    stat1.close();
+		    conn1.close();
+		    */
+		   // System.out.println("done create !");
+			
+		    //getdata
+			
+		   // System.out.println("start getdata !");
+			/*
+		    String databasename2,driver2,url20,username2,password2,tablename2,tabledate2;
+		    */
+		  //  String[] strike = new String[1000],high = new String[1000],low = new String[1000],current=new String[1000],change= new String[1000],volume= new String[1000],time= new String[1000],premium=new String[1000];
+			/*
+		    Connection conn2;
+		    Statement stat2;
+		    Calendar cal2 = Calendar.getInstance();
+			int dayOfMonth2 = cal2.get(Calendar.DAY_OF_MONTH);
+			int Month2 = cal2.get(Calendar.MONTH)+1;
+			int Year2 = cal2.get(Calendar.YEAR);
+			tabledate2=String.valueOf(dayOfMonth2)+String.valueOf(Month2)+String.valueOf(Year2);
+			*/
+			//System.out.println(tabledate2);
+			/*
+		    databasename2="";
+			databasename2="ff2plustradeb";
+			driver2 = "org.postgresql.Driver";
+			*/
+			//System.out.println(driver2);		
+			//String property = System.getProperty("java.library.path");
+			//System.out.println(property);
+			//String lib2="postgresql-9.4.1208.jre7.jar";
+			//System.loadLibrary(lib);
+			//URL url1 = getClass().getResource(lib);
+			//System.out.println(url1);
+			/*
+			Class.forName(driver2);
+			url20    = "jdbc:postgresql://localhost:5432/"+databasename2;
+			username2 = "postgres";
+			password2 = "postgres";            // Change it to your Password	
+			*/
+			//System.out.println(url+" "+username+" "+password);
+			/*
+			conn2=DriverManager.getConnection(url20,username2,password2);
+			stat2=conn2.createStatement();		
+			tablename2="";
+		
+			tablename2=databasename2+tabledate2;
+			*/
+		//	System.out.println(tablename2);
+			//String cmd="select * from"+ tablename;
+			//String cmd="INSERT INTO "+tablename+" (Strike,High,Low,Current,Change,Volume,Time,Premium) VALUES ('"+strike+"','"+high+"','"+low+"','"+current+"','"+change+"','"+volume+"','"+time+"','"+premium+"');";
+		    //System.out.println(cmd);
+			/*
+			ResultSet result2=stat2.executeQuery("SELECT valuetext FROM "+tablename2);
+			int k=1;
+			String[] valuetext20=new String[100];
+			while(result2.next())
+			{
+				valuetext20[k]=result2.getString(1);
+				*/
+			//	System.out.println(result2.getString(1));
+			/*
+				k++;
+			}
+			result2.close();
+			stat2.close();
+		    conn2.close();
+		    */
+		   // System.out.println(k);
+			/*
+			md.setlim(k);
+			int start=29;
+			for(int n=start, m=1;n<=md.getlim();n=n+9,m++)
+			{
+				md.setstrike(valuetext20[n],m);
+				md.sethigh(valuetext20[n+2],m);
+				md.setlow(valuetext20[n+3],m);
+				md.setcurrent(valuetext20[n+4],m);
+				md.setchange(valuetext20[n+5],m);
+				md.setvolume(valuetext20[n+6],m);
+				md.settime(valuetext20[n+7],m);
+				md.setpremium(valuetext20[n+8],m);
+			}
+		    */
+		    //System.out.println("done getdata !");
+			
+			//  insert
+			
+			//System.out.println("start insert !");
+			/*
+		    String databasename3,driver3,url21,username3,password3,tablename3,tabledate3,option3;
+		    */
+		   // String strike = "0",high = "0",low = "0",current= "0",change= "0",volume= "0",time= "0",premium= "0";
+			/*
+		    Connection conn3;
+		    Statement stat3;
+		    Calendar cal3 = Calendar.getInstance();
+			int dayOfMonth3 = cal3.get(Calendar.DAY_OF_MONTH);
+			int Month3 = cal3.get(Calendar.MONTH)+1;
+			int Year3 = cal3.get(Calendar.YEAR);
+			tabledate3=String.valueOf(dayOfMonth3)+String.valueOf(Month3)+String.valueOf(Year3);
+			*/
+			//System.out.println(tabledate3);
+			/*
+		    databasename3="";
+			databasename3="ff2plustradeb";
+			driver3 = "org.postgresql.Driver";
+			*/
+			//System.out.println(driver3);		
+			//String property = System.getProperty("java.library.path");
+			//System.out.println(property);
+			//String lib3="postgresql-9.4.1208.jre7.jar";
+			//System.loadLibrary(lib);
+			//URL url1 = getClass().getResource(lib);
+			//System.out.println(url1);
+			/*
+			Class.forName(driver3);
+			url21    = "jdbc:postgresql://localhost:5432/"+databasename3;
+			username3 = "postgres";
+			password3 = "postgres";            // Change it to your Password
+			*/	
+			//System.out.println(url+" "+username+" "+password);
+			/*
+			conn3=DriverManager.getConnection(url21,username3,password3);
+			stat3=conn3.createStatement();		
+			tablename3="";
+			option3="option";
+			tablename3=databasename3+option3+tabledate3;
+			*/
+			//System.out.println(tablename3);
+			//System.out.println(md.getlim());
+			/*
+			for(int n=1;n<=md.getlim();n++)
+			{
+		    if((md.getstrike(n)!=null)&&(md.gethigh(n)!=null)&&(md.getlow(n)!=null)&&(md.getcurrent(n)!=null)&&(md.getchange(n)!=null)&&(md.getvolume(n)!=null)&&(md.gettime(n)!=null)&&(md.getpremium(n)!=null))
+		    {
+		    */
+			//System.out.println(md.getstrike(n)+" "+md.gethigh(n)+" "+md.getlow(n)+" "+md.getcurrent(n)+" "+md.getchange(n)+" "+md.getvolume(n)+" "+md.gettime(n)+" "+md.getpremium(n));
+			/*
+			String cmd="INSERT INTO "+tablename3+" (Strike,High,Low,Current,Change,Volume,Time,Premium) VALUES ('"+md.getstrike(n)+"','"+md.gethigh(n)+"','"+md.getlow(n)+"','"+md.getcurrent(n)+"','"+md.getchange(n)+"','"+md.getvolume(n)+"','"+md.gettime(n)+"','"+md.getpremium(n)+"');";
+			stat3.executeUpdate(cmd);
+		    }
+			}
+			*/
+		    //System.out.println(cmd);
+		    /*
+		    stat3.close();
+		    conn3.close();
+		    */
+		    //System.out.println("done insert !");
+			
+		
+		//   2
+		
+		databasename="";
+		databasename="ff2boomspread";
+		driver = "org.postgresql.Driver";
+		
+		url    = "jdbc:postgresql://localhost:5432/"+databasename;
+		username = "postgres";
+		password = "postgres";            // Change it to your Password	
+		Class.forName(driver);
+		conn=DriverManager.getConnection(url,username,password);
+		stat=conn.createStatement();
+		
+		tablename="";
+		
+		tablename=databasename+tabledate;
+	    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+	    scmd1="";
+	    scmd2="";
+	    rescmd1="";
+	    rescmd2="";
+	    res1cmd1="";
+	    res2cmd2=""; 
+	    for(int i=1;i<=s2;i++)
+	    {
+	    scmd1=idattr2[i];
+	    scmd2=valuetext2[i];
+	    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+	    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+	    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+	    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+	    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+	    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+	    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+	    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+	    //System.out.println(cmd);
+	    stat.executeUpdate(cmd);
+	    }
+		result=stat.executeQuery("SELECT * FROM "+tablename);
+		while(result.next())
+		{
+			System.out.println(result.getString(1)+ result.getString(2));
+		}
+		//stat.executeUpdate("Drop Table "+tablename);
+		result.close();
+		result1.close();
+		conn.close();
+		
+	        //   3
+		databasename="";
+		databasename="ff2beefsandwich";
+		driver = "org.postgresql.Driver";
+		Class.forName(driver);
+		url    = "jdbc:postgresql://localhost:5432/"+databasename;
+		username = "postgres";
+		password = "postgres";            // Change it to your Password	
+		conn=DriverManager.getConnection(url,username,password);
+		stat=conn.createStatement();
+			
+		tablename="";
+		
+		tablename=databasename+tabledate;
+		    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+		    scmd1="";
+		    scmd2="";
+		    rescmd1="";
+		    rescmd2="";
+		    res1cmd1="";
+		    res2cmd2=""; 
+		    for(int i=1;i<=s3;i++)
+		    {
+		    scmd1=idattr3[i];
+		    scmd2=valuetext3[i];
+		    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+		    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+		    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+		    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+		    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+		    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+		    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+		    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+		    //System.out.println(cmd);
+		    stat.executeUpdate(cmd);
+		    }
+			result=stat.executeQuery("SELECT * FROM "+tablename);
+			while(result.next())
+			{
+				System.out.println(result.getString(1)+ result.getString(2));
+			}
+			//stat.executeUpdate("Drop Table "+tablename);
+			result.close();
+			result1.close();
+			conn.close();
+		
+			
+		//   4
+			databasename="";
+			databasename="ff2coopercoup";
+			driver = "org.postgresql.Driver";
+			Class.forName(driver);
+			url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			username = "postgres";
+			password = "postgres";            // Change it to your Password	
+			conn=DriverManager.getConnection(url,username,password);
+			stat=conn.createStatement();
+			
+			tablename="";
+		
+			tablename=databasename+tabledate;
+		    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+		    scmd1="";
+		    scmd2="";
+		    rescmd1="";
+		    rescmd2="";
+		    res1cmd1="";
+		    res2cmd2=""; 
+		    for(int i=1;i<=s4;i++)
+		    {
+		    scmd1=idattr4[i];
+		    scmd2=valuetext4[i];
+		    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+		    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+		    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+		    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+		    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+		    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+		    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+		    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+		    //System.out.println(cmd);
+		    stat.executeUpdate(cmd);
+		    }
+			result=stat.executeQuery("SELECT * FROM "+tablename);
+			while(result.next())
+			{
+				System.out.println(result.getString(1)+ result.getString(2));
+			}
+			//stat.executeUpdate("Drop Table "+tablename);
+			result.close();
+			result1.close();
+			conn.close();
+		
+		//   5
+			databasename="";
+			databasename="ff2cottonconnection";
+			driver = "org.postgresql.Driver";
+			Class.forName(driver);
+			url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			username = "postgres";
+			password = "postgres";            // Change it to your Password	
+			conn=DriverManager.getConnection(url,username,password);
+			stat=conn.createStatement();
+			
+			tablename="";
+			
+			tablename=databasename+tabledate;
+		    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+		    scmd1="";
+		    scmd2="";
+		    rescmd1="";
+		    rescmd2="";
+		    res1cmd1="";
+		    res2cmd2=""; 
+		    for(int i=1;i<=s5;i++)
+		    {
+		    scmd1=idattr5[i];
+		    scmd2=valuetext5[i];
+		    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+		    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+		    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+		    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+		    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+		    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+		    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+		    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+		    //System.out.println(cmd);
+		    stat.executeUpdate(cmd);
+		    }
+			result=stat.executeQuery("SELECT * FROM "+tablename);
+			while(result.next())
+			{
+				System.out.println(result.getString(1)+ result.getString(2));
+			}
+			//stat.executeUpdate("Drop Table "+tablename);
+			result.close();
+			result1.close();
+			conn.close();
+			
+			
+		//   6
+			databasename="";
+			databasename="ff2hamsandwich";
+			driver = "org.postgresql.Driver";
+			Class.forName(driver);
+			url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			username = "postgres";
+			password = "postgres";            // Change it to your Password	
+			conn=DriverManager.getConnection(url,username,password);
+			stat=conn.createStatement();
+			
+			tablename="";
+		
+			tablename=databasename+tabledate;
+		    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+		    scmd1="";
+		    scmd2="";
+		    rescmd1="";
+		    rescmd2="";
+		    res1cmd1="";
+		    res2cmd2=""; 
+		    for(int i=1;i<=s6;i++)
+		    {
+		    scmd1=idattr6[i];
+		    scmd2=valuetext6[i];
+		    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+		    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+		    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+		    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+		    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+		    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+		    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+		    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+		    //System.out.println(cmd);
+		    stat.executeUpdate(cmd);
+		    }
+			result=stat.executeQuery("SELECT * FROM "+tablename);
+			while(result.next())
+			{
+				System.out.println(result.getString(1)+ result.getString(2));
+			}
+			//stat.executeUpdate("Drop Table "+tablename);
+			result.close();
+			result1.close();
+			conn.close();
+			
+		//   7
+			databasename="";
+			databasename="ff2insuredgsrtradeg";
+			driver = "org.postgresql.Driver";
+			Class.forName(driver);
+			url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			username = "postgres";
+			password = "postgres";            // Change it to your Password	
+			conn=DriverManager.getConnection(url,username,password);
+			stat=conn.createStatement();
+			
+			tablename="";
+			
+			tablename=databasename+tabledate;
+		    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+		    scmd1="";
+		    scmd2="";
+		    rescmd1="";
+		    rescmd2="";
+		    res1cmd1="";
+		    res2cmd2=""; 
+		    for(int i=1;i<=s7;i++)
+		    {
+		    scmd1=idattr7[i];
+		    scmd2=valuetext7[i];
+		    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+		    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+		    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+		    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+		    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+		    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+		    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+		    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+		    //System.out.println(cmd);
+		    stat.executeUpdate(cmd);
+		    }
+			result=stat.executeQuery("SELECT * FROM "+tablename);
+			while(result.next())
+			{
+				System.out.println(result.getString(1)+ result.getString(2));
+			}
+			//stat.executeUpdate("Drop Table "+tablename);
+			result.close();
+			result1.close();
+			conn.close();
+			
+		//   7b
+			databasename="";
+			databasename="ff2insuredgsrtrades";
+			driver = "org.postgresql.Driver";
+			Class.forName(driver);
+			url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			username = "postgres";
+			password = "postgres";            // Change it to your Password	
+			conn=DriverManager.getConnection(url,username,password);
+			stat=conn.createStatement();
+			
+			tablename="";
+		
+			tablename=databasename+tabledate;
+		    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+		    scmd1="";
+		    scmd2="";
+		    rescmd1="";
+		    rescmd2="";
+		    res1cmd1="";
+		    res2cmd2=""; 
+		    for(int i=1;i<=s7b;i++)
+		    {
+		    scmd1=idattr7b[i];
+		    scmd2=valuetext7b[i];
+		    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+		    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+		    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+		    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+		    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+		    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+		    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+		    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+		    //System.out.println(cmd);
+		    stat.executeUpdate(cmd);
+		    }
+			result=stat.executeQuery("SELECT * FROM "+tablename);
+			while(result.next())
+			{
+				System.out.println(result.getString(1)+ result.getString(2));
+			}
+			//stat.executeUpdate("Drop Table "+tablename);
+			result.close();
+			result1.close();
+			conn.close();
+			
+			
+		//   8
+			databasename="";
+			databasename="ff2multimarkmaneuver";
+			driver = "org.postgresql.Driver";
+			Class.forName(driver);
+			url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			username = "postgres";
+			password = "postgres";            // Change it to your Password	
+			conn=DriverManager.getConnection(url,username,password);
+			stat=conn.createStatement();
+			
+			tablename="";
+			
+			tablename=databasename+tabledate;
+		    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+		    scmd1="";
+		    scmd2="";
+		    rescmd1="";
+		    rescmd2="";
+		    res1cmd1="";
+		    res2cmd2=""; 
+		    for(int i=1;i<=s8;i++)
+		    {
+		    scmd1=idattr8[i];
+		    scmd2=valuetext8[i];
+		    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+		    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+		    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+		    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+		    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+		    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+		    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+		    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+		    //System.out.println(cmd);
+		    stat.executeUpdate(cmd);
+		    }
+			result=stat.executeQuery("SELECT * FROM "+tablename);
+			while(result.next())
+			{
+				System.out.println(result.getString(1)+ result.getString(2));
+			}
+			//stat.executeUpdate("Drop Table "+tablename);
+			result.close();
+			result1.close();
+			conn.close();
+			
+		//   9
+			databasename="";
+			databasename="ff2petroparlay";
+			driver = "org.postgresql.Driver";
+			Class.forName(driver);
+			url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			username = "postgres";
+			password = "postgres";            // Change it to your Password	
+			conn=DriverManager.getConnection(url,username,password);
+			stat=conn.createStatement();
+			
+			tablename="";
+		
+			tablename=databasename+tabledate;
+		    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+		    scmd1="";
+		    scmd2="";
+		    rescmd1="";
+		    rescmd2="";
+		    res1cmd1="";
+		    res2cmd2=""; 
+		    for(int i=1;i<=s9;i++)
+		    {
+		    scmd1=idattr9[i];
+		    scmd2=valuetext9[i];
+		    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+		    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+		    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+		    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+		    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+		    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+		    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+		    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+		    //System.out.println(cmd);
+		    stat.executeUpdate(cmd);
+		    }
+			result=stat.executeQuery("SELECT * FROM "+tablename);
+			while(result.next())
+			{
+				System.out.println(result.getString(1)+ result.getString(2));
+			}
+			//stat.executeUpdate("Drop Table "+tablename);
+			result.close();
+			result1.close();
+			conn.close();
+			
+			
+		//   10
+			databasename="";
+			databasename="ff2quicksilverquest";
+			driver = "org.postgresql.Driver";
+			Class.forName(driver);
+			url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			username = "postgres";
+			password = "postgres";            // Change it to your Password	
+			conn=DriverManager.getConnection(url,username,password);
+			stat=conn.createStatement();
+			
+			tablename="";
+			
+			tablename=databasename+tabledate;
+		    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+		    scmd1="";
+		    scmd2="";
+		    rescmd1="";
+		    rescmd2="";
+		    res1cmd1="";
+		    res2cmd2=""; 
+		    for(int i=1;i<=s10;i++)
+		    {
+		    scmd1=idattr10[i];
+		    scmd2=valuetext10[i];
+		    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+		    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+		    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+		    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+		    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+		    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+		    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+		    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+		    //System.out.println(cmd);
+		    stat.executeUpdate(cmd);
+		    }
+			result=stat.executeQuery("SELECT * FROM "+tablename);
+			while(result.next())
+			{
+				System.out.println(result.getString(1)+ result.getString(2));
+			}
+			//stat.executeUpdate("Drop Table "+tablename);
+			result.close();
+			result1.close();
+			conn.close();
+			
+			
+		//   11
+			databasename="";
+			databasename="ff2sacerealtradew";
+			driver = "org.postgresql.Driver";
+			Class.forName(driver);
+			url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			username = "postgres";
+			password = "postgres";            // Change it to your Password	
+			conn=DriverManager.getConnection(url,username,password);
+			stat=conn.createStatement();
+			
+			tablename="";
+			
+			tablename=databasename+tabledate;
+		    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+		    scmd1="";
+		    scmd2="";
+		    rescmd1="";
+		    rescmd2="";
+		    res1cmd1="";
+		    res2cmd2=""; 
+		    for(int i=1;i<=s11;i++)
+		    {
+		    scmd1=idattr11[i];
+		    scmd2=valuetext11[i];
+		    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+		    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+		    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+		    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+		    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+		    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+		    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+		    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+		    //System.out.println(cmd);
+		    stat.executeUpdate(cmd);
+		    }
+			result=stat.executeQuery("SELECT * FROM "+tablename);
+			while(result.next())
+			{
+				System.out.println(result.getString(1)+ result.getString(2));
+			}
+			//stat.executeUpdate("Drop Table "+tablename);
+			result.close();
+			result1.close();
+			conn.close();
+			
+		//   11b
+			databasename="";
+			databasename="ff2sacerealtradec";
+			driver = "org.postgresql.Driver";
+			Class.forName(driver);
+			url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			username = "postgres";
+			password = "postgres";            // Change it to your Password	
+			conn=DriverManager.getConnection(url,username,password);
+			stat=conn.createStatement();
+			
+			tablename="";
+		
+			tablename=databasename+tabledate;
+		    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+		    scmd1="";
+		    scmd2="";
+		    rescmd1="";
+		    rescmd2="";
+		    res1cmd1="";
+		    res2cmd2=""; 
+		    for(int i=1;i<=s11b;i++)
+		    {
+		    scmd1=idattr11b[i];
+		    scmd2=valuetext11b[i];
+		    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+		    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+		    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+		    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+		    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+		    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+		    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+		    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+		    //System.out.println(cmd);
+		    stat.executeUpdate(cmd);
+		    }
+			result=stat.executeQuery("SELECT * FROM "+tablename);
+			while(result.next())
+			{
+				System.out.println(result.getString(1)+ result.getString(2));
+			}
+			//stat.executeUpdate("Drop Table "+tablename);
+			result.close();
+			result1.close();
+			conn.close();
+			
+		//   12
+			databasename="";
+			databasename="ff2silverbutterfly";
+			driver = "org.postgresql.Driver";
+			Class.forName(driver);
+			url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			username = "postgres";
+			password = "postgres";            // Change it to your Password	
+			conn=DriverManager.getConnection(url,username,password);
+			stat=conn.createStatement();
+			
+			tablename="";
+		
+			tablename=databasename+tabledate;
+		    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+		    scmd1="";
+		    scmd2="";
+		    rescmd1="";
+		    rescmd2="";
+		    res1cmd1="";
+		    res2cmd2=""; 
+		    for(int i=1;i<=s12;i++)
+		    {
+		    scmd1=idattr12[i];
+		    scmd2=valuetext12[i];
+		    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+		    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+		    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+		    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+		    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+		    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+		    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+		    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+		    //System.out.println(cmd);
+		    stat.executeUpdate(cmd);
+		    }
+			result=stat.executeQuery("SELECT * FROM "+tablename);
+			while(result.next())
+			{
+				System.out.println(result.getString(1)+ result.getString(2));
+			}
+			//stat.executeUpdate("Drop Table "+tablename);
+			result.close();
+			result1.close();
+			conn.close();
+			
+		//   13
+			databasename="";
+			databasename="ff2superbeantrade";
+			driver = "org.postgresql.Driver";
+			Class.forName(driver);
+			url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			username = "postgres";
+			password = "postgres";            // Change it to your Password	
+			conn=DriverManager.getConnection(url,username,password);
+			stat=conn.createStatement();
+			
+			tablename="";
+	
+			tablename=databasename+tabledate;
+		    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+		    scmd1="";
+		    scmd2="";
+		    rescmd1="";
+		    rescmd2="";
+		    res1cmd1="";
+		    res2cmd2=""; 
+		    for(int i=1;i<=s13;i++)
+		    {
+		    scmd1=idattr13[i];
+		    scmd2=valuetext13[i];
+		    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+		    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+		    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+		    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+		    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+		    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+		    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+		    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+		    //System.out.println(cmd);
+		    stat.executeUpdate(cmd);
+		    }
+			result=stat.executeQuery("SELECT * FROM "+tablename);
+			while(result.next())
+			{
+				System.out.println(result.getString(1)+ result.getString(2));
+			}
+			//stat.executeUpdate("Drop Table "+tablename);
+			result.close();
+			result1.close();
+			conn.close();
+			
+		//   14
+			databasename="";
+			databasename="ff2sweetseasonal";
+			driver = "org.postgresql.Driver";
+			Class.forName(driver);
+			url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			username = "postgres";
+			password = "postgres";            // Change it to your Password	
+			conn=DriverManager.getConnection(url,username,password);
+			stat=conn.createStatement();
+			
+			tablename="";
+			
+			tablename=databasename+tabledate;
+		    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+		    scmd1="";
+		    scmd2="";
+		    rescmd1="";
+		    rescmd2="";
+		    res1cmd1="";
+		    res2cmd2=""; 
+		    for(int i=1;i<=s14;i++)
+		    {
+		    scmd1=idattr14[i];
+		    scmd2=valuetext14[i];
+		    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+		    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+		    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+		    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+		    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+		    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+		    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+		    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+		    //System.out.println(cmd);
+		    stat.executeUpdate(cmd);
+		    }
+			result=stat.executeQuery("SELECT * FROM "+tablename);
+			while(result.next())
+			{
+				System.out.println(result.getString(1)+ result.getString(2));
+			}
+			//stat.executeUpdate("Drop Table "+tablename);
+			result.close();
+			result1.close();
+			conn.close();
+			
+			
+		//   15
+			databasename="";
+			databasename="ff2tedspreaded";
+			driver = "org.postgresql.Driver";
+			Class.forName(driver);
+			url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			username = "postgres";
+			password = "postgres";            // Change it to your Password	
+			conn=DriverManager.getConnection(url,username,password);
+			stat=conn.createStatement();
+			
+			tablename="";
+			
+			tablename=databasename+tabledate;
+		    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+		    scmd1="";
+		    scmd2="";
+		    rescmd1="";
+		    rescmd2="";
+		    res1cmd1="";
+		    res2cmd2=""; 
+		    for(int i=1;i<=s15;i++)
+		    {
+		    scmd1=idattr15[i];
+		    scmd2=valuetext15[i];
+		    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+		    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+		    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+		    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+		    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+		    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+		    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+		    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+		    //System.out.println(cmd);
+		    stat.executeUpdate(cmd);
+		    }
+			result=stat.executeQuery("SELECT * FROM "+tablename);
+			while(result.next())
+			{
+				System.out.println(result.getString(1)+ result.getString(2));
+			}
+			//stat.executeUpdate("Drop Table "+tablename);
+			result.close();
+			result1.close();
+			conn.close();
+			
+		//   15b
+			databasename="";
+			databasename="ff2tedspreadtn";
+			driver = "org.postgresql.Driver";
+			Class.forName(driver);
+			url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			username = "postgres";
+			password = "postgres";            // Change it to your Password	
+			conn=DriverManager.getConnection(url,username,password);
+			stat=conn.createStatement();
+			
+			tablename="";
+			
+			tablename=databasename+tabledate;
+		    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+		    scmd1="";
+		    scmd2="";
+		    rescmd1="";
+		    rescmd2="";
+		    res1cmd1="";
+		    res2cmd2=""; 
+		    for(int i=1;i<=s15b;i++)
+		    {
+		    scmd1=idattr15b[i];
+		    scmd2=valuetext15b[i];
+		    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+		    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+		    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+		    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+		    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+		    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+		    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+		    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+		    //System.out.println(cmd);
+		    stat.executeUpdate(cmd);
+		    }
+			result=stat.executeQuery("SELECT * FROM "+tablename);
+			while(result.next())
+			{
+				System.out.println(result.getString(1)+ result.getString(2));
+			}
+			//stat.executeUpdate("Drop Table "+tablename);
+			result.close();
+			result1.close();
+			conn.close();
+			
+		//   16
+			databasename="";
+			databasename="ff2timetactica";
+			driver = "org.postgresql.Driver";
+			Class.forName(driver);
+			url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			username = "postgres";
+			password = "postgres";            // Change it to your Password	
+			conn=DriverManager.getConnection(url,username,password);
+			stat=conn.createStatement();
+			
+			tablename="";
+
+			tablename=databasename+tabledate;
+		    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+		    scmd1="";
+		    scmd2="";
+		    rescmd1="";
+		    rescmd2="";
+		    res1cmd1="";
+		    res2cmd2=""; 
+		    for(int i=1;i<=s16;i++)
+		    {
+		    scmd1=idattr16[i];
+		    scmd2=valuetext16[i];
+		    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+		    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+		    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+		    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+		    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+		    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+		    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+		    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+		    //System.out.println(cmd);
+		    stat.executeUpdate(cmd);
+		    }
+			result=stat.executeQuery("SELECT * FROM "+tablename);
+			while(result.next())
+			{
+				System.out.println(result.getString(1)+ result.getString(2));
+			}
+			//stat.executeUpdate("Drop Table "+tablename);
+			result.close();
+			result1.close();
+			conn.close();
+			
+			
+		//   16b
+			databasename="";
+			databasename="ff2timetacticb";
+			driver = "org.postgresql.Driver";
+			Class.forName(driver);
+			url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			username = "postgres";
+			password = "postgres";            // Change it to your Password	
+			conn=DriverManager.getConnection(url,username,password);
+			stat=conn.createStatement();
+			
+			tablename="";
+			
+			tablename=databasename+tabledate;
+		    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+		    scmd1="";
+		    scmd2="";
+		    rescmd1="";
+		    rescmd2="";
+		    res1cmd1="";
+		    res2cmd2=""; 
+		    for(int i=1;i<=s16b;i++)
+		    {
+		    scmd1=idattr16b[i];
+		    scmd2=valuetext16b[i];
+		    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+		    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+		    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+		    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+		    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+		    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+		    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+		    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+		    //System.out.println(cmd);
+		    stat.executeUpdate(cmd);
+		    }
+			result=stat.executeQuery("SELECT * FROM "+tablename);
+			while(result.next())
+			{
+				System.out.println(result.getString(1)+ result.getString(2));
+			}
+			//stat.executeUpdate("Drop Table "+tablename);
+			result.close();
+			result1.close();
+			conn.close();
+			
+		//   17
+			databasename="";
+			databasename="ff2totalmarkettactic";
+			driver = "org.postgresql.Driver";
+			Class.forName(driver);
+			url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			username = "postgres";
+			password = "postgres";            // Change it to your Password	
+			conn=DriverManager.getConnection(url,username,password);
+			stat=conn.createStatement();
+			
+			tablename="";
+			
+			tablename=databasename+tabledate;
+		    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+		    scmd1="";
+		    scmd2="";
+		    rescmd1="";
+		    rescmd2="";
+		    res1cmd1="";
+		    res2cmd2=""; 
+		    for(int i=1;i<=s17;i++)
+		    {
+		    scmd1=idattr17[i];
+		    scmd2=valuetext17[i];
+		    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+		    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+		    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+		    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+		    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+		    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+		    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+		    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+		    //System.out.println(cmd);
+		    stat.executeUpdate(cmd);
+		    }
+			result=stat.executeQuery("SELECT * FROM "+tablename);
+			while(result.next())
+			{
+				System.out.println(result.getString(1)+ result.getString(2));
+			}
+			//stat.executeUpdate("Drop Table "+tablename);
+			result.close();
+			result1.close();
+			conn.close();
+			
+			
+		//   18
+			databasename="";
+			databasename="ff2tripletbondtrade";
+			driver = "org.postgresql.Driver";
+			Class.forName(driver);
+			url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			username = "postgres";
+			password = "postgres";            // Change it to your Password	
+			conn=DriverManager.getConnection(url,username,password);
+			stat=conn.createStatement();
+			
+			tablename="";
+		
+			tablename=databasename+tabledate;
+		    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+		    scmd1="";
+		    scmd2="";
+		    rescmd1="";
+		    rescmd2="";
+		    res1cmd1="";
+		    res2cmd2=""; 
+		    for(int i=1;i<=s18;i++)
+		    {
+		    scmd1=idattr18[i];
+		    scmd2=valuetext18[i];
+		    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+		    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+		    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+		    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+		    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+		    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+		    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+		    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+		    //System.out.println(cmd);
+		    stat.executeUpdate(cmd);
+		    }
+			result=stat.executeQuery("SELECT * FROM "+tablename);
+			while(result.next())
+			{
+				System.out.println(result.getString(1)+ result.getString(2));
+			}
+			//stat.executeUpdate("Drop Table "+tablename);
+			result.close();
+			result1.close();
+			conn.close();
+			
+		//   19
+			databasename="";
+			databasename="ff2wildoatswindfall";
+			driver = "org.postgresql.Driver";
+			Class.forName(driver);
+			url    = "jdbc:postgresql://localhost:5432/"+databasename;
+			username = "postgres";
+			password = "postgres";            // Change it to your Password	
+			conn=DriverManager.getConnection(url,username,password);
+			stat=conn.createStatement();
+			
+			tablename="";
+			
+			tablename=databasename+tabledate;
+		    stat.executeUpdate("CREATE TABLE IF NOT EXISTS "+tablename+" (AttributeID CHAR(50),ValueText CHAR(50))");   
+		    scmd1="";
+		    scmd2="";
+		    rescmd1="";
+		    rescmd2="";
+		    res1cmd1="";
+		    res2cmd2=""; 
+		    for(int i=1;i<=s19;i++)
+		    {
+		    scmd1=idattr19[i];
+		    scmd2=valuetext19[i];
+		    //System.out.println(scmd1+" "+scmd1.length()+" "+scmd2+" "+scmd2.length());
+		    if(scmd1.length()>49){rescmd1=scmd1.substring(0, 49);}else{rescmd1=scmd1;}
+		    if(scmd2.length()>49){rescmd2=scmd2.substring(0, 49);}else{rescmd2=scmd2;}
+		    if(rescmd1.contains("'")){res1cmd1=rescmd1.replace("'"," ");}else{res1cmd1=rescmd1;}
+		    if(rescmd2.contains("'")){res2cmd2=rescmd2.replace("'"," ");}else{res2cmd2=rescmd2;}
+		    if(res1cmd1.isEmpty()){res1cmd1="empty";}
+		    if(res2cmd2.isEmpty()){res2cmd2="empty";}   
+		    String cmd="INSERT INTO "+tablename+" (AttributeID,ValueText) VALUES ('"+res1cmd1+"','"+res2cmd2+"');";
+		    //System.out.println(cmd);
+		    stat.executeUpdate(cmd);
+		    }
+			result=stat.executeQuery("SELECT * FROM "+tablename);
+			while(result.next())
+			{
+				System.out.println(result.getString(1)+ result.getString(2));
+			}
+			//stat.executeUpdate("Drop Table "+tablename);	
+		result.close();
+		result1.close();
+		conn.close();
+	
+		EventQueue.invokeLater(new Runnable()
+		{
+			public void run()
+			{
+				
+				frame=x.new SimpleFrame();
+				frame.setTitle("SizedFrame");
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setVisible(true);
+			}
+		});
+		}
+		catch(SocketTimeoutException e13){e13.getMessage();e13.printStackTrace();}
+		catch(ArrayIndexOutOfBoundsException e12){e12.getMessage();e12.printStackTrace();}
+		catch(PSQLException e11){e11.getMessage();e11.printStackTrace();}
+		catch(UnknownHostException e10){e10.getMessage();e10.printStackTrace();}
+	    catch(SQLNonTransientConnectionException e7){e7.getMessage();e7.printStackTrace();}
+	    catch(ConnectException e8){e8.getMessage();e8.printStackTrace();}
+	    catch(ClassNotFoundException e3){e3.getMessage();e3.printStackTrace();}
+	    catch(NoSuchFileException e5){e5.getMessage();e5.printStackTrace();}
+	    catch(SQLException e1){e1.getMessage();e1.printStackTrace();}
+	    catch(NullPointerException e6){e6.getMessage();e6.printStackTrace();}
+		catch(IllegalArgumentException e4){System.out.println("ERROR:illegal argument exception");e4.getMessage();e4.printStackTrace();}
+		catch(IOException e2){e2.getMessage();e2.printStackTrace();}
+		catch(Exception e){e.getMessage();e.printStackTrace();}
+	finally{System.out.println( "bye bye World!" );}
+	}//getdata
+}// class datawebimporttodatabase
+	
+	
+	private static String trim(String s, int width) {
+	if (s.length() > width)
+	    return s.substring(0, width-1) + ".";
+	else
+	    return s;
+	}
+	
+public class m
+{
+	public int s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19;
+	public int s1b,s7b,s11b,s15b,s16b;
+}
+static public m tm=x.new m();;
+ class myVariables
+{
+	public String var1;
+}
+
+static public myVariables thevar;
+ 
+static SimpleFrame frame;
+
+class SimpleFrame extends JFrame
+{
+	Toolkit kit=Toolkit.getDefaultToolkit();
+	Dimension screenSize=kit.getScreenSize();
+	int screenHeight=screenSize.height;
+	int screenWidth =screenSize.width;
+    Image img=new ImageIcon("icon.gif").getImage();
+	
+	public SimpleFrame()
+	{
+	//	setSize((int)screenWidth/2,(int)screenHeight/2);
+	//	setLocationByPlatform(true);
+		//setIconImage(img);
+		//add(new myComponent());
+		
+	}
+	
+}// class SimpleFrame
+
+
+class myComponent extends JComponent
+{
+	public static final int MESSAGE_X=75;
+	public static final int MESSAGE_Y=100;
+	
+	public void paintComponent(Graphics g)
+	{
+	try{
+		String item=new String();
+		item=thevar.var1;
+		g.drawString(item, MESSAGE_X, MESSAGE_Y);
+	}
+	catch(NullPointerException e2){e2.getMessage();e2.printStackTrace();}
+	catch(ArrayIndexOutOfBoundsException e1){e1.getMessage();e1.printStackTrace();}
+	catch(Exception e){e.getMessage();e.printStackTrace();}
+	}
+	
+}// class myComponent
+/*
+public class MyData
+{
+	   private int lim;
+	   
+	   private MyDataType mdt=new MyDataType(); 
+	   void setlim(int lim){this.lim=lim;}
+	   int getlim(){return this.lim;}
+	   void setstrike(String strike,int n){this.mdt.strike[n]=strike;}
+    String getstrike(int n){return this.mdt.strike[n];}
+	   void sethigh(String high,int n){this.mdt.high[n]=high;}
+	   String gethigh(int n){return this.mdt.high[n];}
+	   void setlow(String low,int n){this.mdt.low[n]=low;}
+	   String getlow(int n){return this.mdt.low[n];}
+	   void setcurrent(String current,int n){this.mdt.current[n]=current;}
+	   String getcurrent(int n){return this.mdt.current[n];}
+	   void setchange(String change,int n){this.mdt.change[n]=change;}
+	   String getchange(int n){return this.mdt.change[n];}
+	   void setvolume(String volume,int n){this.mdt.volume[n]=volume;}
+	   String getvolume(int n){return this.mdt.volume[n];}
+	   void settime(String time,int n){this.mdt.time[n]=time;}
+	   String gettime(int n){return this.mdt.time[n];}
+	   void setpremium(String premium,int n){this.mdt.premium[n]=premium;}
+	   String getpremium(int n){return this.mdt.premium[n];}
+} 
+public class MyDataType
+{
+	    String[] strike =new String[1000] ,high = new String[1000],low = new String[1000],current=new String[1000],change= new String[1000],volume= new String[1000],time= new String[1000],premium= new String[1000];   
+}
+*/
+}//class financefuture3
+
+
